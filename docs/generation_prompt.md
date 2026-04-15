@@ -1,4 +1,4 @@
-# Develop The Hospitality CMMS Full Project
+# Develop A Hospitality CMMS Full Project
 
 ## Role
 
