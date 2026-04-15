@@ -84,45 +84,53 @@ Every phase must execute the following six steps in order.
 
 ## Step 1: Pre-Execution Git and Workspace Verification
 
-### Purpose
+**Purpose**: Ensure complete and accurate Git branch information to prevent issues during new branch creation and checkout.
 
-Establish the current repository state before analysis or implementation.
+**Actions**:
 
-### Mandatory actions
+1. **Check Current State**:
+   - Execute `git status` to check:
+     - Current branch name
+     - Uncommitted changes (staged/unstaged files)
+     - Untracked files
+   - Execute `git branch -vv` to display:
+     - All local branches
+     - Branch tracking information
+     - Ahead/behind status relative to remote
 
-1. Run `git status`.
-2. Run `git branch -vv`.
-3. Determine the current branch.
-4. Determine whether uncommitted changes exist.
-5. Determine whether the worktree already contains phase-related changes.
-6. Determine whether a remote is configured and reachable.
+2. **Update Remote Information**:
+   - Execute `git fetch origin` to update remote tracking information
+   - Verify remote branches are synchronized
 
-### Conditional actions
+3. **Handle Uncommitted Changes**:
+   - **IF uncommitted changes exist**:
+     - Stay on the current branch where uncommitted changes exist
+     - Execute `git add .` to stage all changes
+     - Execute `git commit -m "descriptive commit message"` with clear description
+     - Execute `git push origin <current-branch>` to push to remote
+     - Execute `git checkout main` (or appropriate base branch)
+     - Execute `git merge <feature-branch>` to merge changes
+     - Execute `git push origin main` to push merged changes
+     - Execute `git branch -d <feature-branch>` to delete local branch
+     - Execute `git push origin --delete <feature-branch>` to delete remote branch
+     - **Think twice before acting** - verify branch names and merge targets
 
-If a remote exists and is part of the active workflow:
+4. **Synchronize Local with Remote**:
+   - **IF local branch is behind remote**:
+     - Execute `git pull origin <branch>` to synchronize
+   - **IF merge conflicts detected**:
+     - **HALT immediately**
+     - Prompt user to resolve conflicts manually
+     - Wait for user confirmation before proceeding
 
-1. Run `git fetch origin`.
-2. Verify local and remote tracking status.
+5. **Create Feature Branch**:
+   - Execute `git checkout -b <descriptive-branch-name>`
+   - Use clear, descriptive branch names matching task number and description
 
-If the current branch contains unrelated uncommitted changes:
-
-1. Do not overwrite or revert them.
-2. Understand whether they conflict with the current phase.
-3. If they conflict materially, stop and ask the user how to proceed.
-
-If the current phase requires a feature branch under the active workflow:
-
-1. Verify the intended base branch.
-2. Create a descriptive phase branch using Git Bash/WSL compatible commands.
-
-### Required verification output
-
-Before proceeding to Step 2, the implementer must know:
-
-1. Current branch.
-2. Whether the worktree is clean or dirty.
-3. Whether any existing changes affect the current phase.
-4. Whether remote synchronization is relevant for this phase.
+6. **Verify Clean State**:
+   - Execute `git status` to confirm clean working directory
+   - Confirm correct branch is checked out
+   - Proceed to Step 2 only after verification
 
 ---
 
@@ -302,29 +310,70 @@ Do not proceed to Step 6 until:
 
 ## Step 6: Post-Approval Git Finalization
 
-### Purpose
+**Purpose**: Add, commit, push implementation, checkout, merge, and synchronize between local and remote repositories. Delete related branches after detailed verification.
 
-Finalize the phase in Git only after explicit user approval.
+**Actions**:
 
-### Mandatory actions
+1. **Verify Current State**:
+   - Execute `git status` to check:
+     - Current branch (should be feature branch)
+     - All modified/created files
+     - No unintended changes
+   - Execute `git branch -vv` to display branch tracking information
+   - Execute `git fetch origin` to update remote tracking information
 
-1. Run `git status`.
-2. Run `git diff` or equivalent diff review for changed files.
-3. Verify the intended branch.
-4. Stage only the intended changes.
-5. Verify staged changes.
-6. Commit with a descriptive conventional commit message.
+2. **Stage and Commit Changes**:
+   - Review all changes carefully: `git diff`
+   - Stage all changes: `git add .`
+   - Verify staged changes: `git status`
+   - Commit with descriptive message: `git commit -m "feat: [Task N] Descriptive task title and summary"`
+   - Use conventional commit format: `feat:`, `fix:`, `refactor:`, `docs:`, etc.
 
-If the active workflow includes remote synchronization:
+3. **Push Feature Branch**:
+   - Push to remote: `git push origin <feature-branch>`
+   - Verify push success
+   - Confirm remote branch exists: `git branch -r`
 
-1. Push the feature branch.
-2. Verify push success.
-3. Check out the intended base branch.
-4. Pull the latest base branch state.
-5. Merge the feature branch.
-6. Halt if merge conflicts occur and wait for explicit resolution.
-7. Push the merged branch.
-8. Delete the feature branch only after merge verification.
+4. **Checkout Base Branch**:
+   - Checkout main/master: `git checkout main` (or appropriate base branch)
+   - Verify clean state: `git status`
+   - Pull latest changes: `git pull origin main`
+
+5. **Merge Feature Branch**:
+   - **CRITICAL: Think twice before merging**
+   - Verify you are on correct base branch: `git branch`
+   - Merge feature branch: `git merge <feature-branch>`
+   - **IF merge conflicts occur**:
+     - **HALT immediately**
+     - Prompt user to resolve conflicts manually
+     - Wait for user confirmation
+     - Verify resolution: `git status`
+   - **IF merge successful**:
+     - Verify merged changes: `git log --oneline -5`
+     - Confirm all expected files are present
+
+6. **Push Merged Changes**:
+   - Push to remote: `git push origin main`
+   - Verify push success
+   - Confirm remote is updated: `git log origin/main --oneline -5`
+
+7. **Delete Feature Branch (Local and Remote)**:
+   - **CRITICAL: Verify merge success before deleting**
+   - Confirm feature branch is fully merged: `git branch --merged`
+   - Delete local branch: `git branch -d <feature-branch>`
+   - Delete remote branch: `git push origin --delete <feature-branch>`
+   - Verify deletion: `git branch -a` (feature branch should not appear)
+
+8. **Final Synchronization Verification**:
+   - Execute `git status` - should show clean working directory
+   - Execute `git branch -vv` - should show main branch in sync with origin
+   - Execute `git log --oneline -5` - should show recent commit
+   - Confirm local and remote are synchronized
+
+9. **Cleanup Verification**:
+   - Verify no orphaned branches: `git branch -a`
+   - Verify no uncommitted changes: `git status`
+   - Verify correct branch: `git branch` (should be on main)
 
 ### Mandatory final verification
 
