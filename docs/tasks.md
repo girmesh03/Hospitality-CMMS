@@ -74,18 +74,23 @@ Freeze the implementation flow and ensure that every later change is traceable t
 
 - Read `docs/prd.md`, `docs/requirements.md`, `docs/design.md`, `docs/tasks.md`, and `docs/task-execution-protocol.md` together.
 - Verify document precedence and resolve any contradictions before feature work starts.
+- Normalize the Phase 00 document gaps: notification `deliveryStatus`, organization API inventory, saved-view API inventory, and explicit organization/team settings routes.
+- Record the locked implementation defaults for package additions, auth transport, local-disk upload storage, and in-process scheduler topology.
 - Create a traceability matrix artifact or equivalent working notes mapping PRD sections to requirement sections, design sections, and task phases.
 - Confirm the explicit prohibitions and engineering constraints are understood.
 
 ### Deliverables
 
 - Stable documentation set.
+- `docs/traceability-matrix.md`.
 - Requirement-to-design-to-task traceability mapping.
+- Recorded Phase 00 implementation defaults that later phases must follow.
 
 ### Completion gate
 
 - No unresolved contradiction remains across the docs.
 - Every PRD top-level requirement group maps to at least one phase.
+- Phase 00 implementation defaults are documented and no longer discretionary.
 
 ## Phase 01: Repository Foundation and Shared Conventions
 

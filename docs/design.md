@@ -24,6 +24,14 @@ This document is implementation-facing. It is not a product brief. Its purpose i
 4. Ensure routes, APIs, models, and screens have clear one-to-one or one-to-many traceability.
 5. Make responsive behavior explicit rather than incidental.
 
+### 2.3 Locked implementation defaults
+
+1. Backend infrastructure additions are limited to `multer`, `node-cron`, `csv-parse`, and `sharp` unless the docs are revised first.
+2. Document ingestion must use `multer` plus a storage abstraction that writes to local disk in the first implementation.
+3. Scheduled jobs run in-process and are enabled only when an environment flag such as `ENABLE_SCHEDULERS` is set.
+4. Authentication transport uses a short-lived access token kept in client memory, an `httpOnly` refresh-token cookie, and anti-CSRF protection for mutating cookie-authenticated requests.
+5. These defaults are fixed so later phases extend one architecture rather than choosing a new one ad hoc.
+
 ## 3. Target Repository Structure
 
 ### 3.1 Top-level structure
@@ -330,6 +338,8 @@ The `docs/` directory must contain the full implementation flow:
 3. `design.md`
 4. `tasks.md`
 5. `task-execution-protocol.md`
+6. `traceability-matrix.md`
+7. `generation_prompt.md`
 
 ## 4. Backend Design
 

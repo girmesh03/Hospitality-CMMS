@@ -48,7 +48,7 @@ The current repository baseline is minimal. At the time of drafting:
 
 1. `backend/app.js` and `backend/server.js` exist.
 2. `client/src/main.jsx` and `client/src/App.jsx` exist.
-3. `docs/prd.md`, `docs/generation_prompt.md`, and `docs/task-execution-protocol.md` exist.
+3. `docs/prd.md`, `docs/requirements.md`, `docs/design.md`, `docs/tasks.md`, `docs/task-execution-protocol.md`, and `docs/generation_prompt.md` exist.
 4. The required shared constants files do not yet exist.
 5. The required centralized frontend theme module does not yet exist.
 6. The current repo does not yet contain the feature structure required for a production-grade hospitality CMMS.
@@ -76,6 +76,16 @@ Frontend runtime packages must remain aligned with `docs/prd.md`, including:
 7. `react-hook-form`
 8. `redux-persist`
 9. `socket.io-client`
+
+### 3.3 Locked Phase 00 implementation defaults
+
+The following implementation defaults are locked during Phase 00 and must not drift unless the governing docs are updated first:
+
+1. Approved backend infrastructure additions are `multer`, `node-cron`, `csv-parse`, and `sharp`.
+2. Upload handling must use `multer` and a storage abstraction that persists to local disk in the first implementation.
+3. Scheduled jobs must run in-process by default and be guarded by an environment flag such as `ENABLE_SCHEDULERS`.
+4. Auth transport must keep access tokens in client memory only, use an `httpOnly` refresh-token cookie, and require an anti-CSRF header on mutating cookie-authenticated requests.
+5. These defaults exist to remove discretionary architecture choices from later feature phases.
 
 ## 4. Mandatory Engineering Constraints
 
@@ -140,6 +150,8 @@ The `docs/` directory must contain at minimum:
 3. `docs/design.md`
 4. `docs/tasks.md`
 5. `docs/task-execution-protocol.md`
+6. `docs/traceability-matrix.md`
+7. `docs/generation_prompt.md`
 
 ### 5.3 Required backend deliverables
 

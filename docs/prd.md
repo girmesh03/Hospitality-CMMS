@@ -71,7 +71,7 @@
 
 The PRD must be interpreted against the current repository baseline, not against an abstract future stack. As of this document revision, the implementation baseline is:
 
-1. Documentation files: `docs/generation_prompt.md`, `docs/task-execution-protocol.md`, and `docs/prd.md`.
+1. Documentation files: `docs/prd.md`, `docs/requirements.md`, `docs/design.md`, `docs/tasks.md`, `docs/task-execution-protocol.md`, and `docs/generation_prompt.md`.
 2. Backend entry points: `backend/server.js` and `backend/app.js`.
 3. Frontend entry points: `client/src/main.jsx` and `client/src/App.jsx`.
 4. Backend runtime: Node.js ESM with `express@5.2.1`, `mongoose@9.4.1`, `jsonwebtoken@9.0.3`, `express-validator@7.3.2`, and `socket.io@4.8.3`.
@@ -1942,7 +1942,7 @@ Indexes:
 | `entityId` | ObjectId | No | Linked entity ID |
 | `title` | String | Yes | Short title |
 | `bodySnippet` | String | Yes | Short body |
-| `deliveryStatus` | String | Yes | `queued`, `sent`, `failed`, `read` |
+| `deliveryStatus` | String | Yes | `queued`, `sent`, `delivered_if_known`, `failed`, `read` |
 | `readAt` | Date | No | Null until read |
 | `sentAt` | Date | No | Null until sent |
 | `failedReason` | String | No | Optional failure text |
@@ -2069,6 +2069,8 @@ Indexes:
 | `/vendors` | Vendors List | Vendor management |
 | `/vendors/:vendorId` | Vendor Detail | Profile, compliance, assigned work |
 | `/reports` | Reports Hub | Standard reports and exports |
+| `/settings/organization` | Organization Settings | Organization-wide maintenance configuration |
+| `/settings/teams` | Teams | Team management |
 | `/settings/users` | Users | User management |
 | `/settings/roles` | Roles | Role management |
 | `/settings/master-data` | Master Data | Categories, priorities, reasons, SLAs |
@@ -2401,9 +2403,10 @@ Domain groups:
 20. `/documents`
 21. `/notifications`
 22. `/reports`
-23. `/settings`
-24. `/imports`
-25. `/audit-logs`
+23. `/saved-views`
+24. `/settings`
+25. `/imports`
+26. `/audit-logs`
 
 ### 13.2 Endpoint Inventory
 
@@ -2411,6 +2414,7 @@ Domain groups:
 | --- | --- |
 | Auth | `POST /auth/login`, `POST /auth/logout`, `POST /auth/logout-all`, `POST /auth/refresh`, `POST /auth/forgot-password`, `POST /auth/reset-password`, `POST /auth/accept-invite`, `GET /auth/me`, `PATCH /auth/me/password`, `GET /auth/sessions`, `DELETE /auth/sessions/:sessionId` |
 | Dashboard | `GET /dashboard/summary`, `GET /dashboard/widgets/:widgetKey` |
+| Organizations | `GET /organizations/current`, `PATCH /organizations/current` |
 | Properties | `GET /properties`, `POST /properties`, `GET /properties/:propertyId`, `PATCH /properties/:propertyId` |
 | Locations | `GET /locations/tree`, `GET /locations`, `POST /locations`, `GET /locations/:locationId`, `PATCH /locations/:locationId`, `POST /locations/:locationId/archive` |
 | Roles | `GET /roles`, `POST /roles`, `GET /roles/:roleId`, `PATCH /roles/:roleId` |
@@ -2427,6 +2431,7 @@ Domain groups:
 | Documents | `POST /documents/upload`, `GET /documents/:documentId`, `GET /documents/:documentId/download`, `DELETE /documents/:documentId` |
 | Notifications | `GET /notifications`, `POST /notifications/:notificationId/read`, `POST /notifications/mark-all-read`, `PATCH /notifications/preferences` |
 | Reports | `GET /reports`, `GET /reports/:reportKey`, `POST /reports/:reportKey/export` |
+| Saved Views | `GET /saved-views`, `POST /saved-views`, `GET /saved-views/:savedViewId`, `PATCH /saved-views/:savedViewId`, `DELETE /saved-views/:savedViewId` |
 | Settings | `GET /settings/:configType`, `POST /settings/:configType`, `PATCH /settings/:configType/:configId` |
 | Imports | `POST /imports`, `GET /imports`, `GET /imports/:jobId`, `POST /imports/:jobId/validate`, `POST /imports/:jobId/commit` |
 | Audit | `GET /audit-logs` |
