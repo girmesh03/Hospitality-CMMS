@@ -27,6 +27,42 @@ export const API_DEFAULTS = Object.freeze({
 });
 
 /**
+ * Shared header names used across request processing.
+ */
+export const HTTP_HEADERS = Object.freeze({
+  REQUEST_ID: "x-request-id",
+  CSRF_TOKEN: "x-csrf-token",
+  AUTHORIZATION: "authorization",
+});
+
+/**
+ * Shared cookie names used by the authentication layer.
+ */
+export const COOKIE_NAMES = Object.freeze({
+  REFRESH_TOKEN: "hospitality_cmms_refresh",
+  CSRF_TOKEN: "hospitality_cmms_csrf",
+});
+
+/**
+ * Shared machine-readable error codes.
+ */
+export const ERROR_CODES = Object.freeze({
+  INTERNAL_ERROR: "internal_error",
+  NOT_FOUND: "not_found",
+  ROUTE_NOT_FOUND: "route_not_found",
+  VALIDATION_ERROR: "validation_error",
+  UNAUTHORIZED: "unauthorized",
+  FORBIDDEN: "forbidden",
+  CONFLICT: "conflict",
+  DATABASE_CONNECTION_ERROR: "database_connection_error",
+  INVALID_TOKEN: "invalid_token",
+  INVALID_AUTHORIZATION_HEADER: "invalid_authorization_header",
+  ACCESS_TOKEN_SECRET_MISSING: "access_token_secret_missing",
+  CONFIGURATION_ERROR: "configuration_error",
+  CORS_ORIGIN_NOT_ALLOWED: "cors_origin_not_allowed",
+});
+
+/**
  * Shared upload and security thresholds.
  */
 export const SYSTEM_LIMITS = Object.freeze({
@@ -397,6 +433,9 @@ export const ENTITY_TYPES = Object.freeze({
  */
 export const BACKEND_CONSTANTS = Object.freeze({
   API_DEFAULTS,
+  HTTP_HEADERS,
+  COOKIE_NAMES,
+  ERROR_CODES,
   SYSTEM_LIMITS,
   SOURCE_CHANNELS,
   ROLE_KEYS,
