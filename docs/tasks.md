@@ -16,51 +16,51 @@ This task plan is mandatory.
 
 ## 3. Phase Summary
 
-| Phase | Name | Type | Depends On |
-| --- | --- | --- | --- |
-| 00 | Documentation Lock and Traceability Setup | Prerequisite | None |
-| 01 | Repository Foundation and Shared Conventions | Prerequisite | 00 |
-| 02 | Backend Core Infrastructure | Prerequisite | 01 |
-| 03 | Frontend Core Infrastructure | Prerequisite | 01 |
-| 04 | Authentication and Session Management | Feature | 02, 03 |
-| 05 | Organization, Property, Location, and Master Data Foundations | Feature | 02, 03, 04 |
-| 06 | Users, Roles, Teams, and Access Control | Feature | 05 |
-| 07 | Assets, Meters, Documents, and Location Context | Feature | 05, 06 |
-| 08 | Work Request Intake and Triage | Feature | 05, 06, 07 |
-| 09 | Work Order Core Lifecycle | Feature | 08 |
-| 10 | Preventive Maintenance | Feature | 07, 09 |
-| 11 | Inspections, Checklists, and Procedures | Feature | 09, 10 |
-| 12 | Inventory and Spare Parts | Feature | 07, 09 |
-| 13 | Vendors and Restricted Contractor Access | Feature | 09, 12 |
-| 14 | Notifications and Real-Time Synchronization | Feature | 08, 09, 10, 12, 13 |
-| 15 | Dashboards, Search, Saved Views, Reporting, and Audit UX | Feature | 05 through 14 |
-| 16 | Data Import, Export, and Migration Operations | Feature | 05 through 15 |
-| 17 | Mock Data Injection and Demo Dataset Assembly | Late Support | 05 through 16 |
-| 18 | Final Cross-Phase Alignment and Completion Gate | Completion | 00 through 17 |
+| Phase | Name                                                          | Type         | Depends On         |
+| ----- | ------------------------------------------------------------- | ------------ | ------------------ |
+| 00    | Documentation Lock and Traceability Setup                     | Prerequisite | None               |
+| 01    | Repository Foundation and Shared Conventions                  | Prerequisite | 00                 |
+| 02    | Backend Core Infrastructure                                   | Prerequisite | 01                 |
+| 03    | Frontend Core Infrastructure                                  | Prerequisite | 01                 |
+| 04    | Authentication and Session Management                         | Feature      | 02, 03             |
+| 05    | Organization, Property, Location, and Master Data Foundations | Feature      | 02, 03, 04         |
+| 06    | Users, Roles, Teams, and Access Control                       | Feature      | 05                 |
+| 07    | Assets, Meters, Documents, and Location Context               | Feature      | 05, 06             |
+| 08    | Work Request Intake and Triage                                | Feature      | 05, 06, 07         |
+| 09    | Work Order Core Lifecycle                                     | Feature      | 08                 |
+| 10    | Preventive Maintenance                                        | Feature      | 07, 09             |
+| 11    | Inspections, Checklists, and Procedures                       | Feature      | 09, 10             |
+| 12    | Inventory and Spare Parts                                     | Feature      | 07, 09             |
+| 13    | Vendors and Restricted Contractor Access                      | Feature      | 09, 12             |
+| 14    | Notifications and Real-Time Synchronization                   | Feature      | 08, 09, 10, 12, 13 |
+| 15    | Dashboards, Search, Saved Views, Reporting, and Audit UX      | Feature      | 05 through 14      |
+| 16    | Data Import, Export, and Migration Operations                 | Feature      | 05 through 15      |
+| 17    | Mock Data Injection and Demo Dataset Assembly                 | Late Support | 05 through 16      |
+| 18    | Final Cross-Phase Alignment and Completion Gate               | Completion   | 00 through 17      |
 
 ## 4. Phase Traceability Matrix
 
-| Phase | Primary PRD scope | Primary requirements scope | Primary design scope |
-| --- | --- | --- | --- |
-| 00 | PRD whole-document alignment | Requirements sections 1 to 16 | Design sections 1 to 14 |
-| 01 | PRD `1.4`, `12.10`, `13.5.3`, `15.6.2`, `18.12` | Requirements sections 3, 4, 5 | Design sections 2 and 3 |
-| 02 | PRD `13`, `15`, `16`, `18.12` | Requirements sections 4, 5, 11, 12 | Design section 4 |
-| 03 | PRD `12`, `15.6.2`, `18.12` | Requirements sections 4, 5, 10, 12 | Design sections 5, 6, 7, and 8 |
-| 04 | PRD `8.1`, `9.1`, `11.8`, `13.2`, `18.1` | Requirements sections 6.1 and 8.1 | Design sections 4, 5, and 9.1 |
-| 05 | PRD `8.2`, `8.17`, `11.2`, `11.3`, `11.4`, `11.22` | Requirements sections 6.2 and 8.2 | Design sections 3, 4, 5, and 9.2 |
-| 06 | PRD `8.3`, `11.5`, `11.6`, `11.7`, `18.1` | Requirements sections 6.3 and 8.2 | Design sections 4, 5, and 9.2 |
-| 07 | PRD `8.5`, `8.13`, `11.9`, `11.10`, `11.19`, `18.6` | Requirements sections 6.5 and 8.4 | Design sections 4, 5, 6, and 9.3 |
-| 08 | PRD `8.6`, `9.2`, `11.11`, `18.2` | Requirements sections 6.6 and 8.5 | Design sections 4, 5, 6, 7, 8, and 9.3 |
-| 09 | PRD `8.7`, `9.3`, `9.4`, `11.12`, `18.3` | Requirements sections 6.7 and 8.6 | Design sections 4, 5, 6, 7, 8, and 9.3 |
-| 10 | PRD `8.8`, `9.5`, `11.13`, `18.4` | Requirements sections 6.8 and 8.7 | Design sections 4, 5, 6, 7, and 9.3 |
-| 11 | PRD `8.9`, `9.6`, `11.14`, `18.5` | Requirements sections 6.9 and 8.8 | Design sections 4, 5, 6, 7, 8, and 9.3 |
-| 12 | PRD `8.10`, `9.7`, `11.15`, `11.16`, `11.17`, `18.7` | Requirements sections 6.10 and 8.9 | Design sections 4, 5, 6, 7, 8, and 9.3 |
-| 13 | PRD `8.11`, `9.8`, `11.18`, `18.8` | Requirements sections 6.11 and 8.10 | Design sections 4, 5, 6, 7, 8, and 9.3 |
-| 14 | PRD `8.12`, `13.11`, `13.12`, `14`, `18.9` | Requirements sections 6.12 and 12 | Design sections 4, 5, 8, 9.3, and 10 |
-| 15 | PRD `8.4`, `8.14`, `8.15`, `8.16`, `11.20`, `11.21`, `11.24`, `18.10` | Requirements sections 6.4, 6.12, 10, and 12 | Design sections 5, 6, 7, 8, 9.3, 10, and 11 |
-| 16 | PRD `8.18`, `9.10`, `11.23`, `18.11` | Requirements sections 6.12 and 11 | Design sections 4, 5, 10, and 11.4 |
-| 17 | PRD `19.2`, `13.8`, `18.12` plus full model coverage | Requirements section 13 | Design section 12 |
-| 18 | PRD whole-document completion and acceptance | Requirements sections 14 to 16 | Design sections 13 and 14 |
+| Phase | Primary PRD scope                                                     | Primary requirements scope                  | Primary design scope                        |
+| ----- | --------------------------------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
+| 00    | PRD whole-document alignment                                          | Requirements sections 1 to 16               | Design sections 1 to 14                     |
+| 01    | PRD `1.4`, `12.10`, `13.5.3`, `15.6.2`, `18.12`                       | Requirements sections 3, 4, 5               | Design sections 2 and 3                     |
+| 02    | PRD `13`, `15`, `16`, `18.12`                                         | Requirements sections 4, 5, 11, 12          | Design section 4                            |
+| 03    | PRD `12`, `15.6.2`, `18.12`                                           | Requirements sections 4, 5, 10, 12          | Design sections 5, 6, 7, and 8              |
+| 04    | PRD `8.1`, `9.1`, `11.8`, `13.2`, `18.1`                              | Requirements sections 6.1 and 8.1           | Design sections 4, 5, and 9.1               |
+| 05    | PRD `8.2`, `8.17`, `11.2`, `11.3`, `11.4`, `11.22`                    | Requirements sections 6.2 and 8.2           | Design sections 3, 4, 5, and 9.2            |
+| 06    | PRD `8.3`, `11.5`, `11.6`, `11.7`, `18.1`                             | Requirements sections 6.3 and 8.2           | Design sections 4, 5, and 9.2               |
+| 07    | PRD `8.5`, `8.13`, `11.9`, `11.10`, `11.19`, `18.6`                   | Requirements sections 6.5 and 8.4           | Design sections 4, 5, 6, and 9.3            |
+| 08    | PRD `8.6`, `9.2`, `11.11`, `18.2`                                     | Requirements sections 6.6 and 8.5           | Design sections 4, 5, 6, 7, 8, and 9.3      |
+| 09    | PRD `8.7`, `9.3`, `9.4`, `11.12`, `18.3`                              | Requirements sections 6.7 and 8.6           | Design sections 4, 5, 6, 7, 8, and 9.3      |
+| 10    | PRD `8.8`, `9.5`, `11.13`, `18.4`                                     | Requirements sections 6.8 and 8.7           | Design sections 4, 5, 6, 7, and 9.3         |
+| 11    | PRD `8.9`, `9.6`, `11.14`, `18.5`                                     | Requirements sections 6.9 and 8.8           | Design sections 4, 5, 6, 7, 8, and 9.3      |
+| 12    | PRD `8.10`, `9.7`, `11.15`, `11.16`, `11.17`, `18.7`                  | Requirements sections 6.10 and 8.9          | Design sections 4, 5, 6, 7, 8, and 9.3      |
+| 13    | PRD `8.11`, `9.8`, `11.18`, `18.8`                                    | Requirements sections 6.11 and 8.10         | Design sections 4, 5, 6, 7, 8, and 9.3      |
+| 14    | PRD `8.12`, `13.11`, `13.12`, `14`, `18.9`                            | Requirements sections 6.12 and 12           | Design sections 4, 5, 8, 9.3, and 10        |
+| 15    | PRD `8.4`, `8.14`, `8.15`, `8.16`, `11.20`, `11.21`, `11.24`, `18.10` | Requirements sections 6.4, 6.12, 10, and 12 | Design sections 5, 6, 7, 8, 9.3, 10, and 11 |
+| 16    | PRD `8.18`, `9.10`, `11.23`, `18.11`                                  | Requirements sections 6.12 and 11           | Design sections 4, 5, 10, and 11.4          |
+| 17    | PRD `19.2`, `13.8`, `18.12` plus full model coverage                  | Requirements section 13                     | Design section 12                           |
+| 18    | PRD whole-document completion and acceptance                          | Requirements sections 14 to 16              | Design sections 13 and 14                   |
 
 ## 5. Detailed Phases
 
@@ -212,6 +212,7 @@ Implement all authentication, invitation, password, session, and security-notifi
 
 ### Frontend tasks
 
+- Build landing page.
 - Build login page.
 - Build forgot-password page.
 - Build reset-password page.

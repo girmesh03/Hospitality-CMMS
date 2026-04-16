@@ -58,6 +58,84 @@ export const NAVIGATION_SECTIONS = Object.freeze({
 });
 
 /**
+ * Primary application navigation inventory for the authenticated shell.
+ */
+export const APP_NAV_ITEMS = Object.freeze([
+  Object.freeze({
+    label: "Dashboard",
+    routeKey: "DASHBOARD",
+    section: NAVIGATION_SECTIONS.OPERATIONS,
+    icon: "dashboard",
+  }),
+  Object.freeze({
+    label: "Requests",
+    routeKey: "REQUESTS",
+    section: NAVIGATION_SECTIONS.OPERATIONS,
+    icon: "request",
+  }),
+  Object.freeze({
+    label: "Work Orders",
+    routeKey: "WORK_ORDERS",
+    section: NAVIGATION_SECTIONS.OPERATIONS,
+    icon: "workOrder",
+  }),
+  Object.freeze({
+    label: "PM",
+    routeKey: "PM_PLANS",
+    section: NAVIGATION_SECTIONS.OPERATIONS,
+    icon: "pm",
+  }),
+  Object.freeze({
+    label: "Assets",
+    routeKey: "ASSETS",
+    section: NAVIGATION_SECTIONS.ASSETS,
+    icon: "asset",
+  }),
+  Object.freeze({
+    label: "Locations",
+    routeKey: "LOCATIONS",
+    section: NAVIGATION_SECTIONS.ASSETS,
+    icon: "location",
+  }),
+  Object.freeze({
+    label: "Inventory",
+    routeKey: "INVENTORY_PARTS",
+    section: NAVIGATION_SECTIONS.INVENTORY,
+    icon: "inventory",
+  }),
+  Object.freeze({
+    label: "Vendors",
+    routeKey: "VENDORS",
+    section: NAVIGATION_SECTIONS.VENDORS,
+    icon: "vendor",
+  }),
+  Object.freeze({
+    label: "Reports",
+    routeKey: "REPORTS",
+    section: NAVIGATION_SECTIONS.REPORTING,
+    icon: "report",
+  }),
+  Object.freeze({
+    label: "Settings",
+    routeKey: "SETTINGS_ORGANIZATION",
+    section: NAVIGATION_SECTIONS.SETTINGS,
+    icon: "settings",
+  }),
+  Object.freeze({
+    label: "Imports",
+    routeKey: "IMPORTS",
+    section: NAVIGATION_SECTIONS.SETTINGS,
+    icon: "import",
+  }),
+  Object.freeze({
+    label: "Audit",
+    routeKey: "AUDIT",
+    section: NAVIGATION_SECTIONS.SETTINGS,
+    icon: "audit",
+  }),
+]);
+
+/**
  * Shared route-adjacent enums mirrored from backend canonical constants.
  */
 export const ROLE_KEYS = Object.freeze([
@@ -255,6 +333,7 @@ export const UI_DEFAULTS = Object.freeze({
 export const CLIENT_CONSTANTS = Object.freeze({
   ROUTES,
   NAVIGATION_SECTIONS,
+  APP_NAV_ITEMS,
   ROLE_KEYS,
   REQUEST_STATUSES,
   WORK_ORDER_STATUSES,
