@@ -8,6 +8,7 @@ import PagePlaceholder from "../pages/PagePlaceholder.jsx";
 import LandingPage from "../pages/LandingPage.jsx";
 import BootstrapPage from "../pages/bootstrap/BootstrapPage.jsx";
 import LoginPage from "../pages/auth/LoginPage.jsx";
+import RegisterPage from "../pages/auth/RegisterPage.jsx";
 import ForgotPasswordPage from "../pages/auth/ForgotPasswordPage.jsx";
 import ResetPasswordPage from "../pages/auth/ResetPasswordPage.jsx";
 import DashboardPage from "../pages/dashboard/DashboardPage.jsx";
@@ -35,6 +36,7 @@ export const router = createBrowserRouter([
   { path: "/", element: <LandingPage /> },
   { path: "/bootstrap", element: <GuestRoute><BootstrapPage /></GuestRoute> },
   { path: "/login", element: <GuestRoute><LoginPage /></GuestRoute> },
+  { path: "/register", element: <GuestRoute><RegisterPage /></GuestRoute> },
   { path: "/forgot-password", element: <GuestRoute><ForgotPasswordPage /></GuestRoute> },
   { path: "/reset-password", element: <GuestRoute><ResetPasswordPage /></GuestRoute> },
   {

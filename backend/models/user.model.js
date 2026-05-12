@@ -33,6 +33,8 @@ const userSchema = new Schema(
     notificationPreferences: { type: Schema.Types.Mixed },
     lastLoginAt: { type: Date },
     lastLoginIp: { type: String },
+    resetPasswordToken: { type: String },
+    resetPasswordExpires: { type: Date },
     revision: { type: Number, default: 1 },
     createdBy: { type: Schema.Types.ObjectId, ref: "User" },
     updatedBy: { type: Schema.Types.ObjectId, ref: "User" },

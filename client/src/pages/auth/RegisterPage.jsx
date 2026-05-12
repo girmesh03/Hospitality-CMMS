@@ -8,34 +8,40 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Alert from "@mui/material/Alert";
 import CircularProgress from "@mui/material/CircularProgress";
-import Checkbox from "@mui/material/Checkbox";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import { authApi } from "../../domains/auth/api.js";
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [form, setForm] = useState({ email: "", password: "", rememberMe: false });
+  const [form, setForm] = useState({
+    email: "",
+    firstName: "",
+    lastName: "",
+    password: "",
+    confirmPassword: "",
+  });
 
   const handleChange = (field) => (e) => {
-    const value = field === "rememberMe" ? e.target.checked : e.target.value;
-    setForm((prev) => ({ ...prev, [field]: value }));
+    setForm((prev) => ({ ...prev, [field]: e.target.value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+
+    if (form.password !== form.confirmPassword) {
+      setError("Passwords do not match");
+      return;
+    }
+
     setLoading(true);
 
     try {
-      const res = await authApi.login(form);
-      if (res.data.data?.csrfToken) {
-        sessionStorage.setItem("csrfToken", res.data.data.csrfToken);
-      }
-      navigate("/dashboard");
+      await authApi.register(form);
+      navigate("/login");
     } catch (err) {
-      setError(err.response?.data?.message || "Login failed");
+      setError(err.response?.data?.message || "Registration failed");
     } finally {
       setLoading(false);
     }
@@ -45,21 +51,23 @@ export default function LoginPage() {
     <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh", p: 2 }}>
       <Card sx={{ maxWidth: 420, width: "100%" }}>
         <CardContent sx={{ p: 3 }}>
-          <Typography variant="h4" gutterBottom>Sign In</Typography>
+          <Typography variant="h4" gutterBottom>Create Account</Typography>
 
           {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
 
           <Box component="form" onSubmit={handleSubmit}>
             <TextField label="Email" type="email" value={form.email} onChange={handleChange("email")} fullWidth required sx={{ mb: 2 }} />
-            <TextField label="Password" type="password" value={form.password} onChange={handleChange("password")} fullWidth required sx={{ mb: 1 }} />
-            <FormControlLabel control={<Checkbox checked={form.rememberMe} onChange={handleChange("rememberMe")} />} label="Remember me" sx={{ mb: 2 }} />
+            <TextField label="First Name" value={form.firstName} onChange={handleChange("firstName")} fullWidth required sx={{ mb: 2 }} />
+            <TextField label="Last Name" value={form.lastName} onChange={handleChange("lastName")} fullWidth required sx={{ mb: 2 }} />
+            <TextField label="Password" type="password" value={form.password} onChange={handleChange("password")} fullWidth required sx={{ mb: 2 }} />
+            <TextField label="Confirm Password" type="password" value={form.confirmPassword} onChange={handleChange("confirmPassword")} fullWidth required sx={{ mb: 2 }} />
             <Button type="submit" variant="contained" size="large" fullWidth disabled={loading} sx={{ mb: 2 }}>
-              {loading ? <CircularProgress size={24} /> : "Sign In"}
+              {loading ? <CircularProgress size={24} /> : "Create Account"}
             </Button>
           </Box>
 
           <Typography variant="body2" align="center">
-            <Link to="/forgot-password" style={{ color: "inherit" }}>Forgot password?</Link>
+            Already have an account? <Link to="/login" style={{ color: "inherit" }}>Sign In</Link>
           </Typography>
         </CardContent>
       </Card>
