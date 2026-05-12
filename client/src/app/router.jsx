@@ -32,6 +32,11 @@ import OrganizationSettingsPage from "../pages/organizations/OrganizationSetting
 import RequestPortalPage from "../pages/portal/RequestPortalPage.jsx";
 import VendorPortalPage from "../pages/portal/VendorPortalPage.jsx";
 
+/**
+ * Application router configuration.
+ * Defines public, guest-only, and protected (authenticated) route trees.
+ * @type {import("react-router").Router}
+ */
 export const router = createBrowserRouter([
   { path: "/", element: <LandingPage /> },
   { path: "/bootstrap", element: <GuestRoute><BootstrapPage /></GuestRoute> },

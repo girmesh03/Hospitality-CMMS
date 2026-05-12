@@ -10,6 +10,10 @@ import Alert from "@mui/material/Alert";
 import CircularProgress from "@mui/material/CircularProgress";
 import { authApi } from "../../domains/auth/api.js";
 
+/**
+ * Forgot password page — email input with success message on submission.
+ * @returns {JSX.Element}
+ */
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);

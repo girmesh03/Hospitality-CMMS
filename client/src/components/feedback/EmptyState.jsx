@@ -16,12 +16,12 @@ export function EmptyState({ title, message, actionLabel, onAction }) {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        minHeight: 200,
+        minHeight: (theme) => theme.spacing(25),
         gap: 1,
         py: 6,
       }}
     >
-      <InboxIcon sx={{ fontSize: 48, color: "text.secondary", mb: 1 }} />
+      <InboxIcon sx={(theme) => ({ fontSize: theme.typography.pxToRem(48), color: "text.secondary", mb: 1 })} />
       <Typography variant="h6" color="text.secondary">
         {title || "No data found"}
       </Typography>

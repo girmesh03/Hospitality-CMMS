@@ -5,8 +5,7 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import { TopBar } from "./TopBar.jsx";
 import { SideNav } from "./SideNav.jsx";
-
-const DRAWER_WIDTH = 240;
+import { layoutConfig } from "../../app/theme/themePrimitives";
 
 /**
  * Main application layout shell with TopBar, SideNav, and routed content outlet.
@@ -21,10 +20,10 @@ export function AppLayout() {
         position="fixed"
         color="default"
         elevation={0}
-        sx={{
-          width: { md: `calc(100% - ${DRAWER_WIDTH}px)` },
-          ml: { md: `${DRAWER_WIDTH}px` },
-        }}
+        sx={(theme) => ({
+          width: { md: `calc(100% - ${layoutConfig.drawerWidth}px)` },
+          ml: { md: `${layoutConfig.drawerWidth}px` },
+        })}
       >
         <TopBar onMenuToggle={() => setMobileOpen(!mobileOpen)} />
       </AppBar>
@@ -34,12 +33,12 @@ export function AppLayout() {
       />
       <Box
         component="main"
-        sx={{
+        sx={(theme) => ({
           flexGrow: 1,
-          width: { md: `calc(100% - ${DRAWER_WIDTH}px)` },
-          mt: "64px",
+          width: { md: `calc(100% - ${layoutConfig.drawerWidth}px)` },
+          mt: theme.spacing(layoutConfig.headerHeight / 8),
           p: 3,
-        }}
+        })}
       >
         <Outlet />
       </Box>

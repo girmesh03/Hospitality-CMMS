@@ -8,7 +8,10 @@ import {
   LOCKOUT_WINDOW_MINUTES,
   INITIAL_LOCKOUT_MINUTES,
   PASSWORD_HISTORY_COUNT,
+  USER_STATUS,
+  ORGANIZATION_STATUS,
 } from "../../utils/constants.js";
+import Organization from "../../models/organization.model.js";
 import {
   UnauthorizedError,
   ForbiddenError,
@@ -16,6 +19,11 @@ import {
   NotFoundError,
 } from "../../utils/errors.js";
 
+/**
+ * @param {object} actor - The acting user (must include organizationId)
+ * @param {{ email: string, firstName: string, lastName: string, password: string }} data
+ * @returns {Promise<object>}
+ */
 export const register = async (actor, data) => {
   const existingUser = await User.findOne({
     email: data.email.toLowerCase(),
@@ -34,13 +42,17 @@ export const register = async (actor, data) => {
     displayName: `${data.firstName} ${data.lastName}`,
     password: data.password,
     emailVerified: false,
-    status: "active",
+    status: USER_STATUS.ACTIVE,
   });
 
   const { password, passwordHistory, ...userJson } = user.toJSON();
   return userJson;
 };
 
+/**
+ * @param {{ email: string, password: string, ip?: string, userAgent?: string, rememberMe?: boolean }} data
+ * @returns {Promise<{ user: object, accessToken: string, refreshToken: string, rememberMe: boolean }>}
+ */
 export const login = async (data) => {
   const user = await User.findOne({ email: data.email.toLowerCase() });
 
@@ -48,7 +60,12 @@ export const login = async (data) => {
     throw new UnauthorizedError("Invalid email or password");
   }
 
-  if (user.status === "archived" || user.status === "disabled") {
+  const organization = await Organization.findById(user.organizationId);
+  if (!organization || organization.status !== ORGANIZATION_STATUS.ACTIVE) {
+    throw new ForbiddenError("Organization is inactive or not found");
+  }
+
+  if (user.status === USER_STATUS.ARCHIVED || user.status === USER_STATUS.DISABLED) {
     throw new ForbiddenError("Account is disabled");
   }
 
@@ -100,7 +117,7 @@ export const login = async (data) => {
     organizationId: user.organizationId,
     sessionId,
     roleKeys: [],
-    propertyIds: [],
+    propertyIds: user.propertyIds || [],
     permissionHash: "",
   });
 
@@ -114,6 +131,11 @@ export const login = async (data) => {
   };
 };
 
+/**
+ * @param {string} refreshToken
+ * @param {object} data
+ * @returns {Promise<{ accessToken: string, refreshToken: string }>}
+ */
 export const refresh = async (refreshToken, data) => {
   if (!refreshToken) {
     throw new UnauthorizedError("Refresh token required");
@@ -131,7 +153,7 @@ export const refresh = async (refreshToken, data) => {
   }
 
   const user = await User.findById(session.userId);
-  if (!user || user.status === "archived" || user.status === "disabled") {
+  if (!user || user.status === USER_STATUS.ARCHIVED || user.status === USER_STATUS.DISABLED) {
     session.revoked = true;
     session.revokedAt = new Date();
     session.revocationReason = "User disabled";
@@ -161,6 +183,11 @@ export const refresh = async (refreshToken, data) => {
   return { accessToken, refreshToken: newRefreshToken };
 };
 
+/**
+ * @param {string} refreshToken
+ * @param {boolean} [allSessions=false]
+ * @returns {Promise<void>}
+ */
 export const logout = async (refreshToken, allSessions = false) => {
   if (!refreshToken && !allSessions) return;
 
@@ -187,12 +214,21 @@ export const logout = async (refreshToken, allSessions = false) => {
   }
 };
 
+/**
+ * @param {string} userId
+ * @returns {Promise<object>}
+ */
 export const getMe = async (userId) => {
   const user = await User.findById(userId).select("-password -passwordHistory");
   if (!user) throw new NotFoundError("User");
   return user;
 };
 
+/**
+ * @param {string} userId
+ * @param {{ firstName?: string, lastName?: string, phone?: string, jobTitle?: string }} data
+ * @returns {Promise<object>}
+ */
 export const updateMe = async (userId, data) => {
   const allowed = ["firstName", "lastName", "phone", "jobTitle"];
   const updates = {};
@@ -208,6 +244,11 @@ export const updateMe = async (userId, data) => {
   return user;
 };
 
+/**
+ * @param {string} userId
+ * @param {{ currentPassword: string, newPassword: string }} data
+ * @returns {Promise<{ message: string }>}
+ */
 export const changePassword = async (userId, data) => {
   const user = await User.findById(userId);
   if (!user) throw new NotFoundError("User");
@@ -242,6 +283,10 @@ export const changePassword = async (userId, data) => {
   return { message: "Password changed successfully" };
 };
 
+/**
+ * @param {{ email: string }} data
+ * @returns {Promise<{ message: string, resetToken?: string, email?: string }>}
+ */
 export const forgotPassword = async (data) => {
   const user = await User.findOne({ email: data.email.toLowerCase() });
   if (!user) return { message: "If the email exists, a reset link has been sent" };
@@ -255,6 +300,10 @@ export const forgotPassword = async (data) => {
   return { resetToken, email: user.email, message: "Reset link sent" };
 };
 
+/**
+ * @param {{ token: string, password: string }} data
+ * @returns {Promise<{ message: string }>}
+ */
 export const resetPassword = async (data) => {
   const hashed = jwtUtils.hashToken(data.token);
   const user = await User.findOne({
@@ -285,6 +334,10 @@ export const resetPassword = async (data) => {
   return { message: "Password reset successfully" };
 };
 
+/**
+ * @param {string} userId
+ * @returns {Promise<Array<object>>}
+ */
 export const listSessions = async (userId) => {
   const sessions = await UserSession.find({ userId, revoked: false })
     .select("userAgent ip issuedAt lastActivityAt expiresAt")
@@ -292,6 +345,11 @@ export const listSessions = async (userId) => {
   return sessions;
 };
 
+/**
+ * @param {string} userId
+ * @param {string} sessionId
+ * @returns {Promise<{ message: string }>}
+ */
 export const revokeSession = async (userId, sessionId) => {
   const session = await UserSession.findOne({ _id: sessionId, userId, revoked: false });
   if (!session) throw new NotFoundError("Session");
@@ -304,6 +362,10 @@ export const revokeSession = async (userId, sessionId) => {
   return { message: "Session revoked" };
 };
 
+/**
+ * @param {string} userId
+ * @returns {Promise<{ permissions: string[] }>}
+ */
 export const getPermissions = async (userId) => {
   const user = await User.findById(userId).populate("roleIds");
   if (!user) throw new NotFoundError("User");
@@ -318,8 +380,12 @@ export const getPermissions = async (userId) => {
   return { permissions: [...permissions] };
 };
 
+/**
+ * @param {number} attemptCount
+ * @returns {number}
+ */
 function getLockDuration(attemptCount) {
-  const durations = [15, 30, 60, 120, 240, 480, 1440];
+  const durations = [30, 60, 120, 240, 480, 1440];
   const index = Math.min(Math.floor((attemptCount - 1) / MAX_LOGIN_ATTEMPTS), durations.length - 1);
   return durations[index] || INITIAL_LOCKOUT_MINUTES;
 }

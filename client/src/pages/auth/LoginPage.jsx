@@ -12,6 +12,10 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { authApi } from "../../domains/auth/api.js";
 
+/**
+ * Login page with email/password form and remember-me toggle.
+ * @returns {JSX.Element}
+ */
 export default function LoginPage() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);

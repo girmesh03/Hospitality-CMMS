@@ -1,14 +1,21 @@
 import mongoose from "mongoose";
 import Organization from "../../models/organization.model.js";
 import User from "../../models/user.model.js";
-import { ROLE_KEYS, PERMISSIONS } from "../../utils/constants.js";
+import { USER_STATUS } from "../../utils/constants.js";
 import { ConflictError } from "../../utils/errors.js";
 
+/**
+ * @returns {Promise<{ bootstrapRequired: boolean }>}
+ */
 export const checkBootstrapStatus = async () => {
   const count = await Organization.countDocuments();
   return { bootstrapRequired: count === 0 };
 };
 
+/**
+ * @param {{ orgName: string, subdomain?: string, timezone: string, currency?: string, email: string, firstName: string, lastName: string, password: string }} data
+ * @returns {Promise<{ organization: object, user: object }>}
+ */
 export const initializeSystem = async (data) => {
   const orgCount = await Organization.countDocuments();
   if (orgCount > 0) {
@@ -42,7 +49,7 @@ export const initializeSystem = async (data) => {
           password: data.password,
           emailVerified: true,
           emailVerifiedAt: new Date(),
-          status: "active",
+          status: USER_STATUS.ACTIVE,
         },
       ],
       { session }

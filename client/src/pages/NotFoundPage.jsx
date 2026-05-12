@@ -21,7 +21,7 @@ export function NotFoundPage() {
         gap: 2,
       }}
     >
-      <Typography variant="h1" color="text.secondary" sx={{ fontSize: 96, fontWeight: 700 }}>
+      <Typography variant="h1" color="text.secondary" sx={(theme) => ({ fontSize: theme.typography.pxToRem(96), fontWeight: theme.typography.fontWeightBold })}>
         404
       </Typography>
       <Typography variant="h5" color="text.secondary">

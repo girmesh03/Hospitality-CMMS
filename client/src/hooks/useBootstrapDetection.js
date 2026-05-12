@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+/**
+ * Hook that checks the bootstrap status from the API on mount.
+ * @returns {{ bootstrapRequired: boolean|null, loading: boolean, error: string|null }}
+ */
 export function useBootstrapDetection() {
   const [bootstrapRequired, setBootstrapRequired] = useState(null);
   const [loading, setLoading] = useState(true);

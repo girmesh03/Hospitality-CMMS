@@ -5,6 +5,7 @@ import { bootstrapLimiter } from "../middlewares/security/rateLimiter.js";
 import { initializeValidator } from "../validators/bootstrap/initialize.validator.js";
 import { getBootstrapStatus, initializeSystem } from "../controllers/bootstrap/bootstrap.controller.js";
 
+/** Bootstrap routes: check status and initialize the system. @type {import("express").Router} */
 const router = Router();
 
 router.get("/status", getBootstrapStatus);

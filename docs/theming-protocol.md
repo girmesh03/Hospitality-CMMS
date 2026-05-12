@@ -19,7 +19,7 @@
 
 This document establishes the **mandatory theming architecture** and **styling standards** for the Hospitality CMMS web application. It is derived from comprehensive analysis of:
 
-1. Current theme implementation in `client/src/theme/`
+1. Current theme implementation in `client/src/app/theme/`
 2. MUI v9 component customization patterns
 3. Project requirements from `docs/prd.md`, `docs/requirements.md`, and `docs/design.md`
 4. Responsive design requirements for mobile, tablet, and desktop
@@ -32,12 +32,12 @@ This document establishes the **mandatory theming architecture** and **styling s
 
 ### 2.1 Centralized Theme Location
 
-**MANDATORY RULE**: All theme configuration MUST reside in `client/src/theme/`
+**MANDATORY RULE**: All theme configuration MUST reside in `client/src/app/theme/`
 
 **Current Theme Structure**:
 
 ```
-client/src/theme/
+client/src/app/theme/
 ├── AppTheme.jsx              # Main theme provider component
 ├── themePrimitives.js        # Color schemes, typography, shadows, shape
 └── customizations/
@@ -112,7 +112,7 @@ function AppTheme(props) {
 
 ### 3.1 Brand Colors
 
-**Defined in**: `client/src/theme/themePrimitives.js`
+**Defined in**: `client/src/app/theme/themePrimitives.js`
 
 ```javascript
 export const brand = {
@@ -245,7 +245,7 @@ import "@fontsource/inter/700.css";
 
 ### 4.2 Typography Scale
 
-**Defined in**: `client/src/theme/themePrimitives.js`
+**Defined in**: `client/src/app/theme/themePrimitives.js`
 
 ```javascript
 export const typography = {
@@ -342,7 +342,7 @@ sx={{ margin: 16 }}                  // ❌ No theme reference
 
 ### 5.2 Shape and Border Radius
 
-**Defined in**: `client/src/theme/themePrimitives.js`
+**Defined in**: `client/src/app/theme/themePrimitives.js`
 
 ```javascript
 export const shape = {
@@ -362,7 +362,7 @@ sx={{ borderRadius: '8px' }}  // ❌ Hardcoded
 
 ### 5.3 Layout Configuration
 
-**Defined in**: `client/src/theme/themePrimitives.js`
+**Defined in**: `client/src/app/theme/themePrimitives.js`
 
 ```javascript
 export const layoutConfig = {
@@ -438,7 +438,7 @@ sx={{
 
 ### 7.1 MUI Component Override Pattern
 
-**Location**: `client/src/theme/customizations/`
+**Location**: `client/src/app/theme/customizations/`
 
 **Structure**:
 
@@ -472,7 +472,7 @@ export default componentCustomizations;
 
 ### 7.2 Button Customizations
 
-**Defined in**: `client/src/theme/customizations/inputs.js`
+**Defined in**: `client/src/app/theme/customizations/inputs.js`
 
 **Key Features**:
 
@@ -528,7 +528,7 @@ export default componentCustomizations;
 
 ### 7.4 Card and Surface Customizations
 
-**Defined in**: `client/src/theme/customizations/surfaces.js`
+**Defined in**: `client/src/app/theme/customizations/surfaces.js`
 
 **Key Features**:
 

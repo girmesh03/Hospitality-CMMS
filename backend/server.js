@@ -20,6 +20,7 @@ server.listen(PORT, () => {
   logger.info(`Server running on port ${PORT}`);
 });
 
+/** Graceful shutdown handler — closes HTTP server and MongoDB connection. @returns {Promise<void>} */
 const shutdown = async () => {
   logger.info("Shutting down gracefully...");
   server.close(async () => {

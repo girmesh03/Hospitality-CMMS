@@ -1,6 +1,7 @@
 import { body } from "express-validator";
 import { PASSWORD_MIN_LENGTH, PASSWORD_MAX_LENGTH } from "../../utils/constants.js";
 
+/** Validation chain for system initialization. @type {import("express-validator").ValidationChain[]} */
 export const initializeValidator = [
   body("orgName")
     .isString()

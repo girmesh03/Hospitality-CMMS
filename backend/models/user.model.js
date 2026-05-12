@@ -4,6 +4,7 @@ import { BCRYPT_ROUNDS, USER_STATUS } from "../utils/constants.js";
 
 const { Schema } = mongoose;
 
+/** User schema definition */
 const userSchema = new Schema(
   {
     organizationId: { type: Schema.Types.ObjectId, ref: "Organization", index: true },
@@ -49,17 +50,30 @@ const userSchema = new Schema(
 userSchema.index({ email: 1, organizationId: 1 }, { unique: true });
 userSchema.index({ organizationId: 1, status: 1 });
 
+/**
+ * Pre-save hook to hash password when modified.
+ * @param {import("mongoose").CallbackWithoutResultAndNext} next
+ */
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password") || !this.password) return next();
   this.password = await bcrypt.hash(this.password, BCRYPT_ROUNDS);
   next();
 });
 
+/**
+ * Compare a candidate password with the stored hash.
+ * @param {string} candidatePassword
+ * @returns {Promise<boolean>}
+ */
 userSchema.methods.comparePassword = async function (candidatePassword) {
   if (!this.password) return false;
   return bcrypt.compare(candidatePassword, this.password);
 };
 
+/**
+ * User model.
+ * @type {import("mongoose").Model<import("mongoose").Document>}
+ */
 const User = mongoose.model("User", userSchema);
 
 export default User;

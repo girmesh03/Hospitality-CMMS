@@ -1,5 +1,6 @@
 import { env } from "./env.js";
 
+/** CORS configuration object. */
 export const corsConfig = {
   origin: env.corsOrigins,
   credentials: true,

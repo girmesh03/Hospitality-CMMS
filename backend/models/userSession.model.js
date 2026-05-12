@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const { Schema } = mongoose;
 
+/** User session schema definition */
 const userSessionSchema = new Schema(
   {
     userId: { type: Schema.Types.ObjectId, ref: "User", required: true, index: true },
@@ -25,6 +26,10 @@ const userSessionSchema = new Schema(
 userSessionSchema.index({ refreshToken: 1 });
 userSessionSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 });
 
+/**
+ * UserSession model.
+ * @type {import("mongoose").Model<import("mongoose").Document>}
+ */
 const UserSession = mongoose.model("UserSession", userSessionSchema);
 
 export default UserSession;

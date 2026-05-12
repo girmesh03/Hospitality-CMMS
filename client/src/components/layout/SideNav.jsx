@@ -24,8 +24,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import SecurityIcon from "@mui/icons-material/Security";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-
-const DRAWER_WIDTH = 240;
+import { layoutConfig } from "../../app/theme/themePrimitives";
 
 const navItems = [
   { label: "Dashboard", path: "/app/dashboard", icon: <DashboardIcon /> },
@@ -77,7 +76,7 @@ function NavItem({ item, depth }) {
         onClick={handleClick}
         sx={{ pl: 2 + depth * 2 }}
       >
-        <ListItemIcon sx={{ minWidth: 40 }}>
+        <ListItemIcon sx={(theme) => ({ minWidth: theme.spacing(5) })}>
           {item.icon}
         </ListItemIcon>
         <ListItemText primary={item.label} />
@@ -123,7 +122,7 @@ export function SideNav({ open, onClose }) {
         ModalProps={{ keepMounted: true }}
         sx={{
           display: { xs: "block", md: "none" },
-          "& .MuiDrawer-paper": { boxSizing: "border-box", width: DRAWER_WIDTH },
+          "& .MuiDrawer-paper": { boxSizing: "border-box", width: layoutConfig.drawerWidth },
         }}
       >
         {drawerContent}
@@ -133,7 +132,7 @@ export function SideNav({ open, onClose }) {
         open
         sx={{
           display: { xs: "none", md: "block" },
-          "& .MuiDrawer-paper": { boxSizing: "border-box", width: DRAWER_WIDTH },
+          "& .MuiDrawer-paper": { boxSizing: "border-box", width: layoutConfig.drawerWidth },
         }}
       >
         {drawerContent}

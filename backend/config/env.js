@@ -16,6 +16,7 @@ if (missing.length > 0) {
   throw new Error(`Missing required environment variables: ${missing.join(", ")}`);
 }
 
+/** Application environment configuration values loaded from process.env. */
 export const env = {
   nodeEnv: process.env.NODE_ENV || "development",
   port: parseInt(process.env.PORT, 10) || 4000,

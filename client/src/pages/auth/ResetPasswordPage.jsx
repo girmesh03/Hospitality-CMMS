@@ -10,6 +10,10 @@ import Alert from "@mui/material/Alert";
 import CircularProgress from "@mui/material/CircularProgress";
 import { authApi } from "../../domains/auth/api.js";
 
+/**
+ * Reset password page — validates token from URL, accepts new password.
+ * @returns {JSX.Element}
+ */
 export default function ResetPasswordPage() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();

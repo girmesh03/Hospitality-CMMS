@@ -15,7 +15,7 @@ export function LoadingState({ message }) {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        minHeight: 200,
+        minHeight: (theme) => theme.spacing(25),
         gap: 2,
       }}
     >

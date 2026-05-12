@@ -1,4 +1,54 @@
-/** Application-wide constants single source of truth. @module constants */
+/**
+ * Application-wide constants: route paths, nav sections, role keys,
+ * permission strings, and domain enum-like objects.
+ */
+export { ROUTES } from "./routes.js";
+
+export const NAV_SECTIONS = [
+  {
+    title: "Main",
+    items: [
+      { label: "Dashboard", path: ROUTES.DASHBOARD, icon: "Dashboard" },
+      { label: "Work Orders", path: ROUTES.WORK_ORDERS, icon: "Assignment" },
+      { label: "Requests", path: ROUTES.REQUESTS, icon: "RequestQuote" },
+      { label: "PM Plans", path: ROUTES.PM_PLANS, icon: "Schedule" },
+    ],
+  },
+  {
+    title: "Assets & Locations",
+    items: [
+      { label: "Assets", path: ROUTES.ASSETS, icon: "PrecisionManufacturing" },
+      { label: "Locations", path: ROUTES.LOCATIONS, icon: "LocationOn" },
+      { label: "Inventory", path: ROUTES.INVENTORY, icon: "Inventory" },
+    ],
+  },
+  {
+    title: "Administration",
+    items: [
+      { label: "Users", path: ROUTES.USERS, icon: "People" },
+      { label: "Roles", path: ROUTES.ROLES, icon: "AdminPanelSettings" },
+      { label: "Teams", path: ROUTES.TEAMS, icon: "Group" },
+      { label: "Properties", path: ROUTES.PROPERTIES, icon: "Business" },
+    ],
+  },
+  {
+    title: "Vendors & Reports",
+    items: [
+      { label: "Vendors", path: ROUTES.VENDORS, icon: "LocalShipping" },
+      { label: "Reports", path: ROUTES.REPORTS, icon: "BarChart" },
+    ],
+  },
+  {
+    title: "System",
+    items: [
+      { label: "Notifications", path: ROUTES.NOTIFICATIONS, icon: "Notifications" },
+      { label: "Imports", path: ROUTES.IMPORTS, icon: "FileUpload" },
+      { label: "Audit Log", path: ROUTES.AUDIT_LOG, icon: "Security" },
+      { label: "Settings", path: ROUTES.SETTINGS_PROFILE, icon: "Settings" },
+    ],
+  },
+];
+
 export const ROLE_KEYS = {
   ORGANIZATION_ADMIN: "ORGANIZATION_ADMIN",
   CORPORATE_ENGINEERING_DIRECTOR: "CORPORATE_ENGINEERING_DIRECTOR",
@@ -72,22 +122,6 @@ export const WO_STATUS = {
   CANCELLED: "cancelled",
 };
 
-export const WO_VALID_TRANSITIONS = {
-  draft: ["open", "cancelled"],
-  open: ["assigned", "cancelled"],
-  assigned: ["scheduled", "in_progress", "on_hold", "cancelled"],
-  scheduled: ["in_progress", "on_hold", "cancelled"],
-  in_progress: ["completed", "on_hold", "awaiting_parts", "awaiting_access", "cancelled"],
-  on_hold: ["in_progress", "cancelled"],
-  awaiting_parts: ["in_progress", "cancelled"],
-  awaiting_access: ["in_progress", "cancelled"],
-  awaiting_approval: ["in_progress", "completed", "cancelled"],
-  completed: ["verified", "closed", "cancelled"],
-  verified: ["closed", "cancelled"],
-  closed: ["cancelled"],
-  cancelled: [],
-};
-
 export const WO_TYPE = {
   CORRECTIVE: "corrective",
   EMERGENCY: "emergency",
@@ -157,114 +191,12 @@ export const PM_FREQUENCY = {
   CUSTOM: "custom_interval",
 };
 
-export const NOTIFICATION_EVENTS = {
-  REQUEST_CREATED: "request_created",
-  REQUEST_APPROVED: "request_approved",
-  REQUEST_REJECTED: "request_rejected",
-  WO_CREATED: "wo_created",
-  WO_ASSIGNED: "wo_assigned",
-  WO_REASSIGNED: "wo_reassigned",
-  WO_STATUS_CHANGED: "wo_status_changed",
-  WO_COMPLETED: "wo_completed",
-  WO_VERIFIED: "wo_verified",
-  WO_OVERDUE: "wo_overdue",
-  PM_GENERATED: "pm_generated",
-  PM_MISSED: "pm_missed",
-  INSPECTION_FAILED: "inspection_failed",
-  PART_LOW_STOCK: "part_low_stock",
-  PART_OUT_OF_STOCK: "part_out_of_stock",
-  VENDOR_ASSIGNED: "vendor_assigned",
-  VENDOR_COMPLETED: "vendor_completed",
-  USER_MENTIONED: "user_mentioned",
-  SLA_AT_RISK: "sla_at_risk",
-  SLA_BREACHED: "sla_breached",
-  COMPLIANCE_DOC_EXPIRING: "compliance_document_expiring",
-  COMPLIANCE_DOC_EXPIRED: "compliance_document_expired",
-  DOCUMENT_UPLOADED: "document_uploaded",
-  COMMENT_ADDED: "comment_added",
-};
-
-export const AUDIT_ACTIONS = {
-  SYSTEM_BOOTSTRAP: "SYSTEM_BOOTSTRAP",
-  USER_LOGIN: "USER_LOGIN",
-  USER_LOGOUT: "USER_LOGOUT",
-  USER_CREATED: "USER_CREATED",
-  USER_UPDATED: "USER_UPDATED",
-  USER_DEACTIVATED: "USER_DEACTIVATED",
-  USER_ROLE_CHANGED: "USER_ROLE_CHANGED",
-  PASSWORD_CHANGED: "PASSWORD_CHANGED",
-  PASSWORD_RESET: "PASSWORD_RESET",
-  ACCOUNT_LOCKED: "ACCOUNT_LOCKED",
-  SESSION_REVOKED: "SESSION_REVOKED",
-  ORGANIZATION_CREATED: "ORGANIZATION_CREATED",
-  ORGANIZATION_UPDATED: "ORGANIZATION_UPDATED",
-  PROPERTY_CREATED: "PROPERTY_CREATED",
-  PROPERTY_UPDATED: "PROPERTY_UPDATED",
-  LOCATION_CREATED: "LOCATION_CREATED",
-  LOCATION_UPDATED: "LOCATION_UPDATED",
-  ASSET_CREATED: "ASSET_CREATED",
-  ASSET_UPDATED: "ASSET_UPDATED",
-  ASSET_TRANSFERRED: "ASSET_TRANSFERRED",
-  ASSET_RETIRED: "ASSET_RETIRED",
-  WORK_REQUEST_CREATED: "WORK_REQUEST_CREATED",
-  WORK_REQUEST_APPROVED: "WORK_REQUEST_APPROVED",
-  WORK_REQUEST_REJECTED: "WORK_REQUEST_REJECTED",
-  WORK_REQUEST_CONVERTED: "WORK_REQUEST_CONVERTED",
-  WORK_ORDER_CREATED: "WORK_ORDER_CREATED",
-  WORK_ORDER_UPDATED: "WORK_ORDER_UPDATED",
-  WORK_ORDER_STATUS_CHANGED: "WORK_ORDER_STATUS_CHANGED",
-  WORK_ORDER_ASSIGNED: "WORK_ORDER_ASSIGNED",
-  WORK_ORDER_COMPLETED: "WORK_ORDER_COMPLETED",
-  WORK_ORDER_VERIFIED: "WORK_ORDER_VERIFIED",
-  WORK_ORDER_CANCELLED: "WORK_ORDER_CANCELLED",
-  PM_PLAN_CREATED: "PM_PLAN_CREATED",
-  PM_PLAN_UPDATED: "PM_PLAN_UPDATED",
-  PM_GENERATED: "PM_GENERATED",
-  INVENTORY_ADJUSTED: "INVENTORY_ADJUSTED",
-  INVENTORY_TRANSFERRED: "INVENTORY_TRANSFERRED",
-  VENDOR_CREATED: "VENDOR_CREATED",
-  VENDOR_UPDATED: "VENDOR_UPDATED",
-  DOCUMENT_UPLOADED: "DOCUMENT_UPLOADED",
-  DOCUMENT_DELETED: "DOCUMENT_DELETED",
-  SETTINGS_UPDATED: "SETTINGS_UPDATED",
-  IMPORT_STARTED: "IMPORT_STARTED",
-  IMPORT_COMMITTED: "IMPORT_COMMITTED",
-};
-
-export const ENTITY_TYPES = {
-  SYSTEM: "SYSTEM",
-  ORGANIZATION: "ORGANIZATION",
-  PROPERTY: "PROPERTY",
-  LOCATION: "LOCATION",
-  USER: "USER",
-  ROLE: "ROLE",
-  TEAM: "TEAM",
-  ASSET: "ASSET",
-  METER: "METER",
-  WORK_REQUEST: "WORK_REQUEST",
-  WORK_ORDER: "WORK_ORDER",
-  PM_PLAN: "PM_PLAN",
-  CHECKLIST: "CHECKLIST",
-  INSPECTION: "INSPECTION",
-  PART: "PART",
-  INVENTORY_STOCK: "INVENTORY_STOCK",
-  VENDOR: "VENDOR",
-  DOCUMENT: "DOCUMENT",
-  NOTIFICATION: "NOTIFICATION",
-  SETTINGS: "SETTINGS",
-};
-
 export const USER_STATUS = {
   INVITED: "invited",
   ACTIVE: "active",
   LOCKED: "locked",
   DISABLED: "disabled",
   ARCHIVED: "archived",
-};
-
-export const ORGANIZATION_STATUS = {
-  ACTIVE: "active",
-  INACTIVE: "inactive",
 };
 
 export const PROPERTY_STATUS = {
@@ -326,16 +258,50 @@ export const VENDOR_TYPE = {
   CONSULTANT: "consultant",
 };
 
-export const DOCUMENT_ENTITY_TYPES = [
-  ENTITY_TYPES.ASSET,
-  ENTITY_TYPES.WORK_ORDER,
-  ENTITY_TYPES.WORK_REQUEST,
-  ENTITY_TYPES.PM_PLAN,
-  ENTITY_TYPES.INSPECTION,
-  ENTITY_TYPES.VENDOR,
-  ENTITY_TYPES.LOCATION,
-  ENTITY_TYPES.USER,
-];
+export const REQUEST_STATUS = {
+  SUBMITTED: "submitted",
+  UNDER_REVIEW: "under_review",
+  NEEDS_CLARIFICATION: "needs_clarification",
+  APPROVED: "approved",
+  REJECTED: "rejected",
+  CONVERTED: "converted",
+  CANCELLED: "cancelled",
+};
+
+export const NOTIFICATION_TYPE = {
+  INFO: "info",
+  WARNING: "warning",
+  ALERT: "alert",
+  SUCCESS: "success",
+  ERROR: "error",
+};
+
+export const NOTIFICATION_EVENTS = {
+  REQUEST_CREATED: "request_created",
+  REQUEST_APPROVED: "request_approved",
+  REQUEST_REJECTED: "request_rejected",
+  WO_CREATED: "wo_created",
+  WO_ASSIGNED: "wo_assigned",
+  WO_REASSIGNED: "wo_reassigned",
+  WO_STATUS_CHANGED: "wo_status_changed",
+  WO_COMPLETED: "wo_completed",
+  WO_VERIFIED: "wo_verified",
+  WO_OVERDUE: "wo_overdue",
+  PM_GENERATED: "pm_generated",
+  PM_MISSED: "pm_missed",
+  INSPECTION_FAILED: "inspection_failed",
+  PART_LOW_STOCK: "part_low_stock",
+  PART_OUT_OF_STOCK: "part_out_of_stock",
+  VENDOR_ASSIGNED: "vendor_assigned",
+  VENDOR_COMPLETED: "vendor_completed",
+  USER_MENTIONED: "user_mentioned",
+  SLA_AT_RISK: "sla_at_risk",
+  SLA_BREACHED: "sla_breached",
+  COMPLIANCE_DOC_EXPIRING: "compliance_document_expiring",
+  COMPLIANCE_DOC_EXPIRED: "compliance_document_expired",
+  DOCUMENT_UPLOADED: "document_uploaded",
+  COMMENT_ADDED: "comment_added",
+};
 
 export const DELIVERY_STATUS = {
   QUEUED: "queued",
@@ -349,49 +315,6 @@ export const NOTIFICATION_CHANNELS = {
   IN_APP: "in_app",
   EMAIL: "email",
   BOTH: "both",
-};
-
-export const NOTIFICATION_TYPE = {
-  INFO: "info",
-  WARNING: "warning",
-  ALERT: "alert",
-  SUCCESS: "success",
-  ERROR: "error",
-};
-
-export const REQUEST_STATUS = {
-  SUBMITTED: "submitted",
-  UNDER_REVIEW: "under_review",
-  NEEDS_CLARIFICATION: "needs_clarification",
-  APPROVED: "approved",
-  REJECTED: "rejected",
-  CONVERTED: "converted",
-  CANCELLED: "cancelled",
-};
-
-export const PAGINATION_DEFAULTS = { page: 1, limit: 20, maxLimit: 100 };
-export const PASSWORD_MIN_LENGTH = 12;
-export const PASSWORD_MAX_LENGTH = 72;
-export const BCRYPT_ROUNDS = 12;
-export const ACCESS_TOKEN_EXPIRY = "15m";
-export const REFRESH_TOKEN_EXPIRY_DAYS = 7;
-export const REMEMBER_ME_EXPIRY_DAYS = 30;
-export const MAX_LOGIN_ATTEMPTS = 5;
-export const LOCKOUT_WINDOW_MINUTES = 15;
-export const INITIAL_LOCKOUT_MINUTES = 30;
-export const MAX_FILE_SIZE = 10 * 1024 * 1024;
-export const ALLOWED_FILE_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif", "application/pdf", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"];
-export const PASSWORD_HISTORY_COUNT = 8;
-export const SESSION_IDLE_TIMEOUT_HOURS = 24;
-export const LOCATION_MAX_DEPTH = 8;
-
-export const WO_SOURCE = {
-  MANUAL: "manual",
-  REQUEST_CONVERSION: "request_conversion",
-  PM_GENERATION: "pm_generation",
-  INSPECTION_FAILURE: "inspection_failure",
-  DUPLICATE_SPLIT: "duplicate_split",
-  IMPORT: "import",
 };
 
 export const CHECKLIST_RESPONSE_TYPE = {
@@ -422,3 +345,10 @@ export const IMPORT_JOB_STATUS = {
   COMMITTED: "committed",
   FAILED: "failed",
 };
+
+export const PAGINATION_DEFAULTS = { page: 1, limit: 20, maxLimit: 100 };
+export const PASSWORD_MIN_LENGTH = 12;
+export const PASSWORD_MAX_LENGTH = 72;
+export const MAX_FILE_SIZE = 10 * 1024 * 1024;
+export const ALLOWED_FILE_TYPES = ["image/jpeg", "image/png", "image/webp", "image/gif", "application/pdf", "text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "application/msword", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"];
+export const LOCATION_MAX_DEPTH = 8;

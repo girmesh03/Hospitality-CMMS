@@ -7,6 +7,11 @@ import {
   generateCsrfToken,
 } from "../../utils/jwt.js";
 
+/**
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ * @param {import("express").NextFunction} next
+ */
 export const register = async (req, res, next) => {
   try {
     const user = await authService.register(req.user, req.validated.body);
@@ -16,6 +21,11 @@ export const register = async (req, res, next) => {
   }
 };
 
+/**
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ * @param {import("express").NextFunction} next
+ */
 export const login = async (req, res, next) => {
   try {
     const data = {
@@ -42,6 +52,11 @@ export const login = async (req, res, next) => {
   }
 };
 
+/**
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ * @param {import("express").NextFunction} next
+ */
 export const refresh = async (req, res, next) => {
   try {
     const refreshToken = req.cookies?.refreshToken;
@@ -62,6 +77,11 @@ export const refresh = async (req, res, next) => {
   }
 };
 
+/**
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ * @param {import("express").NextFunction} next
+ */
 export const logout = async (req, res, next) => {
   try {
     const refreshToken = req.cookies?.refreshToken;
@@ -73,6 +93,11 @@ export const logout = async (req, res, next) => {
   }
 };
 
+/**
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ * @param {import("express").NextFunction} next
+ */
 export const logoutAll = async (req, res, next) => {
   try {
     const refreshToken = req.cookies?.refreshToken;
@@ -84,6 +109,11 @@ export const logoutAll = async (req, res, next) => {
   }
 };
 
+/**
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ * @param {import("express").NextFunction} next
+ */
 export const getMe = async (req, res, next) => {
   try {
     const user = await authService.getMe(req.user.id);
@@ -93,6 +123,11 @@ export const getMe = async (req, res, next) => {
   }
 };
 
+/**
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ * @param {import("express").NextFunction} next
+ */
 export const updateMe = async (req, res, next) => {
   try {
     const user = await authService.updateMe(req.user.id, req.validated.body);
@@ -102,6 +137,11 @@ export const updateMe = async (req, res, next) => {
   }
 };
 
+/**
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ * @param {import("express").NextFunction} next
+ */
 export const changePassword = async (req, res, next) => {
   try {
     const result = await authService.changePassword(req.user.id, req.validated.body);
@@ -111,6 +151,11 @@ export const changePassword = async (req, res, next) => {
   }
 };
 
+/**
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ * @param {import("express").NextFunction} next
+ */
 export const forgotPassword = async (req, res, next) => {
   try {
     const result = await authService.forgotPassword(req.validated.body);
@@ -120,6 +165,11 @@ export const forgotPassword = async (req, res, next) => {
   }
 };
 
+/**
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ * @param {import("express").NextFunction} next
+ */
 export const resetPassword = async (req, res, next) => {
   try {
     const result = await authService.resetPassword(req.validated.body);
@@ -129,6 +179,11 @@ export const resetPassword = async (req, res, next) => {
   }
 };
 
+/**
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ * @param {import("express").NextFunction} next
+ */
 export const listSessions = async (req, res, next) => {
   try {
     const sessions = await authService.listSessions(req.user.id);
@@ -138,6 +193,11 @@ export const listSessions = async (req, res, next) => {
   }
 };
 
+/**
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ * @param {import("express").NextFunction} next
+ */
 export const revokeSession = async (req, res, next) => {
   try {
     const result = await authService.revokeSession(req.user.id, req.validated.params.id);
@@ -147,6 +207,11 @@ export const revokeSession = async (req, res, next) => {
   }
 };
 
+/**
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ * @param {import("express").NextFunction} next
+ */
 export const getPermissions = async (req, res, next) => {
   try {
     const result = await authService.getPermissions(req.user.id);

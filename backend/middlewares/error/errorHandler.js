@@ -1,6 +1,12 @@
 import { AppError } from "../../utils/errors.js";
 import { logger } from "../../utils/logger.js";
 
+/**
+ * @param {Error} err
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ * @param {import("express").NextFunction} next
+ */
 export const errorHandler = (err, req, res, next) => {
   if (err instanceof AppError) {
     return res.status(err.statusCode).json({

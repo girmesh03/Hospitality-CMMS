@@ -7,6 +7,7 @@ const RETRY_DELAY_MS = 5000;
 
 let retryCount = 0;
 
+/** Database connection configuration. @returns {Promise<void>} */
 export async function connectDatabase() {
   try {
     mongoose.connection.on("connected", () => {

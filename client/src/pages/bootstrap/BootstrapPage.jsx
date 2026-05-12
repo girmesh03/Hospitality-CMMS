@@ -10,6 +10,10 @@ import Alert from "@mui/material/Alert";
 import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
 
+/**
+ * System bootstrap page — first-run organization + admin creation.
+ * @returns {JSX.Element}
+ */
 export default function BootstrapPage() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);

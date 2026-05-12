@@ -44,7 +44,7 @@ export default function LandingPage() {
           textAlign: "center",
         }}
       >
-        <Typography variant="h2" fontWeight={700}>
+        <Typography variant="h1">
           Hospitality CMMS
         </Typography>
         <Typography variant="h6" color="text.secondary">

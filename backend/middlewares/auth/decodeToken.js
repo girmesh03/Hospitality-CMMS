@@ -1,6 +1,11 @@
 import jwt from "jsonwebtoken";
 import { env } from "../../config/env.js";
 
+/**
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ * @param {import("express").NextFunction} next
+ */
 export const decodeToken = (req, res, next) => {
   const token = req.cookies?.accessToken;
   if (!token) return next();

@@ -4,6 +4,7 @@ import {
   PASSWORD_MAX_LENGTH,
 } from "../../utils/constants.js";
 
+/** Validation chain for user registration. @type {import("express-validator").ValidationChain[]} */
 export const registerValidator = [
   body("email").isEmail().normalizeEmail().withMessage("Valid email is required"),
   body("firstName").isString().trim().isLength({ min: 1, max: 50 }).withMessage("First name is required"),
@@ -18,12 +19,14 @@ export const registerValidator = [
     .matches(/[^A-Za-z0-9]/).withMessage("Must contain a special character"),
 ];
 
+/** Validation chain for login. @type {import("express-validator").ValidationChain[]} */
 export const loginValidator = [
   body("email").isEmail().normalizeEmail().withMessage("Valid email is required"),
   body("password").isString().notEmpty().withMessage("Password is required"),
   body("rememberMe").optional().isBoolean().withMessage("rememberMe must be a boolean"),
 ];
 
+/** Validation chain for profile updates. @type {import("express-validator").ValidationChain[]} */
 export const updateProfileValidator = [
   body("firstName").optional().isString().trim().isLength({ max: 50 }),
   body("lastName").optional().isString().trim().isLength({ max: 50 }),
@@ -31,6 +34,7 @@ export const updateProfileValidator = [
   body("jobTitle").optional().isString().trim(),
 ];
 
+/** Validation chain for password change. @type {import("express-validator").ValidationChain[]} */
 export const changePasswordValidator = [
   body("currentPassword").isString().notEmpty().withMessage("Current password is required"),
   body("newPassword")
@@ -43,10 +47,12 @@ export const changePasswordValidator = [
     .matches(/[^A-Za-z0-9]/).withMessage("Must contain a special character"),
 ];
 
+/** Validation chain for forgot-password requests. @type {import("express-validator").ValidationChain[]} */
 export const forgotPasswordValidator = [
   body("email").isEmail().normalizeEmail().withMessage("Valid email is required"),
 ];
 
+/** Validation chain for password reset with token. @type {import("express-validator").ValidationChain[]} */
 export const resetPasswordValidator = [
   body("token").isString().notEmpty().withMessage("Reset token is required"),
   body("password")
@@ -59,6 +65,12 @@ export const resetPasswordValidator = [
     .matches(/[^A-Za-z0-9]/).withMessage("Must contain a special character"),
 ];
 
+/** Validation chain for refresh-token requests. @type {import("express-validator").ValidationChain[]} */
+export const refreshValidator = [
+  body("rememberMe").optional().isBoolean().withMessage("rememberMe must be a boolean"),
+];
+
+/** Validation chain for session ID route param. @type {import("express-validator").ValidationChain[]} */
 export const sessionIdValidator = [
   param("id").isMongoId().withMessage("Invalid session ID"),
 ];

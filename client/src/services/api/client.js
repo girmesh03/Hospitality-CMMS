@@ -1,5 +1,10 @@
 import axios from "axios";
 
+/**
+ * Axios instance configured with the API base URL and cookie-based auth.
+ * Automatically attempts token refresh on 401 responses.
+ * @type {import("axios").AxiosInstance}
+ */
 const apiClient = axios.create({
   baseURL: "/api/v1",
   withCredentials: true,

@@ -1,5 +1,8 @@
 import apiClient from "../../services/api/client.js";
 
+/**
+ * Auth API endpoints.
+ */
 export const authApi = {
   login: (data) => apiClient.post("/auth/login", data),
   register: (data) => apiClient.post("/auth/register", data),

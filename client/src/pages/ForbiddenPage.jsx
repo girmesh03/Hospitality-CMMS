@@ -21,7 +21,7 @@ export function ForbiddenPage() {
         gap: 2,
       }}
     >
-      <Typography variant="h1" color="error.main" sx={{ fontSize: 96, fontWeight: 700 }}>
+      <Typography variant="h1" color="error.main" sx={(theme) => ({ fontSize: theme.typography.pxToRem(96), fontWeight: theme.typography.fontWeightBold })}>
         403
       </Typography>
       <Typography variant="h5" color="text.secondary">

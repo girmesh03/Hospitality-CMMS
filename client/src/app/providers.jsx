@@ -14,6 +14,11 @@ import { ErrorState } from "../components/feedback/ErrorState.jsx";
 
 const emotionCache = createCache({ key: "mui" });
 
+/**
+ * Default error fallback rendered by ErrorBoundary on uncaught exceptions.
+ * @param {{ error: Error, resetErrorBoundary: () => void }} props
+ * @returns {JSX.Element}
+ */
 function ErrorFallback({ error, resetErrorBoundary }) {
   return (
     <ErrorState

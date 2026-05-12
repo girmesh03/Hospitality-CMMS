@@ -1,7 +1,9 @@
 import mongoose from "mongoose";
+import { ORGANIZATION_STATUS } from "../utils/constants.js";
 
 const { Schema } = mongoose;
 
+/** Organization schema definition */
 const organizationSchema = new Schema(
   {
     name: { type: String, required: true, trim: true },
@@ -20,7 +22,7 @@ const organizationSchema = new Schema(
       zip: String,
       country: String,
     },
-    status: { type: String, enum: ["active", "inactive"], default: "active" },
+    status: { type: String, enum: [ORGANIZATION_STATUS.ACTIVE, ORGANIZATION_STATUS.INACTIVE], default: ORGANIZATION_STATUS.ACTIVE },
     settings: {
       defaultServiceWindows: { type: Schema.Types.Mixed },
       quietHours: { type: Schema.Types.Mixed },
@@ -40,6 +42,10 @@ const organizationSchema = new Schema(
 organizationSchema.index({ name: 1 });
 organizationSchema.index({ code: 1 });
 
+/**
+ * Organization model.
+ * @type {import("mongoose").Model<import("mongoose").Document>}
+ */
 const Organization = mongoose.model("Organization", organizationSchema);
 
 export default Organization;

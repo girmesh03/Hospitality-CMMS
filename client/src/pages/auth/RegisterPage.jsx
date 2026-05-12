@@ -10,6 +10,10 @@ import Alert from "@mui/material/Alert";
 import CircularProgress from "@mui/material/CircularProgress";
 import { authApi } from "../../domains/auth/api.js";
 
+/**
+ * Registration page with password strength indicator.
+ * @returns {JSX.Element}
+ */
 export default function RegisterPage() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);

@@ -1,7 +1,13 @@
 import { ForbiddenError } from "../../utils/errors.js";
 
+/** HTTP methods that require CSRF validation. */
 const MUTATING_METHODS = ["POST", "PUT", "PATCH", "DELETE"];
 
+/**
+ * @param {import("express").Request} req
+ * @param {import("express").Response} res
+ * @param {import("express").NextFunction} next
+ */
 export const csrfProtection = (req, res, next) => {
   if (!MUTATING_METHODS.includes(req.method)) {
     return next();

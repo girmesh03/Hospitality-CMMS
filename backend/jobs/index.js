@@ -2,6 +2,7 @@ import cron from "node-cron";
 import { env } from "../config/env.js";
 import { logger } from "../utils/logger.js";
 
+/** Register and start all cron-based background jobs (PM generation, SLA, stock, notifications, session cleanup). */
 export const startJobs = () => {
   if (!env.enableSchedulers) {
     logger.info("Schedulers are disabled (ENABLE_SCHEDULERS=false)");

@@ -16,12 +16,12 @@ export function ErrorState({ title, message, onRetry }) {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        minHeight: 200,
+        minHeight: (theme) => theme.spacing(25),
         gap: 1,
         py: 6,
       }}
     >
-      <ErrorIcon sx={{ fontSize: 48, color: "error.main", mb: 1 }} />
+      <ErrorIcon sx={(theme) => ({ fontSize: theme.typography.pxToRem(48), color: "error.main", mb: 1 })} />
       <Typography variant="h6" color="error.main">
         {title || "An error occurred"}
       </Typography>

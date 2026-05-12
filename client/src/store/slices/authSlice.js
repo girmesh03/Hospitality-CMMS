@@ -1,5 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+/**
+ * Auth state slice — tracks user, authentication status, loading, and errors.
+ */
 const authSlice = createSlice({
   name: "auth",
   initialState: {

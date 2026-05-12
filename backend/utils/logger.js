@@ -25,4 +25,5 @@ if (env.nodeEnv !== "production") {
   );
 }
 
+/** Application-wide Winston logger instance. @type {import("winston").Logger} */
 export { logger };

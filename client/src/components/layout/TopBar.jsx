@@ -9,6 +9,7 @@ import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import SearchIcon from "@mui/icons-material/Search";
+import { layoutConfig } from "../../app/theme/themePrimitives";
 import { toggleTheme } from "../../store/slices/themeSlice";
 
 /**
@@ -22,13 +23,13 @@ export function TopBar({ onMenuToggle }) {
 
   return (
     <Toolbar
-      sx={{
+      sx={(theme) => ({
         px: { xs: 1, sm: 2 },
-        minHeight: "64px !important",
+        minHeight: `${layoutConfig.headerHeight}px !important`,
         borderBottom: 1,
         borderColor: "divider",
         bgcolor: "background.paper",
-      }}
+      })}
     >
       <IconButton
         edge="start"
@@ -43,12 +44,12 @@ export function TopBar({ onMenuToggle }) {
         component="img"
         src="/logo.svg"
         alt="Logo"
-        sx={{ height: 32, mr: 2, display: { xs: "none", sm: "block" } }}
+        sx={(theme) => ({ height: theme.spacing(4), mr: 2, display: { xs: "none", sm: "block" } })}
       />
       <Typography
         variant="h6"
         noWrap
-        sx={{ fontWeight: 600, display: { xs: "none", sm: "block" } }}
+        sx={{ display: { xs: "none", sm: "block" } }}
       >
         Hospitality CMMS
       </Typography>

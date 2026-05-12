@@ -1,5 +1,6 @@
 import { env } from "./env.js";
 
+/** Socket.IO server configuration. */
 export const socketConfig = {
   cors: {
     origin: env.corsOrigins,
