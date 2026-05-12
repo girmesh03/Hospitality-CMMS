@@ -2,16 +2,16 @@
 
 ## 1. Document Control
 
-| Item | Value |
-| --- | --- |
-| Title | Hospitality CMMS Web Application Product Requirements Document |
-| Version | 1.0 |
-| Status | Draft for implementation |
-| Authoring approach | Official-source-grounded, implementation-first, hospitality-specific, AI-excluded, exhaustive by intent |
-| Source basis | UpKeep official product and help-center content accessed on April 13, 2026, expanded into a hospitality-specific CMMS requirements set |
-| Primary objective | Define all requirements necessary to build a production-grade hospitality maintenance-management platform for web use |
+| Item                 | Value                                                                                                                                  |
+| -------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| Title                | Hospitality CMMS Web Application Product Requirements Document                                                                         |
+| Version              | 1.0                                                                                                                                    |
+| Status               | Draft for implementation                                                                                                               |
+| Authoring approach   | Official-source-grounded, implementation-first, hospitality-specific, AI-excluded, exhaustive by intent                                |
+| Source basis         | UpKeep official product and help-center content accessed on April 13, 2026, expanded into a hospitality-specific CMMS requirements set |
+| Primary objective    | Define all requirements necessary to build a production-grade hospitality maintenance-management platform for web use                  |
 | Target stack context | Express + MongoDB + Mongoose backend; React + MUI frontend; JWT auth; Socket.IO real-time updates; Nodemailer email; jsPDF/PDF exports |
-| Explicit exclusions | AI features, pricing/billing, subscription logic, licensing, TypeScript, testing strategy/tooling sections |
+| Explicit exclusions  | AI features, pricing/billing, subscription logic, licensing, TypeScript, testing strategy/tooling sections                             |
 
 ### 1.1 Assumptions
 
@@ -28,44 +28,44 @@
 
 ### 1.2 Definitions
 
-| Term | Definition |
-| --- | --- |
-| Organization | Top-level tenant entity that owns one or more hospitality properties |
-| Property | An individual hotel, resort, club, serviced apartment, restaurant property, spa, or venue managed inside the platform |
-| Location | A place within a property, such as a building, floor, wing, room, public space, kitchen, plant room, or bin location |
-| Asset | A maintainable equipment item, system, component, fixture, or tracked facility element |
-| Work Request | An intake record describing a maintenance issue that requires review, approval, rejection, or conversion into a work order |
-| Work Order | An executable maintenance job record used to plan, assign, perform, and close work |
-| PM Plan | A preventive maintenance plan that generates scheduled work orders |
-| Inspection | A structured procedure or checklist execution used to assess condition, compliance, or readiness |
-| Guest-impact issue | A maintenance issue that affects guest rooms, guest safety, guest comfort, guest-facing public areas, or service availability |
-| Occupied-room restriction | A rule that limits when a work order may be performed in a guest room that is occupied, DND, VIP, or otherwise restricted |
-| Service window | An allowed time range for work execution |
-| Blackout window | A forbidden time range for planned work execution |
-| Downtime event | A time-bounded event during which an asset, room, or area is partially or fully unavailable because of maintenance-related conditions |
-| Inventory line | A stock record for a part at a specific storeroom and bin |
-| Vendor | An external service company or supplier |
-| Contractor | An external worker acting under a vendor or directly under a property agreement |
-| SLA | Service level agreement timing policy used for response, start, and completion expectations |
-| Master data | Configurable reference data such as categories, statuses, priorities, reasons, business hours, and custom field definitions |
+| Term                      | Definition                                                                                                                            |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| Organization              | Top-level tenant entity that owns one or more hospitality properties                                                                  |
+| Property                  | An individual hotel, resort, club, serviced apartment, restaurant property, spa, or venue managed inside the platform                 |
+| Location                  | A place within a property, such as a building, floor, wing, room, public space, kitchen, plant room, or bin location                  |
+| Asset                     | A maintainable equipment item, system, component, fixture, or tracked facility element                                                |
+| Work Request              | An intake record describing a maintenance issue that requires review, approval, rejection, or conversion into a work order            |
+| Work Order                | An executable maintenance job record used to plan, assign, perform, and close work                                                    |
+| PM Plan                   | A preventive maintenance plan that generates scheduled work orders                                                                    |
+| Inspection                | A structured procedure or checklist execution used to assess condition, compliance, or readiness                                      |
+| Guest-impact issue        | A maintenance issue that affects guest rooms, guest safety, guest comfort, guest-facing public areas, or service availability         |
+| Occupied-room restriction | A rule that limits when a work order may be performed in a guest room that is occupied, DND, VIP, or otherwise restricted             |
+| Service window            | An allowed time range for work execution                                                                                              |
+| Blackout window           | A forbidden time range for planned work execution                                                                                     |
+| Downtime event            | A time-bounded event during which an asset, room, or area is partially or fully unavailable because of maintenance-related conditions |
+| Inventory line            | A stock record for a part at a specific storeroom and bin                                                                             |
+| Vendor                    | An external service company or supplier                                                                                               |
+| Contractor                | An external worker acting under a vendor or directly under a property agreement                                                       |
+| SLA                       | Service level agreement timing policy used for response, start, and completion expectations                                           |
+| Master data               | Configurable reference data such as categories, statuses, priorities, reasons, business hours, and custom field definitions           |
 
 ### 1.3 Acronyms
 
-| Acronym | Meaning |
-| --- | --- |
-| CMMS | Computerized Maintenance Management System |
-| PM | Preventive Maintenance |
-| SLA | Service Level Agreement |
-| JWT | JSON Web Token |
-| RBAC | Role-Based Access Control |
-| UOM | Unit of Measure |
-| QR | Quick Response code |
-| CSV | Comma-Separated Values |
-| PDF | Portable Document Format |
-| MTTR | Mean Time To Repair |
-| MTBF | Mean Time Between Failures |
-| OOO | Out of Order |
-| OOS | Out of Service |
+| Acronym | Meaning                                    |
+| ------- | ------------------------------------------ |
+| CMMS    | Computerized Maintenance Management System |
+| PM      | Preventive Maintenance                     |
+| SLA     | Service Level Agreement                    |
+| JWT     | JSON Web Token                             |
+| RBAC    | Role-Based Access Control                  |
+| UOM     | Unit of Measure                            |
+| QR      | Quick Response code                        |
+| CSV     | Comma-Separated Values                     |
+| PDF     | Portable Document Format                   |
+| MTTR    | Mean Time To Repair                        |
+| MTBF    | Mean Time Between Failures                 |
+| OOO     | Out of Order                               |
+| OOS     | Out of Service                             |
 
 ### 1.4 Current Project Setup Baseline and Mandatory Repository Conventions
 
@@ -166,16 +166,16 @@ The research showed the following patterns:
 
 ### 3.2 Core Maintenance-Management Capabilities Identified
 
-| Capability | UpKeep signal used as baseline | Hospitality interpretation used in this PRD |
-| --- | --- | --- |
-| Work order management | Official work-order product page and work-order help articles | Expanded to include guest-impact flags, room access rules, quiet-hour handling, verification rules, and cross-property rollups |
-| Preventive maintenance | Official PM product page and PM overview help article | Expanded to include seasonal plans, guest-room service windows, blackout windows, and hospitality-specific occurrence handling |
-| Asset management | Official asset-management page | Expanded to multi-building hospitality asset placement, room-linked asset context, downtime, warranties, and reliability metrics |
-| Request intake | Request portal and request-approval help content | Expanded into property-specific intake channels, triage, duplicate detection, service windows, and guest-sensitive routing |
-| Roles and permissions | User types, custom roles, and location-based permissions articles | Expanded into corporate/property/location scope, external contractor restrictions, and approval authority rules |
-| Inventory and parts | Inventory quantity management articles and product positioning | Expanded into storeroom/bin stock control, work-order reservations, substitute parts, and critical-stock rules |
-| Inspections and checklists | Checklist and inspection help content | Expanded into compliance evidence, conditional fields, room readiness checks, and follow-up issue creation |
-| Reporting | Maintenance reporting product page | Expanded into hospitality KPIs such as room downtime, guest-impact backlog, and cross-property engineering visibility |
+| Capability                 | UpKeep signal used as baseline                                    | Hospitality interpretation used in this PRD                                                                                      |
+| -------------------------- | ----------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| Work order management      | Official work-order product page and work-order help articles     | Expanded to include guest-impact flags, room access rules, quiet-hour handling, verification rules, and cross-property rollups   |
+| Preventive maintenance     | Official PM product page and PM overview help article             | Expanded to include seasonal plans, guest-room service windows, blackout windows, and hospitality-specific occurrence handling   |
+| Asset management           | Official asset-management page                                    | Expanded to multi-building hospitality asset placement, room-linked asset context, downtime, warranties, and reliability metrics |
+| Request intake             | Request portal and request-approval help content                  | Expanded into property-specific intake channels, triage, duplicate detection, service windows, and guest-sensitive routing       |
+| Roles and permissions      | User types, custom roles, and location-based permissions articles | Expanded into corporate/property/location scope, external contractor restrictions, and approval authority rules                  |
+| Inventory and parts        | Inventory quantity management articles and product positioning    | Expanded into storeroom/bin stock control, work-order reservations, substitute parts, and critical-stock rules                   |
+| Inspections and checklists | Checklist and inspection help content                             | Expanded into compliance evidence, conditional fields, room readiness checks, and follow-up issue creation                       |
+| Reporting                  | Maintenance reporting product page                                | Expanded into hospitality KPIs such as room downtime, guest-impact backlog, and cross-property engineering visibility            |
 
 ### 3.3 Hospitality-Specific Interpretation
 
@@ -189,22 +189,22 @@ This PRD intentionally extends beyond what is visible on a single vendor page in
 
 ### 3.4 Research Appendix
 
-| URL | How it informed requirements |
-| --- | --- |
-| `https://upkeep.com/product/cmms-software/` | Confirmed the current breadth of UpKeep's CMMS positioning and non-AI core modules used as the baseline feature surface |
-| `https://upkeep.com/work-order-software` | Informed work-order lifecycle, assignment, prioritization, and tracking expectations |
-| `https://upkeep.com/product/preventive-maintenance/` | Informed PM scheduling, recurring work, and maintenance planning patterns |
-| `https://upkeep.com/asset-management/` | Informed asset records, histories, hierarchies, files, and maintenance context |
-| `https://upkeep.com/maintenance-reports` | Informed dashboard, analytics, and reporting expectations |
-| `https://help.onupkeep.com/en/articles/108077-upkeep-s-user-types-roles-and-responsibilities-overview` | Informed the baseline role taxonomy and role-responsibility framing |
-| `https://help.onupkeep.com/en/articles/6281944-how-to-create-custom-roles-for-upkeep-users` | Informed configurable RBAC requirements |
-| `https://help.onupkeep.com/en/articles/6699722-location-based-permissions-for-users-in-upkeep` | Informed location-scoped access rules |
-| `https://help.onupkeep.com/en/articles/1746936-how-to-create-manage-and-edit-work-orders` | Informed work-order fields, actions, and operational handling details |
-| `https://help.onupkeep.com/en/articles/9621157-preventive-maintenance-section-overview` | Informed PM planning and PM section behavior |
-| `https://help.onupkeep.com/en/articles/12158452-using-the-new-upkeep-request-portal` | Informed request-portal behavior and requester intake requirements |
-| `https://help.onupkeep.com/en/articles/12325916-using-the-provider-portal-in-upkeep` | Informed external contractor access boundaries |
-| `https://help.onupkeep.com/en/articles/13260846-use-required-tasks-in-checklists-and-work-orders` | Informed required checklist completion behavior |
-| `https://help.onupkeep.com/en/articles/7988255-updating-quantities-across-your-inventory-lines` | Informed quantity adjustments, inventory-line logic, and stock transaction behavior |
+| URL                                                                                                    | How it informed requirements                                                                                            |
+| ------------------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------- |
+| `https://upkeep.com/product/cmms-software/`                                                            | Confirmed the current breadth of UpKeep's CMMS positioning and non-AI core modules used as the baseline feature surface |
+| `https://upkeep.com/work-order-software`                                                               | Informed work-order lifecycle, assignment, prioritization, and tracking expectations                                    |
+| `https://upkeep.com/product/preventive-maintenance/`                                                   | Informed PM scheduling, recurring work, and maintenance planning patterns                                               |
+| `https://upkeep.com/asset-management/`                                                                 | Informed asset records, histories, hierarchies, files, and maintenance context                                          |
+| `https://upkeep.com/maintenance-reports`                                                               | Informed dashboard, analytics, and reporting expectations                                                               |
+| `https://help.onupkeep.com/en/articles/108077-upkeep-s-user-types-roles-and-responsibilities-overview` | Informed the baseline role taxonomy and role-responsibility framing                                                     |
+| `https://help.onupkeep.com/en/articles/6281944-how-to-create-custom-roles-for-upkeep-users`            | Informed configurable RBAC requirements                                                                                 |
+| `https://help.onupkeep.com/en/articles/6699722-location-based-permissions-for-users-in-upkeep`         | Informed location-scoped access rules                                                                                   |
+| `https://help.onupkeep.com/en/articles/1746936-how-to-create-manage-and-edit-work-orders`              | Informed work-order fields, actions, and operational handling details                                                   |
+| `https://help.onupkeep.com/en/articles/9621157-preventive-maintenance-section-overview`                | Informed PM planning and PM section behavior                                                                            |
+| `https://help.onupkeep.com/en/articles/12158452-using-the-new-upkeep-request-portal`                   | Informed request-portal behavior and requester intake requirements                                                      |
+| `https://help.onupkeep.com/en/articles/12325916-using-the-provider-portal-in-upkeep`                   | Informed external contractor access boundaries                                                                          |
+| `https://help.onupkeep.com/en/articles/13260846-use-required-tasks-in-checklists-and-work-orders`      | Informed required checklist completion behavior                                                                         |
+| `https://help.onupkeep.com/en/articles/7988255-updating-quantities-across-your-inventory-lines`        | Informed quantity adjustments, inventory-line logic, and stock transaction behavior                                     |
 
 ## 4. Product Vision and Scope
 
@@ -270,19 +270,19 @@ Later-phase candidates that are intentionally not required for initial implement
 
 ### 5.2 Personas
 
-| Persona | Responsibilities | Goals | Pain points | Permission implications |
-| --- | --- | --- | --- | --- |
-| Corporate Administrator | Owns platform setup, roles, properties, global settings | Standardize operations across the portfolio | Inconsistent property practices, missing data, weak auditability | Full org configuration, user admin, reporting, audit access |
-| Corporate Engineering Director | Oversees engineering performance across properties | Reduce downtime, improve PM compliance | Limited cross-property visibility, no standard KPI set | Cross-property read plus approval and reporting rights |
-| Property Engineering Manager / Chief Engineer | Runs engineering at one property | Dispatch work fast, keep rooms and assets available | Reactive firefighting, poor request quality, vendor delays | Full property work control, PM, asset, vendor, inventory, user-team management |
-| Maintenance Supervisor / Planner | Reviews requests, assigns work, monitors backlog | Balance workload, hit SLA, manage parts readiness | Duplicate issues, poor scheduling visibility | Create/assign/edit work orders, manage schedules, approve routine requests |
-| Technician | Executes assigned work | Clear instructions, quick parts access, easy updates | Missing information, duplicate jobs, unclear priority | View and update assigned work, labor, comments, checklist responses, part requests |
-| Housekeeping / Front Office / F&B / Security Requester | Reports issues | Fast reporting and visibility | No status transparency, rework from unclear location descriptions | Create requests, view owned requests, add clarifications |
-| Inventory Controller / Storekeeper | Maintains spare-part accuracy | Prevent stockouts and shrinkage | Inaccurate counts, undocumented issues, slow replenishment | Manage parts, stock lines, counts, transfers, adjustments |
-| Vendor Coordinator | Dispatches third-party services | Get vendors on site with proper context | Missing documents, no compliance visibility | Manage vendors, assign vendor work, review vendor updates |
-| External Vendor / Contractor User | Performs assigned external work | See only required jobs, upload evidence, mark progress | Too much irrelevant data, unclear access scope | Restricted portal visibility only for assigned work |
-| General Manager / Operations Leader | Needs high-level visibility | Protect guest experience and room availability | No consolidated maintenance status | Read-only dashboards and reports |
-| Auditor / Compliance Reviewer | Reviews history and compliance evidence | Verify process adherence | Missing timestamps, missing attachments | Read-only access to approved scopes, audit logs, reports |
+| Persona                                                | Responsibilities                                        | Goals                                                  | Pain points                                                       | Permission implications                                                            |
+| ------------------------------------------------------ | ------------------------------------------------------- | ------------------------------------------------------ | ----------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Corporate Administrator                                | Owns platform setup, roles, properties, global settings | Standardize operations across the portfolio            | Inconsistent property practices, missing data, weak auditability  | Full org configuration, user admin, reporting, audit access                        |
+| Corporate Engineering Director                         | Oversees engineering performance across properties      | Reduce downtime, improve PM compliance                 | Limited cross-property visibility, no standard KPI set            | Cross-property read plus approval and reporting rights                             |
+| Property Engineering Manager / Chief Engineer          | Runs engineering at one property                        | Dispatch work fast, keep rooms and assets available    | Reactive firefighting, poor request quality, vendor delays        | Full property work control, PM, asset, vendor, inventory, user-team management     |
+| Maintenance Supervisor / Planner                       | Reviews requests, assigns work, monitors backlog        | Balance workload, hit SLA, manage parts readiness      | Duplicate issues, poor scheduling visibility                      | Create/assign/edit work orders, manage schedules, approve routine requests         |
+| Technician                                             | Executes assigned work                                  | Clear instructions, quick parts access, easy updates   | Missing information, duplicate jobs, unclear priority             | View and update assigned work, labor, comments, checklist responses, part requests |
+| Housekeeping / Front Office / F&B / Security Requester | Reports issues                                          | Fast reporting and visibility                          | No status transparency, rework from unclear location descriptions | Create requests, view owned requests, add clarifications                           |
+| Inventory Controller / Storekeeper                     | Maintains spare-part accuracy                           | Prevent stockouts and shrinkage                        | Inaccurate counts, undocumented issues, slow replenishment        | Manage parts, stock lines, counts, transfers, adjustments                          |
+| Vendor Coordinator                                     | Dispatches third-party services                         | Get vendors on site with proper context                | Missing documents, no compliance visibility                       | Manage vendors, assign vendor work, review vendor updates                          |
+| External Vendor / Contractor User                      | Performs assigned external work                         | See only required jobs, upload evidence, mark progress | Too much irrelevant data, unclear access scope                    | Restricted portal visibility only for assigned work                                |
+| General Manager / Operations Leader                    | Needs high-level visibility                             | Protect guest experience and room availability         | No consolidated maintenance status                                | Read-only dashboards and reports                                                   |
+| Auditor / Compliance Reviewer                          | Reviews history and compliance evidence                 | Verify process adherence                               | Missing timestamps, missing attachments                           | Read-only access to approved scopes, audit logs, reports                           |
 
 ### 5.3 Property-Level vs Corporate-Level Users
 
@@ -362,22 +362,22 @@ The system must support seasonal opening and closing activities including:
 
 ### 7.1 Module Map
 
-| Module | Purpose | Key dependencies |
-| --- | --- | --- |
-| Identity and Access | Authenticates users and enforces scope | Users, roles, sessions, audit logs |
-| Organization and Property Admin | Defines org, property, settings, numbering, holidays, SLAs | Identity, locations, master data |
-| Location Management | Maintains the hospitality location tree | Properties, permissions, assets, work |
-| Asset Management | Maintains asset records, history, and meters | Locations, work orders, PM, documents |
-| Request Intake | Accepts and triages maintenance requests | Users, locations, assets, notifications |
-| Work Orders | Executes corrective and planned work | Requests, assets, PM, inventory, vendors, notifications |
-| Preventive Maintenance | Defines schedules and generates planned work | Assets, locations, checklists, work orders |
-| Inspections and Checklists | Runs repeatable procedures and captures evidence | Work orders, PM, assets, locations |
-| Inventory and Parts | Tracks stock and work-order-linked consumption | Work orders, vendors, reporting |
-| Vendors and Contractors | Manages external service partners and restricted portals | Work orders, documents, notifications |
-| Reporting and Dashboards | Surfaces KPIs, trends, and exports | All operational modules |
-| Notifications and Real-Time | Delivers in-app, email, and socket updates | Work, requests, PM, vendor, users |
-| Audit and Master Data | Records change history and controls reference data | All mutable modules |
-| Import and Migration | Loads legacy and bulk master/transactional data | Properties, locations, assets, parts, users |
+| Module                          | Purpose                                                    | Key dependencies                                        |
+| ------------------------------- | ---------------------------------------------------------- | ------------------------------------------------------- |
+| Identity and Access             | Authenticates users and enforces scope                     | Users, roles, sessions, audit logs                      |
+| Organization and Property Admin | Defines org, property, settings, numbering, holidays, SLAs | Identity, locations, master data                        |
+| Location Management             | Maintains the hospitality location tree                    | Properties, permissions, assets, work                   |
+| Asset Management                | Maintains asset records, history, and meters               | Locations, work orders, PM, documents                   |
+| Request Intake                  | Accepts and triages maintenance requests                   | Users, locations, assets, notifications                 |
+| Work Orders                     | Executes corrective and planned work                       | Requests, assets, PM, inventory, vendors, notifications |
+| Preventive Maintenance          | Defines schedules and generates planned work               | Assets, locations, checklists, work orders              |
+| Inspections and Checklists      | Runs repeatable procedures and captures evidence           | Work orders, PM, assets, locations                      |
+| Inventory and Parts             | Tracks stock and work-order-linked consumption             | Work orders, vendors, reporting                         |
+| Vendors and Contractors         | Manages external service partners and restricted portals   | Work orders, documents, notifications                   |
+| Reporting and Dashboards        | Surfaces KPIs, trends, and exports                         | All operational modules                                 |
+| Notifications and Real-Time     | Delivers in-app, email, and socket updates                 | Work, requests, PM, vendor, users                       |
+| Audit and Master Data           | Records change history and controls reference data         | All mutable modules                                     |
+| Import and Migration            | Loads legacy and bulk master/transactional data            | Properties, locations, assets, parts, users             |
 
 ### 7.2 User Journeys
 
@@ -1109,16 +1109,22 @@ Configurable master data must include:
 - Actors: Admin, invited user, auth service.
 - Preconditions: User record exists in `invited` status; email service operational.
 - Main flow:
+
 1. Admin creates user and assigns roles, properties, and optional location scopes.
 2. System sends one-time invitation link.
 3. User opens link, verifies email identity, sets password, accepts terms if configured, and completes login.
 4. System creates first session and stores audit events.
+
 - Alternate flows:
+
 1. Admin resends invitation before expiration.
 2. User changes password immediately after first login.
+
 - Exception flows:
+
 1. Expired invite requires resend.
 2. Disabled user cannot complete activation.
+
 - Validations: Unique email, valid role assignment, active property scope.
 - Notifications: Invitation email, security notification for first password set.
 - Outputs: Active user account, initial session.
@@ -1131,17 +1137,23 @@ Configurable master data must include:
 - Actors: Requester, triage supervisor, notification service.
 - Preconditions: Requester has portal access or dispatcher rights; property and location are valid.
 - Main flow:
+
 1. Requester selects property and location and enters issue details.
 2. System validates required fields and checks for duplicates.
 3. Request is saved in `submitted`.
 4. Triage users are notified.
 5. Supervisor reviews request, may ask for clarification, approve, reject, or convert.
+
 - Alternate flows:
+
 1. Dispatcher submits request on behalf of a phone caller.
 2. Emergency request bypasses normal review queue and raises immediate alert.
+
 - Exception flows:
+
 1. Duplicate warning presented; requester confirms or stops.
 2. Invalid location or archived location blocks submission.
+
 - Validations: Category allowed for property, access-window requirement for occupied room, contact details for portal requester.
 - Notifications: Submission acknowledgement, triage alert, clarification request, approval/rejection notice.
 - Outputs: Triage-ready request or converted work order.
@@ -1154,18 +1166,24 @@ Configurable master data must include:
 - Actors: Supervisor, technician, requester, notification service.
 - Preconditions: Valid property, location, category; assignee or team exists if assignment occurs.
 - Main flow:
+
 1. Work order is created with priority, scope, due expectations, and linked records.
 2. Supervisor assigns technician/team and optionally schedules work.
 3. Technician starts work, records labor, adds notes and attachments, uses parts, and completes checklist tasks.
 4. Technician submits completion.
 5. If verification required, supervisor verifies; otherwise work closes directly.
+
 - Alternate flows:
+
 1. Work pauses for parts, access, or vendor dependency.
 2. Work is reassigned or rescheduled.
+
 - Exception flows:
+
 1. Required checklist task incomplete blocks completion.
 2. No stock available for reserved part triggers exception.
 3. Occupancy restriction prevents start.
+
 - Validations: Allowed status transitions, assignee permission scope, mandatory close fields, cost and downtime consistency.
 - Notifications: Assignment, reassignment, on-hold reason, completion, verification, closure.
 - Outputs: Closed work history and updated asset/location records.
@@ -1178,14 +1196,20 @@ Configurable master data must include:
 - Actors: Requester, supervisor, on-call technician, operations viewers.
 - Preconditions: Emergency priority selected with reason.
 - Main flow:
+
 1. Emergency record is created.
 2. System immediately notifies on-call recipients.
 3. Supervisor assigns responder.
 4. Technician begins work; guest-impact and safety fields remain visible until closure.
+
 - Alternate flows:
+
 1. External vendor is assigned instead of internal responder.
+
 - Exception flows:
+
 1. No on-call technician configured; system escalates to property admin and corporate engineering recipient.
+
 - Validations: Emergency reason mandatory, guest-impact or safety impact mandatory where applicable.
 - Notifications: Real-time and email bypass quiet hours.
 - Outputs: Active emergency work order with escalation trail.
@@ -1198,17 +1222,23 @@ Configurable master data must include:
 - Actors: Scheduler, supervisor, technician.
 - Preconditions: PM plan is active; target asset/location active; no duplicate open occurrence exists.
 - Main flow:
+
 1. Scheduler evaluates active PM plans.
 2. Eligible occurrences are generated as work orders.
 3. Work is assigned per plan defaults.
 4. Technician completes checklist, labor, and required readings.
 5. Completion updates last-completed date and recalculates next trigger.
+
 - Alternate flows:
+
 1. Occurrence deferred with approved reason.
 2. Occurrence skipped with approved reason.
+
 - Exception flows:
+
 1. Asset retired or archived blocks generation and logs exception.
 2. Blackout window delays generation or due date according to policy.
+
 - Validations: Meter reading progression, occurrence uniqueness, checklist requirements.
 - Notifications: New PM-generated work, overdue PM alerts, deferred PM alerts.
 - Outputs: PM work order history and next due calculation.
@@ -1221,14 +1251,20 @@ Configurable master data must include:
 - Actors: Inspector, supervisor, work-order system.
 - Preconditions: Inspection template configured with failure behavior.
 - Main flow:
+
 1. Inspector executes checklist.
 2. Failed step requires comment and photo if configured.
 3. System creates linked request or work order per template behavior.
 4. Linked record inherits property, location, asset, category, and evidence.
+
 - Alternate flows:
+
 1. Failure is informational only and does not create work.
+
 - Exception flows:
+
 1. Mandatory evidence missing blocks completion.
+
 - Validations: Step-level requirement rules, threshold ranges, signoff requirements.
 - Notifications: Supervisor alerted to generated follow-up work.
 - Outputs: Completed inspection and linked follow-up record.
@@ -1241,16 +1277,22 @@ Configurable master data must include:
 - Actors: Supervisor, technician, inventory controller.
 - Preconditions: Part and inventory line exist; user has inventory rights.
 - Main flow:
+
 1. Planner reserves required quantity against a work order.
 2. Storekeeper or technician issues quantity to the work order.
 3. Work order consumes quantity and records cost.
 4. Unused quantity may be returned.
 5. Stock transfer moves quantity between lines.
+
 - Alternate flows:
+
 1. Substitute part used after authorized approval.
+
 - Exception flows:
+
 1. Insufficient stock blocks issue unless override permission exists.
 2. Transfer destination missing blocks transfer.
+
 - Validations: Non-negative stock, valid UOM, valid reason codes.
 - Notifications: Low stock alert, critical stockout alert.
 - Outputs: Updated line balances and transaction history.
@@ -1263,14 +1305,20 @@ Configurable master data must include:
 - Actors: Vendor coordinator, vendor user, verifier.
 - Preconditions: Vendor active and compliant; work order assignable.
 - Main flow:
+
 1. Coordinator assigns vendor and shares allowed fields.
 2. Vendor user views assigned work in restricted portal.
 3. Vendor updates status, adds evidence, and marks ready for review.
 4. Internal verifier reviews and closes or reopens.
+
 - Alternate flows:
+
 1. Vendor is allowed to upload estimate document before work starts.
+
 - Exception flows:
+
 1. Vendor insurance expired blocks new assignment.
+
 - Validations: Scope restriction, compliance document validity, required evidence on completion.
 - Notifications: Vendor assignment, vendor updates, ready-for-review alert.
 - Outputs: Reviewed vendor-completed work.
@@ -1283,14 +1331,20 @@ Configurable master data must include:
 - Actors: Asset manager, supervisor, system.
 - Preconditions: User has asset-admin permission; blocking open records resolved.
 - Main flow:
+
 1. User initiates transfer or retirement.
 2. System checks open work and PM dependencies.
 3. If no blockers remain, location or status updates are applied.
 4. Asset history records transfer or retirement reason.
+
 - Alternate flows:
+
 1. Successor asset linked during retirement.
+
 - Exception flows:
+
 1. Open PM occurrence blocks retirement.
+
 - Validations: Scope permissions, destination property status, successor link validity.
 - Notifications: Stakeholders for affected asset receive notice if configured.
 - Outputs: Updated asset state and history.
@@ -1303,15 +1357,21 @@ Configurable master data must include:
 - Actors: Import administrator, import service.
 - Preconditions: Supported file type; selected template mapping.
 - Main flow:
+
 1. User uploads file and selects import type.
 2. System validates file structure and row content.
 3. User reviews validation result.
 4. User commits import.
 5. System writes rows and produces summary.
+
 - Alternate flows:
+
 1. User downloads error file and retries later.
+
 - Exception flows:
+
 1. Duplicate conflicts exceed chosen strategy and block commit.
+
 - Validations: Required columns, enum values, reference existence, uniqueness rules.
 - Notifications: Import completion email or in-app notice.
 - Outputs: Import summary and created/updated records.
@@ -1320,38 +1380,38 @@ Configurable master data must include:
 
 ## 10. Business Rules
 
-| ID | Rule |
-| --- | --- |
-| BR-001 | A user may only view data for properties and locations included in their scope. |
-| BR-002 | Cross-property dashboard aggregation is available only when the user has multi-property scope. |
-| BR-003 | Occupied-room work orders require a preferred service window unless priority is `emergency`. |
-| BR-004 | DND room status blocks scheduled and in-progress transitions for non-emergency work. |
-| BR-005 | VIP room status requires supervisor acknowledgment before dispatch. |
-| BR-006 | Request rejection, cancellation, skip, defer, hold, and reopen actions always require a reason code. |
-| BR-007 | Work-order completion requires mandatory closure fields and required checklist items. |
+| ID     | Rule                                                                                                                                          |
+| ------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| BR-001 | A user may only view data for properties and locations included in their scope.                                                               |
+| BR-002 | Cross-property dashboard aggregation is available only when the user has multi-property scope.                                                |
+| BR-003 | Occupied-room work orders require a preferred service window unless priority is `emergency`.                                                  |
+| BR-004 | DND room status blocks scheduled and in-progress transitions for non-emergency work.                                                          |
+| BR-005 | VIP room status requires supervisor acknowledgment before dispatch.                                                                           |
+| BR-006 | Request rejection, cancellation, skip, defer, hold, and reopen actions always require a reason code.                                          |
+| BR-007 | Work-order completion requires mandatory closure fields and required checklist items.                                                         |
 | BR-008 | Work orders in `awaiting_parts`, `awaiting_access`, or `awaiting_vendor` pause completion SLA unless the SLA policy explicitly forbids pause. |
-| BR-009 | Emergency work cannot be suppressed by quiet hours. |
-| BR-010 | Asset retirement is blocked when open work orders or active PM obligations still reference the asset. |
-| BR-011 | Negative stock is blocked unless the acting user has explicit override permission. |
-| BR-012 | Inventory adjustments beyond configured value or quantity thresholds require approval-capable permission. |
-| BR-013 | Duplicate request detection warns but does not auto-merge. |
-| BR-014 | Duplicate work-order merge preserves surviving record identity and redirects links from merged records. |
-| BR-015 | Numbering sequences are immutable and non-reusable. |
-| BR-016 | Audit logs are immutable after creation. |
-| BR-017 | Soft deletion is allowed only for records with no dependent active operational links; otherwise records are archived instead. |
-| BR-018 | Imported historical records must be clearly marked with source and import job reference. |
-| BR-019 | PM generation must not create more than one open occurrence for the same plan occurrence key. |
-| BR-020 | Meter readings must not regress unless a rollover configuration is active and the user provides a rollover reason. |
-| BR-021 | Vendor users can view only work orders explicitly assigned to them and only attachments/comments marked vendor-visible. |
-| BR-022 | Report exports must respect field-level and module-level permission rules. |
-| BR-023 | Location status `archived` blocks creation of new requests or work orders at that location. |
-| BR-024 | Property status `inactive` or `temporarily_closed` blocks new planned work generation unless an override is configured. |
-| BR-025 | `completed_pending_verification` may transition only to `closed` or back to `open` through reopen/verification rejection. |
-| BR-026 | A work order may have only one active primary assignee at a time. |
-| BR-027 | Only one active timer may exist per user across all work orders. |
-| BR-028 | Requesters may view only their own requests unless granted broader departmental visibility. |
-| BR-029 | Guest-impact `revenue_blocking` automatically surfaces the work order on manager dashboards. |
-| BR-030 | Overdue logic is computed from due timestamps and paused-clock rules, not from status labels alone. |
+| BR-009 | Emergency work cannot be suppressed by quiet hours.                                                                                           |
+| BR-010 | Asset retirement is blocked when open work orders or active PM obligations still reference the asset.                                         |
+| BR-011 | Negative stock is blocked unless the acting user has explicit override permission.                                                            |
+| BR-012 | Inventory adjustments beyond configured value or quantity thresholds require approval-capable permission.                                     |
+| BR-013 | Duplicate request detection warns but does not auto-merge.                                                                                    |
+| BR-014 | Duplicate work-order merge preserves surviving record identity and redirects links from merged records.                                       |
+| BR-015 | Numbering sequences are immutable and non-reusable.                                                                                           |
+| BR-016 | Audit logs are immutable after creation.                                                                                                      |
+| BR-017 | Soft deletion is allowed only for records with no dependent active operational links; otherwise records are archived instead.                 |
+| BR-018 | Imported historical records must be clearly marked with source and import job reference.                                                      |
+| BR-019 | PM generation must not create more than one open occurrence for the same plan occurrence key.                                                 |
+| BR-020 | Meter readings must not regress unless a rollover configuration is active and the user provides a rollover reason.                            |
+| BR-021 | Vendor users can view only work orders explicitly assigned to them and only attachments/comments marked vendor-visible.                       |
+| BR-022 | Report exports must respect field-level and module-level permission rules.                                                                    |
+| BR-023 | Location status `archived` blocks creation of new requests or work orders at that location.                                                   |
+| BR-024 | Property status `inactive` or `temporarily_closed` blocks new planned work generation unless an override is configured.                       |
+| BR-025 | `completed_pending_verification` may transition only to `closed` or back to `open` through reopen/verification rejection.                     |
+| BR-026 | A work order may have only one active primary assignee at a time.                                                                             |
+| BR-027 | Only one active timer may exist per user across all work orders.                                                                              |
+| BR-028 | Requesters may view only their own requests unless granted broader departmental visibility.                                                   |
+| BR-029 | Guest-impact `revenue_blocking` automatically surfaces the work order on manager dashboards.                                                  |
+| BR-030 | Overdue logic is computed from due timestamps and paused-clock rules, not from status labels alone.                                           |
 
 ## 11. Data Model Requirements
 
@@ -1361,19 +1421,19 @@ Configurable master data must include:
 2. All timestamps are stored in UTC.
 3. All mutable collections must include the following common fields unless explicitly exempted:
 
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `_id` | ObjectId | Yes | Primary key |
-| `organizationId` | ObjectId | Usually | Omitted only where the collection itself is the organization root |
-| `createdAt` | Date | Yes | UTC timestamp |
-| `updatedAt` | Date | Yes | UTC timestamp |
-| `createdByUserId` | ObjectId | No | Null when created by system or import with no user identity |
-| `updatedByUserId` | ObjectId | No | Last editing user |
-| `isDeleted` | Boolean | Yes | Soft-delete flag, default `false` |
-| `deletedAt` | Date | No | Null unless soft deleted |
-| `deletedByUserId` | ObjectId | No | Null unless deleted by a user |
-| `archivedAt` | Date | No | Used when records should be hidden from operational views without deletion |
-| `revision` | Number | Yes | Optimistic-concurrency counter, default `1` |
+| Field             | Type     | Required | Notes                                                                      |
+| ----------------- | -------- | -------- | -------------------------------------------------------------------------- |
+| `_id`             | ObjectId | Yes      | Primary key                                                                |
+| `organizationId`  | ObjectId | Usually  | Omitted only where the collection itself is the organization root          |
+| `createdAt`       | Date     | Yes      | UTC timestamp                                                              |
+| `updatedAt`       | Date     | Yes      | UTC timestamp                                                              |
+| `createdByUserId` | ObjectId | No       | Null when created by system or import with no user identity                |
+| `updatedByUserId` | ObjectId | No       | Last editing user                                                          |
+| `isDeleted`       | Boolean  | Yes      | Soft-delete flag, default `false`                                          |
+| `deletedAt`       | Date     | No       | Null unless soft deleted                                                   |
+| `deletedByUserId` | ObjectId | No       | Null unless deleted by a user                                              |
+| `archivedAt`      | Date     | No       | Used when records should be hidden from operational views without deletion |
+| `revision`        | Number   | Yes      | Optimistic-concurrency counter, default `1`                                |
 
 4. Enumerated fields must be validated at the API layer and Mongoose schema layer.
 5. High-volume collections must use `mongoose-paginate-v2`.
@@ -1382,20 +1442,20 @@ Configurable master data must include:
 
 ### 11.2 `organizations`
 
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `code` | String | Yes | Unique, uppercase, 2 to 20 chars |
-| `name` | String | Yes | Display name |
-| `legalName` | String | No | Legal entity name |
-| `defaultTimezone` | String | Yes | IANA timezone |
-| `defaultCurrency` | String | Yes | ISO currency code |
-| `defaultLanguage` | String | Yes | Locale code |
-| `logoDocumentId` | ObjectId | No | Linked document |
-| `branding` | Object | No | Colors, header title, support email |
-| `status` | String | Yes | `active`, `inactive`, `archived` |
-| `contactEmail` | String | No | Org support contact |
-| `contactPhone` | String | No | Org support contact |
-| `notes` | String | No | Internal admin notes |
+| Field             | Type     | Required | Notes                               |
+| ----------------- | -------- | -------- | ----------------------------------- |
+| `code`            | String   | Yes      | Unique, uppercase, 2 to 20 chars    |
+| `name`            | String   | Yes      | Display name                        |
+| `legalName`       | String   | No       | Legal entity name                   |
+| `defaultTimezone` | String   | Yes      | IANA timezone                       |
+| `defaultCurrency` | String   | Yes      | ISO currency code                   |
+| `defaultLanguage` | String   | Yes      | Locale code                         |
+| `logoDocumentId`  | ObjectId | No       | Linked document                     |
+| `branding`        | Object   | No       | Colors, header title, support email |
+| `status`          | String   | Yes      | `active`, `inactive`, `archived`    |
+| `contactEmail`    | String   | No       | Org support contact                 |
+| `contactPhone`    | String   | No       | Org support contact                 |
+| `notes`           | String   | No       | Internal admin notes                |
 
 Indexes:
 
@@ -1404,30 +1464,30 @@ Indexes:
 
 ### 11.3 `properties`
 
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `code` | String | Yes | Unique within organization |
-| `name` | String | Yes | Property display name |
-| `type` | String | Yes | Enum from supported property types |
-| `brand` | String | No | Brand or flag |
-| `timezone` | String | Yes | IANA timezone |
-| `addressLine1` | String | No | Address |
-| `addressLine2` | String | No | Address |
-| `city` | String | No | Address |
-| `stateProvince` | String | No | Address |
-| `postalCode` | String | No | Address |
-| `countryCode` | String | No | ISO country code |
-| `latitude` | Number | No | Geolocation |
-| `longitude` | Number | No | Geolocation |
-| `operationalStatus` | String | Yes | `active`, `temporarily_closed`, `inactive`, `archived` |
-| `quietHoursStart` | String | No | Local time `HH:mm` |
-| `quietHoursEnd` | String | No | Local time `HH:mm` |
-| `defaultBusinessHoursId` | ObjectId | No | Ref to config |
-| `defaultHolidayCalendarId` | ObjectId | No | Ref to config |
-| `defaultSlaPolicyId` | ObjectId | No | Ref to config |
-| `roomCount` | Number | No | Informational only |
-| `notes` | String | No | Internal notes |
-| `tags` | [String] | No | Searchable labels |
+| Field                      | Type     | Required | Notes                                                  |
+| -------------------------- | -------- | -------- | ------------------------------------------------------ |
+| `code`                     | String   | Yes      | Unique within organization                             |
+| `name`                     | String   | Yes      | Property display name                                  |
+| `type`                     | String   | Yes      | Enum from supported property types                     |
+| `brand`                    | String   | No       | Brand or flag                                          |
+| `timezone`                 | String   | Yes      | IANA timezone                                          |
+| `addressLine1`             | String   | No       | Address                                                |
+| `addressLine2`             | String   | No       | Address                                                |
+| `city`                     | String   | No       | Address                                                |
+| `stateProvince`            | String   | No       | Address                                                |
+| `postalCode`               | String   | No       | Address                                                |
+| `countryCode`              | String   | No       | ISO country code                                       |
+| `latitude`                 | Number   | No       | Geolocation                                            |
+| `longitude`                | Number   | No       | Geolocation                                            |
+| `operationalStatus`        | String   | Yes      | `active`, `temporarily_closed`, `inactive`, `archived` |
+| `quietHoursStart`          | String   | No       | Local time `HH:mm`                                     |
+| `quietHoursEnd`            | String   | No       | Local time `HH:mm`                                     |
+| `defaultBusinessHoursId`   | ObjectId | No       | Ref to config                                          |
+| `defaultHolidayCalendarId` | ObjectId | No       | Ref to config                                          |
+| `defaultSlaPolicyId`       | ObjectId | No       | Ref to config                                          |
+| `roomCount`                | Number   | No       | Informational only                                     |
+| `notes`                    | String   | No       | Internal notes                                         |
+| `tags`                     | [String] | No       | Searchable labels                                      |
 
 Indexes:
 
@@ -1437,26 +1497,26 @@ Indexes:
 
 ### 11.4 `locations`
 
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `propertyId` | ObjectId | Yes | Parent property |
-| `parentLocationId` | ObjectId | No | Null for top-level property child |
-| `locationType` | String | Yes | Configured type enum |
-| `code` | String | Yes | Unique within property |
-| `name` | String | Yes | Display name |
-| `alternateName` | String | No | Optional alias |
-| `roomNumber` | String | No | For room-like spaces |
-| `hierarchyPath` | [ObjectId] | Yes | Ordered ancestor path |
-| `depth` | Number | Yes | 1 to 8 |
-| `status` | String | Yes | `active`, `inactive`, `under_renovation`, `temporarily_closed`, `archived` |
-| `guestSensitive` | Boolean | Yes | Default `false` |
-| `restrictedAccess` | Boolean | Yes | Default `false` |
-| `defaultServiceWindowStart` | String | No | `HH:mm` local |
-| `defaultServiceWindowEnd` | String | No | `HH:mm` local |
-| `blackoutWindows` | [Object] | No | Each object: name, day rules, start, end, reason |
-| `accessNotes` | String | No | Access instructions |
-| `tags` | [String] | No | Search/filter |
-| `customFields` | Object | No | Property- or org-defined schema |
+| Field                       | Type       | Required | Notes                                                                      |
+| --------------------------- | ---------- | -------- | -------------------------------------------------------------------------- |
+| `propertyId`                | ObjectId   | Yes      | Parent property                                                            |
+| `parentLocationId`          | ObjectId   | No       | Null for top-level property child                                          |
+| `locationType`              | String     | Yes      | Configured type enum                                                       |
+| `code`                      | String     | Yes      | Unique within property                                                     |
+| `name`                      | String     | Yes      | Display name                                                               |
+| `alternateName`             | String     | No       | Optional alias                                                             |
+| `roomNumber`                | String     | No       | For room-like spaces                                                       |
+| `hierarchyPath`             | [ObjectId] | Yes      | Ordered ancestor path                                                      |
+| `depth`                     | Number     | Yes      | 1 to 8                                                                     |
+| `status`                    | String     | Yes      | `active`, `inactive`, `under_renovation`, `temporarily_closed`, `archived` |
+| `guestSensitive`            | Boolean    | Yes      | Default `false`                                                            |
+| `restrictedAccess`          | Boolean    | Yes      | Default `false`                                                            |
+| `defaultServiceWindowStart` | String     | No       | `HH:mm` local                                                              |
+| `defaultServiceWindowEnd`   | String     | No       | `HH:mm` local                                                              |
+| `blackoutWindows`           | [Object]   | No       | Each object: name, day rules, start, end, reason                           |
+| `accessNotes`               | String     | No       | Access instructions                                                        |
+| `tags`                      | [String]   | No       | Search/filter                                                              |
+| `customFields`              | Object     | No       | Property- or org-defined schema                                            |
 
 Indexes:
 
@@ -1467,15 +1527,15 @@ Indexes:
 
 ### 11.5 `roles`
 
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `key` | String | Yes | System-safe identifier |
-| `name` | String | Yes | UI label |
-| `description` | String | No | Human-readable explanation |
-| `isSystemRole` | Boolean | Yes | Built-in or custom |
-| `permissionMap` | Object | Yes | Domain-action boolean matrix |
-| `scopeMode` | String | Yes | `organization`, `property`, `location_scoped`, `vendor_restricted` |
-| `isActive` | Boolean | Yes | Default `true` |
+| Field           | Type    | Required | Notes                                                              |
+| --------------- | ------- | -------- | ------------------------------------------------------------------ |
+| `key`           | String  | Yes      | System-safe identifier                                             |
+| `name`          | String  | Yes      | UI label                                                           |
+| `description`   | String  | No       | Human-readable explanation                                         |
+| `isSystemRole`  | Boolean | Yes      | Built-in or custom                                                 |
+| `permissionMap` | Object  | Yes      | Domain-action boolean matrix                                       |
+| `scopeMode`     | String  | Yes      | `organization`, `property`, `location_scoped`, `vendor_restricted` |
+| `isActive`      | Boolean | Yes      | Default `true`                                                     |
 
 Indexes:
 
@@ -1484,27 +1544,27 @@ Indexes:
 
 ### 11.6 `users`
 
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `email` | String | Yes | Lowercased, unique within org |
-| `firstName` | String | Yes | User profile |
-| `lastName` | String | Yes | User profile |
-| `displayName` | String | Yes | UI display |
-| `phone` | String | No | Contact |
-| `jobTitle` | String | No | Optional |
-| `employeeId` | String | No | Optional external ID |
-| `status` | String | Yes | `invited`, `active`, `locked`, `disabled`, `archived` |
-| `passwordHash` | String | No | Null until invite accepted |
-| `emailVerifiedAt` | Date | No | Set when invite accepted or email change verified |
-| `lastLoginAt` | Date | No | Updated on successful login |
-| `passwordChangedAt` | Date | No | Security tracking |
-| `roleIds` | [ObjectId] | Yes | One or many roles |
-| `propertyScopeIds` | [ObjectId] | Yes | Assigned properties |
-| `locationScopeIds` | [ObjectId] | No | Optional restrictions |
-| `teamIds` | [ObjectId] | No | Assigned teams |
-| `notificationPreferences` | Object | No | Event-category to channel preferences |
-| `inviteSentAt` | Date | No | Activation tracking |
-| `avatarDocumentId` | ObjectId | No | Optional avatar |
+| Field                     | Type       | Required | Notes                                                 |
+| ------------------------- | ---------- | -------- | ----------------------------------------------------- |
+| `email`                   | String     | Yes      | Lowercased, unique within org                         |
+| `firstName`               | String     | Yes      | User profile                                          |
+| `lastName`                | String     | Yes      | User profile                                          |
+| `displayName`             | String     | Yes      | UI display                                            |
+| `phone`                   | String     | No       | Contact                                               |
+| `jobTitle`                | String     | No       | Optional                                              |
+| `employeeId`              | String     | No       | Optional external ID                                  |
+| `status`                  | String     | Yes      | `invited`, `active`, `locked`, `disabled`, `archived` |
+| `passwordHash`            | String     | No       | Null until invite accepted                            |
+| `emailVerifiedAt`         | Date       | No       | Set when invite accepted or email change verified     |
+| `lastLoginAt`             | Date       | No       | Updated on successful login                           |
+| `passwordChangedAt`       | Date       | No       | Security tracking                                     |
+| `roleIds`                 | [ObjectId] | Yes      | One or many roles                                     |
+| `propertyScopeIds`        | [ObjectId] | Yes      | Assigned properties                                   |
+| `locationScopeIds`        | [ObjectId] | No       | Optional restrictions                                 |
+| `teamIds`                 | [ObjectId] | No       | Assigned teams                                        |
+| `notificationPreferences` | Object     | No       | Event-category to channel preferences                 |
+| `inviteSentAt`            | Date       | No       | Activation tracking                                   |
+| `avatarDocumentId`        | ObjectId   | No       | Optional avatar                                       |
 
 Indexes:
 
@@ -1514,15 +1574,15 @@ Indexes:
 
 ### 11.7 `teams`
 
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `propertyId` | ObjectId | Yes | Team belongs to one property |
-| `name` | String | Yes | Team label |
-| `description` | String | No | Optional |
-| `leadUserId` | ObjectId | No | Team lead |
-| `memberUserIds` | [ObjectId] | No | Team members |
-| `skillTags` | [String] | No | Search and planning aid |
-| `isActive` | Boolean | Yes | Default `true` |
+| Field           | Type       | Required | Notes                        |
+| --------------- | ---------- | -------- | ---------------------------- |
+| `propertyId`    | ObjectId   | Yes      | Team belongs to one property |
+| `name`          | String     | Yes      | Team label                   |
+| `description`   | String     | No       | Optional                     |
+| `leadUserId`    | ObjectId   | No       | Team lead                    |
+| `memberUserIds` | [ObjectId] | No       | Team members                 |
+| `skillTags`     | [String]   | No       | Search and planning aid      |
+| `isActive`      | Boolean    | Yes      | Default `true`               |
 
 Indexes:
 
@@ -1531,20 +1591,20 @@ Indexes:
 
 ### 11.8 `user_sessions`
 
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `userId` | ObjectId | Yes | Owner |
-| `sessionType` | String | Yes | `web` only in v1 |
-| `refreshTokenHash` | String | Yes | Server-side revocation key |
-| `ipAddress` | String | No | Captured on auth actions |
-| `userAgent` | String | No | Browser signature |
-| `deviceLabel` | String | No | Derived display name |
-| `issuedAt` | Date | Yes | Session start |
-| `lastActivityAt` | Date | Yes | Activity time |
-| `expiresAt` | Date | Yes | Absolute expiry |
-| `isRevoked` | Boolean | Yes | Default `false` |
-| `revokedAt` | Date | No | When revoked |
-| `revokedReason` | String | No | Logout, forced logout, role change, suspicious activity |
+| Field              | Type     | Required | Notes                                                   |
+| ------------------ | -------- | -------- | ------------------------------------------------------- |
+| `userId`           | ObjectId | Yes      | Owner                                                   |
+| `sessionType`      | String   | Yes      | `web` only in v1                                        |
+| `refreshTokenHash` | String   | Yes      | Server-side revocation key                              |
+| `ipAddress`        | String   | No       | Captured on auth actions                                |
+| `userAgent`        | String   | No       | Browser signature                                       |
+| `deviceLabel`      | String   | No       | Derived display name                                    |
+| `issuedAt`         | Date     | Yes      | Session start                                           |
+| `lastActivityAt`   | Date     | Yes      | Activity time                                           |
+| `expiresAt`        | Date     | Yes      | Absolute expiry                                         |
+| `isRevoked`        | Boolean  | Yes      | Default `false`                                         |
+| `revokedAt`        | Date     | No       | When revoked                                            |
+| `revokedReason`    | String   | No       | Logout, forced logout, role change, suspicious activity |
 
 Indexes:
 
@@ -1553,39 +1613,39 @@ Indexes:
 
 ### 11.9 `assets`
 
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `propertyId` | ObjectId | Yes | Asset property |
-| `locationId` | ObjectId | Yes | Current location |
-| `parentAssetId` | ObjectId | No | Parent hierarchy |
-| `replacementSuccessorAssetId` | ObjectId | No | Optional successor |
-| `assetCode` | String | Yes | Unique within property |
-| `name` | String | Yes | Asset name |
-| `category` | String | Yes | Configured category |
-| `subcategory` | String | No | Configured subcategory |
-| `assetClass` | String | No | Optional higher-level grouping |
-| `criticality` | String | Yes | `life_safety`, `guest_service_critical`, `business_critical`, `standard`, `low` |
-| `lifecycleStatus` | String | Yes | From approved asset status set |
-| `operationalStatus` | String | Yes | Day-to-day current condition |
-| `manufacturer` | String | No | Optional |
-| `model` | String | No | Optional |
-| `serialNumber` | String | No | Optional |
-| `barcodeValue` | String | No | Scan token |
-| `qrCodeValue` | String | No | Scan token |
-| `installDate` | Date | No | Optional |
-| `purchaseDate` | Date | No | Optional |
-| `warrantyStartDate` | Date | No | Optional |
-| `warrantyEndDate` | Date | No | Optional |
-| `usefulLifeYears` | Number | No | Reference only |
-| `replacementCost` | Number | No | Reference only |
-| `serviceContractReference` | String | No | Vendor or contract reference |
-| `lastPmCompletedAt` | Date | No | Derived snapshot |
-| `nextPmDueAt` | Date | No | Derived snapshot |
-| `openWorkOrderCount` | Number | No | Derived snapshot |
-| `documentIds` | [ObjectId] | No | Linked docs |
-| `photoDocumentIds` | [ObjectId] | No | Linked images |
-| `tags` | [String] | No | Search labels |
-| `customFields` | Object | No | Configurable per org/property |
+| Field                         | Type       | Required | Notes                                                                           |
+| ----------------------------- | ---------- | -------- | ------------------------------------------------------------------------------- |
+| `propertyId`                  | ObjectId   | Yes      | Asset property                                                                  |
+| `locationId`                  | ObjectId   | Yes      | Current location                                                                |
+| `parentAssetId`               | ObjectId   | No       | Parent hierarchy                                                                |
+| `replacementSuccessorAssetId` | ObjectId   | No       | Optional successor                                                              |
+| `assetCode`                   | String     | Yes      | Unique within property                                                          |
+| `name`                        | String     | Yes      | Asset name                                                                      |
+| `category`                    | String     | Yes      | Configured category                                                             |
+| `subcategory`                 | String     | No       | Configured subcategory                                                          |
+| `assetClass`                  | String     | No       | Optional higher-level grouping                                                  |
+| `criticality`                 | String     | Yes      | `life_safety`, `guest_service_critical`, `business_critical`, `standard`, `low` |
+| `lifecycleStatus`             | String     | Yes      | From approved asset status set                                                  |
+| `operationalStatus`           | String     | Yes      | Day-to-day current condition                                                    |
+| `manufacturer`                | String     | No       | Optional                                                                        |
+| `model`                       | String     | No       | Optional                                                                        |
+| `serialNumber`                | String     | No       | Optional                                                                        |
+| `barcodeValue`                | String     | No       | Scan token                                                                      |
+| `qrCodeValue`                 | String     | No       | Scan token                                                                      |
+| `installDate`                 | Date       | No       | Optional                                                                        |
+| `purchaseDate`                | Date       | No       | Optional                                                                        |
+| `warrantyStartDate`           | Date       | No       | Optional                                                                        |
+| `warrantyEndDate`             | Date       | No       | Optional                                                                        |
+| `usefulLifeYears`             | Number     | No       | Reference only                                                                  |
+| `replacementCost`             | Number     | No       | Reference only                                                                  |
+| `serviceContractReference`    | String     | No       | Vendor or contract reference                                                    |
+| `lastPmCompletedAt`           | Date       | No       | Derived snapshot                                                                |
+| `nextPmDueAt`                 | Date       | No       | Derived snapshot                                                                |
+| `openWorkOrderCount`          | Number     | No       | Derived snapshot                                                                |
+| `documentIds`                 | [ObjectId] | No       | Linked docs                                                                     |
+| `photoDocumentIds`            | [ObjectId] | No       | Linked images                                                                   |
+| `tags`                        | [String]   | No       | Search labels                                                                   |
+| `customFields`                | Object     | No       | Configurable per org/property                                                   |
 
 Indexes:
 
@@ -1598,27 +1658,27 @@ Indexes:
 
 `asset_meters`
 
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `assetId` | ObjectId | Yes | Parent asset |
-| `name` | String | Yes | Meter display name |
-| `meterType` | String | Yes | Approved meter enum |
-| `unitLabel` | String | Yes | `hours`, `cycles`, `count`, custom |
-| `currentReading` | Number | Yes | Latest accepted reading |
-| `rolloverEnabled` | Boolean | Yes | Default `false` |
-| `isActive` | Boolean | Yes | Default `true` |
+| Field             | Type     | Required | Notes                              |
+| ----------------- | -------- | -------- | ---------------------------------- |
+| `assetId`         | ObjectId | Yes      | Parent asset                       |
+| `name`            | String   | Yes      | Meter display name                 |
+| `meterType`       | String   | Yes      | Approved meter enum                |
+| `unitLabel`       | String   | Yes      | `hours`, `cycles`, `count`, custom |
+| `currentReading`  | Number   | Yes      | Latest accepted reading            |
+| `rolloverEnabled` | Boolean  | Yes      | Default `false`                    |
+| `isActive`        | Boolean  | Yes      | Default `true`                     |
 
 `asset_meter_readings`
 
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `meterId` | ObjectId | Yes | Parent meter |
-| `assetId` | ObjectId | Yes | Denormalized for queries |
-| `readingValue` | Number | Yes | Reading amount |
-| `readingAt` | Date | Yes | Effective timestamp |
-| `enteredByUserId` | ObjectId | No | Null if import/system |
-| `sourceType` | String | Yes | `manual`, `import`, `system_adjustment` |
-| `note` | String | No | Optional |
+| Field             | Type     | Required | Notes                                   |
+| ----------------- | -------- | -------- | --------------------------------------- |
+| `meterId`         | ObjectId | Yes      | Parent meter                            |
+| `assetId`         | ObjectId | Yes      | Denormalized for queries                |
+| `readingValue`    | Number   | Yes      | Reading amount                          |
+| `readingAt`       | Date     | Yes      | Effective timestamp                     |
+| `enteredByUserId` | ObjectId | No       | Null if import/system                   |
+| `sourceType`      | String   | Yes      | `manual`, `import`, `system_adjustment` |
+| `note`            | String   | No       | Optional                                |
 
 Indexes:
 
@@ -1626,39 +1686,39 @@ Indexes:
 
 ### 11.11 `work_requests`
 
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `requestNumber` | String | Yes | Unique within property |
-| `propertyId` | ObjectId | Yes | Request property |
-| `locationId` | ObjectId | Yes | Request location |
-| `assetId` | ObjectId | No | Optional asset |
-| `channel` | String | Yes | `internal_form`, `request_portal`, `dispatcher`, `inspection` |
-| `sourcePortalSlug` | String | No | For portal submissions |
-| `requesterUserId` | ObjectId | No | If authenticated |
-| `requesterName` | String | Yes | Preserve origin identity |
-| `requesterEmail` | String | No | Optional contact |
-| `requesterPhone` | String | No | Optional contact |
-| `submittedOnBehalfOf` | String | No | Caller or department label |
-| `title` | String | Yes | Short summary |
-| `description` | String | Yes | Detailed issue |
-| `category` | String | Yes | Configured category |
-| `subcategory` | String | No | Configured subcategory |
-| `priorityRequested` | String | Yes | Requested priority |
-| `guestImpact` | String | Yes | Guest-impact enum |
-| `occupiedRoomFlag` | Boolean | Yes | Context flag |
-| `preferredServiceWindowStart` | String | No | Local time |
-| `preferredServiceWindowEnd` | String | No | Local time |
-| `accessNotes` | String | No | Entry instructions |
-| `status` | String | Yes | Request status enum |
-| `triageUserId` | ObjectId | No | Reviewing user |
-| `triageNotes` | String | No | Review notes |
-| `rejectionReason` | String | No | Required when rejected |
-| `cancellationReason` | String | No | Required when cancelled |
-| `convertedWorkOrderId` | ObjectId | No | Linked work order |
-| `submittedAt` | Date | Yes | Creation time |
-| `reviewedAt` | Date | No | First review time |
-| `approvedAt` | Date | No | Approval time |
-| `attachmentDocumentIds` | [ObjectId] | No | Linked documents |
+| Field                         | Type       | Required | Notes                                                         |
+| ----------------------------- | ---------- | -------- | ------------------------------------------------------------- |
+| `requestNumber`               | String     | Yes      | Unique within property                                        |
+| `propertyId`                  | ObjectId   | Yes      | Request property                                              |
+| `locationId`                  | ObjectId   | Yes      | Request location                                              |
+| `assetId`                     | ObjectId   | No       | Optional asset                                                |
+| `channel`                     | String     | Yes      | `internal_form`, `request_portal`, `dispatcher`, `inspection` |
+| `sourcePortalSlug`            | String     | No       | For portal submissions                                        |
+| `requesterUserId`             | ObjectId   | No       | If authenticated                                              |
+| `requesterName`               | String     | Yes      | Preserve origin identity                                      |
+| `requesterEmail`              | String     | No       | Optional contact                                              |
+| `requesterPhone`              | String     | No       | Optional contact                                              |
+| `submittedOnBehalfOf`         | String     | No       | Caller or department label                                    |
+| `title`                       | String     | Yes      | Short summary                                                 |
+| `description`                 | String     | Yes      | Detailed issue                                                |
+| `category`                    | String     | Yes      | Configured category                                           |
+| `subcategory`                 | String     | No       | Configured subcategory                                        |
+| `priorityRequested`           | String     | Yes      | Requested priority                                            |
+| `guestImpact`                 | String     | Yes      | Guest-impact enum                                             |
+| `occupiedRoomFlag`            | Boolean    | Yes      | Context flag                                                  |
+| `preferredServiceWindowStart` | String     | No       | Local time                                                    |
+| `preferredServiceWindowEnd`   | String     | No       | Local time                                                    |
+| `accessNotes`                 | String     | No       | Entry instructions                                            |
+| `status`                      | String     | Yes      | Request status enum                                           |
+| `triageUserId`                | ObjectId   | No       | Reviewing user                                                |
+| `triageNotes`                 | String     | No       | Review notes                                                  |
+| `rejectionReason`             | String     | No       | Required when rejected                                        |
+| `cancellationReason`          | String     | No       | Required when cancelled                                       |
+| `convertedWorkOrderId`        | ObjectId   | No       | Linked work order                                             |
+| `submittedAt`                 | Date       | Yes      | Creation time                                                 |
+| `reviewedAt`                  | Date       | No       | First review time                                             |
+| `approvedAt`                  | Date       | No       | Approval time                                                 |
+| `attachmentDocumentIds`       | [ObjectId] | No       | Linked documents                                              |
 
 Indexes:
 
@@ -1668,62 +1728,62 @@ Indexes:
 
 ### 11.12 `work_orders`
 
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `workOrderNumber` | String | Yes | Unique within property |
-| `propertyId` | ObjectId | Yes | Primary property |
-| `locationId` | ObjectId | Yes | Primary location |
-| `assetId` | ObjectId | No | Optional main asset |
-| `type` | String | Yes | Work order type enum |
-| `sourceType` | String | Yes | `manual`, `request`, `pm`, `inspection`, `import`, `split` |
-| `sourceId` | ObjectId | No | Request/PM/inspection ref |
-| `title` | String | Yes | Summary |
-| `description` | String | Yes | Detailed work scope |
-| `category` | String | Yes | Configured category |
-| `subcategory` | String | No | Configured subcategory |
-| `priority` | String | Yes | Priority enum |
-| `severity` | String | Yes | Severity enum |
-| `guestImpact` | String | Yes | Guest-impact enum |
-| `status` | String | Yes | Work-order status enum |
-| `statusReasonCode` | String | No | Hold, cancel, reopen, verify rejection reason |
-| `requesterUserId` | ObjectId | No | Original requester if known |
-| `primaryAssigneeUserId` | ObjectId | No | Single primary user |
-| `secondaryAssigneeUserIds` | [ObjectId] | No | Additional assignees |
-| `assignedTeamId` | ObjectId | No | Team |
-| `assignedVendorId` | ObjectId | No | External vendor |
-| `assignedAt` | Date | No | Assignment time |
-| `plannedStartAt` | Date | No | Schedule |
-| `plannedEndAt` | Date | No | Schedule |
-| `actualStartAt` | Date | No | Execution |
-| `actualEndAt` | Date | No | Execution |
-| `dueAt` | Date | No | Business due date |
-| `responseDueAt` | Date | No | SLA derived |
-| `startDueAt` | Date | No | SLA derived |
-| `completionDueAt` | Date | No | SLA derived |
-| `slaPausedSegments` | [Object] | No | Each object: startAt, endAt, reasonCode |
-| `occupiedRoomFlag` | Boolean | Yes | Context |
-| `dndFlag` | Boolean | No | Snapshot at planning or start |
-| `vipFlag` | Boolean | No | Snapshot at planning or start |
-| `preferredServiceWindowStart` | String | No | Local time |
-| `preferredServiceWindowEnd` | String | No | Local time |
-| `guestCommunicationFlags` | Object | No | Booleans for front office, housekeeping, security, operations informed |
-| `taskItems` | [Object] | No | Each object: title, status, required, completedAt, completedByUserId |
-| `checklistExecutionIds` | [ObjectId] | No | Linked inspection/checklist executions |
-| `laborEntries` | [Object] | No | Each object: userId, startedAt, endedAt, minutes, laborType, note, costRate, costAmount |
-| `partUsageLines` | [Object] | No | Each object: partId, inventoryLineId, reservedQty, issuedQty, returnedQty, unitCost, totalCost |
-| `costSummary` | Object | No | Labor cost, parts cost, vendor cost, total cost |
-| `downtime` | Object | No | startAt, endAt, scopeType, scopeId, plannedFlag |
-| `causeCode` | String | No | Required at completion |
-| `resolutionCode` | String | No | Required at completion |
-| `completionSummary` | String | No | Required at completion |
-| `verificationRequired` | Boolean | Yes | Derived or configured |
-| `verifiedByUserId` | ObjectId | No | Verifier |
-| `verifiedAt` | Date | No | Verification time |
-| `reopenCount` | Number | Yes | Default `0` |
-| `cancellationReason` | String | No | Required if cancelled |
-| `attachmentDocumentIds` | [ObjectId] | No | Linked docs |
-| `tags` | [String] | No | Search labels |
-| `customFields` | Object | No | Configurable |
+| Field                         | Type       | Required | Notes                                                                                          |
+| ----------------------------- | ---------- | -------- | ---------------------------------------------------------------------------------------------- |
+| `workOrderNumber`             | String     | Yes      | Unique within property                                                                         |
+| `propertyId`                  | ObjectId   | Yes      | Primary property                                                                               |
+| `locationId`                  | ObjectId   | Yes      | Primary location                                                                               |
+| `assetId`                     | ObjectId   | No       | Optional main asset                                                                            |
+| `type`                        | String     | Yes      | Work order type enum                                                                           |
+| `sourceType`                  | String     | Yes      | `manual`, `request`, `pm`, `inspection`, `import`, `split`                                     |
+| `sourceId`                    | ObjectId   | No       | Request/PM/inspection ref                                                                      |
+| `title`                       | String     | Yes      | Summary                                                                                        |
+| `description`                 | String     | Yes      | Detailed work scope                                                                            |
+| `category`                    | String     | Yes      | Configured category                                                                            |
+| `subcategory`                 | String     | No       | Configured subcategory                                                                         |
+| `priority`                    | String     | Yes      | Priority enum                                                                                  |
+| `severity`                    | String     | Yes      | Severity enum                                                                                  |
+| `guestImpact`                 | String     | Yes      | Guest-impact enum                                                                              |
+| `status`                      | String     | Yes      | Work-order status enum                                                                         |
+| `statusReasonCode`            | String     | No       | Hold, cancel, reopen, verify rejection reason                                                  |
+| `requesterUserId`             | ObjectId   | No       | Original requester if known                                                                    |
+| `primaryAssigneeUserId`       | ObjectId   | No       | Single primary user                                                                            |
+| `secondaryAssigneeUserIds`    | [ObjectId] | No       | Additional assignees                                                                           |
+| `assignedTeamId`              | ObjectId   | No       | Team                                                                                           |
+| `assignedVendorId`            | ObjectId   | No       | External vendor                                                                                |
+| `assignedAt`                  | Date       | No       | Assignment time                                                                                |
+| `plannedStartAt`              | Date       | No       | Schedule                                                                                       |
+| `plannedEndAt`                | Date       | No       | Schedule                                                                                       |
+| `actualStartAt`               | Date       | No       | Execution                                                                                      |
+| `actualEndAt`                 | Date       | No       | Execution                                                                                      |
+| `dueAt`                       | Date       | No       | Business due date                                                                              |
+| `responseDueAt`               | Date       | No       | SLA derived                                                                                    |
+| `startDueAt`                  | Date       | No       | SLA derived                                                                                    |
+| `completionDueAt`             | Date       | No       | SLA derived                                                                                    |
+| `slaPausedSegments`           | [Object]   | No       | Each object: startAt, endAt, reasonCode                                                        |
+| `occupiedRoomFlag`            | Boolean    | Yes      | Context                                                                                        |
+| `dndFlag`                     | Boolean    | No       | Snapshot at planning or start                                                                  |
+| `vipFlag`                     | Boolean    | No       | Snapshot at planning or start                                                                  |
+| `preferredServiceWindowStart` | String     | No       | Local time                                                                                     |
+| `preferredServiceWindowEnd`   | String     | No       | Local time                                                                                     |
+| `guestCommunicationFlags`     | Object     | No       | Booleans for front office, housekeeping, security, operations informed                         |
+| `taskItems`                   | [Object]   | No       | Each object: title, status, required, completedAt, completedByUserId                           |
+| `checklistExecutionIds`       | [ObjectId] | No       | Linked inspection/checklist executions                                                         |
+| `laborEntries`                | [Object]   | No       | Each object: userId, startedAt, endedAt, minutes, laborType, note, costRate, costAmount        |
+| `partUsageLines`              | [Object]   | No       | Each object: partId, inventoryLineId, reservedQty, issuedQty, returnedQty, unitCost, totalCost |
+| `costSummary`                 | Object     | No       | Labor cost, parts cost, vendor cost, total cost                                                |
+| `downtime`                    | Object     | No       | startAt, endAt, scopeType, scopeId, plannedFlag                                                |
+| `causeCode`                   | String     | No       | Required at completion                                                                         |
+| `resolutionCode`              | String     | No       | Required at completion                                                                         |
+| `completionSummary`           | String     | No       | Required at completion                                                                         |
+| `verificationRequired`        | Boolean    | Yes      | Derived or configured                                                                          |
+| `verifiedByUserId`            | ObjectId   | No       | Verifier                                                                                       |
+| `verifiedAt`                  | Date       | No       | Verification time                                                                              |
+| `reopenCount`                 | Number     | Yes      | Default `0`                                                                                    |
+| `cancellationReason`          | String     | No       | Required if cancelled                                                                          |
+| `attachmentDocumentIds`       | [ObjectId] | No       | Linked docs                                                                                    |
+| `tags`                        | [String]   | No       | Search labels                                                                                  |
+| `customFields`                | Object     | No       | Configurable                                                                                   |
 
 Indexes:
 
@@ -1737,31 +1797,31 @@ Indexes:
 
 ### 11.13 `preventive_maintenance_plans`
 
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `planNumber` | String | Yes | Unique within property |
-| `propertyId` | ObjectId | Yes | Owning property |
-| `scopeType` | String | Yes | `asset`, `asset_group`, `location`, `location_group` |
-| `targetAssetId` | ObjectId | No | When scopeType is asset |
-| `targetLocationId` | ObjectId | No | When scopeType is location |
-| `title` | String | Yes | Plan title |
-| `status` | String | Yes | `draft`, `active`, `paused`, `archived` |
-| `triggerType` | String | Yes | `time`, `meter`, `seasonal`, `hybrid` |
-| `timeRule` | Object | No | Recurrence config |
-| `meterRule` | Object | No | meterId, threshold, lead amount |
-| `seasonRule` | Object | No | opening/closing dates or months |
-| `priority` | String | Yes | Default generated priority |
-| `defaultAssigneeUserId` | ObjectId | No | Optional |
-| `defaultTeamId` | ObjectId | No | Optional |
-| `estimatedLaborMinutes` | Number | No | Planning aid |
-| `plannedPartKit` | [Object] | No | partId, plannedQty |
-| `checklistTemplateId` | ObjectId | No | Required procedure |
-| `leadTimeDays` | Number | Yes | Default generation lead time |
-| `blackoutBehavior` | String | Yes | `delay`, `generate_anyway_with_warning`, `skip_with_flag` |
-| `lastGeneratedAt` | Date | No | Scheduler history |
-| `lastCompletedAt` | Date | No | History |
-| `nextDueAt` | Date | No | Derived |
-| `isVerificationRequired` | Boolean | Yes | Generated WO default |
+| Field                    | Type     | Required | Notes                                                     |
+| ------------------------ | -------- | -------- | --------------------------------------------------------- |
+| `planNumber`             | String   | Yes      | Unique within property                                    |
+| `propertyId`             | ObjectId | Yes      | Owning property                                           |
+| `scopeType`              | String   | Yes      | `asset`, `asset_group`, `location`, `location_group`      |
+| `targetAssetId`          | ObjectId | No       | When scopeType is asset                                   |
+| `targetLocationId`       | ObjectId | No       | When scopeType is location                                |
+| `title`                  | String   | Yes      | Plan title                                                |
+| `status`                 | String   | Yes      | `draft`, `active`, `paused`, `archived`                   |
+| `triggerType`            | String   | Yes      | `time`, `meter`, `seasonal`, `hybrid`                     |
+| `timeRule`               | Object   | No       | Recurrence config                                         |
+| `meterRule`              | Object   | No       | meterId, threshold, lead amount                           |
+| `seasonRule`             | Object   | No       | opening/closing dates or months                           |
+| `priority`               | String   | Yes      | Default generated priority                                |
+| `defaultAssigneeUserId`  | ObjectId | No       | Optional                                                  |
+| `defaultTeamId`          | ObjectId | No       | Optional                                                  |
+| `estimatedLaborMinutes`  | Number   | No       | Planning aid                                              |
+| `plannedPartKit`         | [Object] | No       | partId, plannedQty                                        |
+| `checklistTemplateId`    | ObjectId | No       | Required procedure                                        |
+| `leadTimeDays`           | Number   | Yes      | Default generation lead time                              |
+| `blackoutBehavior`       | String   | Yes      | `delay`, `generate_anyway_with_warning`, `skip_with_flag` |
+| `lastGeneratedAt`        | Date     | No       | Scheduler history                                         |
+| `lastCompletedAt`        | Date     | No       | History                                                   |
+| `nextDueAt`              | Date     | No       | Derived                                                   |
+| `isVerificationRequired` | Boolean  | Yes      | Generated WO default                                      |
 
 Indexes:
 
@@ -1773,35 +1833,35 @@ Indexes:
 
 `checklist_templates`
 
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `name` | String | Yes | Template title |
-| `moduleContext` | String | Yes | `work_order`, `pm`, `inspection`, `asset`, `location` |
-| `version` | Number | Yes | Starts at 1 |
-| `status` | String | Yes | `draft`, `active`, `archived` |
-| `steps` | [Object] | Yes | Each step contains label, type, required flag, options, range, conditional logic, failure action |
-| `signoffRequired` | Boolean | Yes | Default `false` |
+| Field             | Type     | Required | Notes                                                                                            |
+| ----------------- | -------- | -------- | ------------------------------------------------------------------------------------------------ |
+| `name`            | String   | Yes      | Template title                                                                                   |
+| `moduleContext`   | String   | Yes      | `work_order`, `pm`, `inspection`, `asset`, `location`                                            |
+| `version`         | Number   | Yes      | Starts at 1                                                                                      |
+| `status`          | String   | Yes      | `draft`, `active`, `archived`                                                                    |
+| `steps`           | [Object] | Yes      | Each step contains label, type, required flag, options, range, conditional logic, failure action |
+| `signoffRequired` | Boolean  | Yes      | Default `false`                                                                                  |
 
 `inspection_executions`
 
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `templateId` | ObjectId | Yes | Source template |
-| `templateVersion` | Number | Yes | Frozen version |
-| `contextType` | String | Yes | `work_order`, `pm`, `asset`, `location`, `standalone` |
-| `contextId` | ObjectId | No | Linked record |
-| `propertyId` | ObjectId | Yes | Property |
-| `locationId` | ObjectId | No | Optional |
-| `assetId` | ObjectId | No | Optional |
-| `startedByUserId` | ObjectId | Yes | Actor |
-| `startedAt` | Date | Yes | Start time |
-| `completedAt` | Date | No | Completion time |
-| `responses` | [Object] | Yes | StepId, answer, note, photoIds, failedFlag |
-| `status` | String | Yes | `in_progress`, `completed`, `cancelled` |
-| `generatedRequestIds` | [ObjectId] | No | Follow-up records |
-| `generatedWorkOrderIds` | [ObjectId] | No | Follow-up records |
-| `signoffByUserId` | ObjectId | No | Signoff actor |
-| `signoffAt` | Date | No | Signoff time |
+| Field                   | Type       | Required | Notes                                                 |
+| ----------------------- | ---------- | -------- | ----------------------------------------------------- |
+| `templateId`            | ObjectId   | Yes      | Source template                                       |
+| `templateVersion`       | Number     | Yes      | Frozen version                                        |
+| `contextType`           | String     | Yes      | `work_order`, `pm`, `asset`, `location`, `standalone` |
+| `contextId`             | ObjectId   | No       | Linked record                                         |
+| `propertyId`            | ObjectId   | Yes      | Property                                              |
+| `locationId`            | ObjectId   | No       | Optional                                              |
+| `assetId`               | ObjectId   | No       | Optional                                              |
+| `startedByUserId`       | ObjectId   | Yes      | Actor                                                 |
+| `startedAt`             | Date       | Yes      | Start time                                            |
+| `completedAt`           | Date       | No       | Completion time                                       |
+| `responses`             | [Object]   | Yes      | StepId, answer, note, photoIds, failedFlag            |
+| `status`                | String     | Yes      | `in_progress`, `completed`, `cancelled`               |
+| `generatedRequestIds`   | [ObjectId] | No       | Follow-up records                                     |
+| `generatedWorkOrderIds` | [ObjectId] | No       | Follow-up records                                     |
+| `signoffByUserId`       | ObjectId   | No       | Signoff actor                                         |
+| `signoffAt`             | Date       | No       | Signoff time                                          |
 
 Indexes:
 
@@ -1810,22 +1870,22 @@ Indexes:
 
 ### 11.15 `parts`
 
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `partNumber` | String | Yes | Unique within organization |
-| `name` | String | Yes | Display name |
-| `description` | String | No | Optional |
-| `category` | String | Yes | Configured category |
-| `stockType` | String | Yes | `stock`, `non_stock`, `consumable`, `serialized_if_enabled` |
-| `uom` | String | Yes | Unit of measure |
-| `criticality` | String | Yes | `critical`, `standard`, `low` |
-| `defaultUnitCost` | Number | No | Cost reference |
-| `manufacturer` | String | No | Optional |
-| `preferredVendorId` | ObjectId | No | Optional |
-| `substitutePartIds` | [ObjectId] | No | Alternatives |
-| `status` | String | Yes | `active`, `restricted`, `obsolete`, `archived` |
-| `documentIds` | [ObjectId] | No | Manuals/specs |
-| `tags` | [String] | No | Search labels |
+| Field               | Type       | Required | Notes                                                       |
+| ------------------- | ---------- | -------- | ----------------------------------------------------------- |
+| `partNumber`        | String     | Yes      | Unique within organization                                  |
+| `name`              | String     | Yes      | Display name                                                |
+| `description`       | String     | No       | Optional                                                    |
+| `category`          | String     | Yes      | Configured category                                         |
+| `stockType`         | String     | Yes      | `stock`, `non_stock`, `consumable`, `serialized_if_enabled` |
+| `uom`               | String     | Yes      | Unit of measure                                             |
+| `criticality`       | String     | Yes      | `critical`, `standard`, `low`                               |
+| `defaultUnitCost`   | Number     | No       | Cost reference                                              |
+| `manufacturer`      | String     | No       | Optional                                                    |
+| `preferredVendorId` | ObjectId   | No       | Optional                                                    |
+| `substitutePartIds` | [ObjectId] | No       | Alternatives                                                |
+| `status`            | String     | Yes      | `active`, `restricted`, `obsolete`, `archived`              |
+| `documentIds`       | [ObjectId] | No       | Manuals/specs                                               |
+| `tags`              | [String]   | No       | Search labels                                               |
 
 Indexes:
 
@@ -1835,24 +1895,24 @@ Indexes:
 
 ### 11.16 `inventory_stock_lines`
 
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `partId` | ObjectId | Yes | Parent part |
-| `propertyId` | ObjectId | Yes | Property |
-| `storeroomLocationId` | ObjectId | Yes | Storeroom location |
-| `binLocationId` | ObjectId | No | Optional bin |
-| `status` | String | Yes | `active`, `quarantine`, `archived` |
-| `onHandQty` | Number | Yes | Physical units |
-| `reservedQty` | Number | Yes | Allocated to work |
-| `availableQty` | Number | Yes | Derived from on-hand minus reserved |
-| `minQty` | Number | No | Min threshold |
-| `maxQty` | Number | No | Max threshold |
-| `reorderPoint` | Number | No | Alert threshold |
-| `reorderQty` | Number | No | Recommendation |
-| `unitCost` | Number | No | Current weighted or standard cost |
-| `lastCountedAt` | Date | No | Inventory control |
-| `lastTransactionAt` | Date | No | Activity timestamp |
-| `notes` | String | No | Optional |
+| Field                 | Type     | Required | Notes                               |
+| --------------------- | -------- | -------- | ----------------------------------- |
+| `partId`              | ObjectId | Yes      | Parent part                         |
+| `propertyId`          | ObjectId | Yes      | Property                            |
+| `storeroomLocationId` | ObjectId | Yes      | Storeroom location                  |
+| `binLocationId`       | ObjectId | No       | Optional bin                        |
+| `status`              | String   | Yes      | `active`, `quarantine`, `archived`  |
+| `onHandQty`           | Number   | Yes      | Physical units                      |
+| `reservedQty`         | Number   | Yes      | Allocated to work                   |
+| `availableQty`        | Number   | Yes      | Derived from on-hand minus reserved |
+| `minQty`              | Number   | No       | Min threshold                       |
+| `maxQty`              | Number   | No       | Max threshold                       |
+| `reorderPoint`        | Number   | No       | Alert threshold                     |
+| `reorderQty`          | Number   | No       | Recommendation                      |
+| `unitCost`            | Number   | No       | Current weighted or standard cost   |
+| `lastCountedAt`       | Date     | No       | Inventory control                   |
+| `lastTransactionAt`   | Date     | No       | Activity timestamp                  |
+| `notes`               | String   | No       | Optional                            |
 
 Indexes:
 
@@ -1862,21 +1922,21 @@ Indexes:
 
 ### 11.17 `inventory_transactions`
 
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `partId` | ObjectId | Yes | Part |
-| `inventoryLineId` | ObjectId | Yes | Primary line |
-| `transactionType` | String | Yes | Approved transaction enum |
-| `quantity` | Number | Yes | Positive quantity |
-| `unitCost` | Number | No | Snapshot cost |
-| `totalCost` | Number | No | Derived |
-| `sourceLineId` | ObjectId | No | For transfers |
-| `destinationLineId` | ObjectId | No | For transfers |
-| `relatedWorkOrderId` | ObjectId | No | For issues/returns |
-| `reasonCode` | String | No | Adjustment or override reason |
-| `performedByUserId` | ObjectId | No | Actor |
-| `transactionAt` | Date | Yes | UTC timestamp |
-| `note` | String | No | Optional |
+| Field                | Type     | Required | Notes                         |
+| -------------------- | -------- | -------- | ----------------------------- |
+| `partId`             | ObjectId | Yes      | Part                          |
+| `inventoryLineId`    | ObjectId | Yes      | Primary line                  |
+| `transactionType`    | String   | Yes      | Approved transaction enum     |
+| `quantity`           | Number   | Yes      | Positive quantity             |
+| `unitCost`           | Number   | No       | Snapshot cost                 |
+| `totalCost`          | Number   | No       | Derived                       |
+| `sourceLineId`       | ObjectId | No       | For transfers                 |
+| `destinationLineId`  | ObjectId | No       | For transfers                 |
+| `relatedWorkOrderId` | ObjectId | No       | For issues/returns            |
+| `reasonCode`         | String   | No       | Adjustment or override reason |
+| `performedByUserId`  | ObjectId | No       | Actor                         |
+| `transactionAt`      | Date     | Yes      | UTC timestamp                 |
+| `note`               | String   | No       | Optional                      |
 
 Indexes:
 
@@ -1885,23 +1945,23 @@ Indexes:
 
 ### 11.18 `vendors`
 
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `vendorType` | String | Yes | `vendor`, `contractor`, `service_partner` |
-| `companyName` | String | Yes | Display name |
-| `status` | String | Yes | `active`, `probation`, `suspended`, `inactive` |
-| `serviceCategories` | [String] | No | Work types handled |
-| `propertyScopeIds` | [ObjectId] | No | Allowed properties |
-| `serviceRegions` | [String] | No | Human-readable regional coverage |
-| `primaryContactName` | String | No | Main contact |
-| `primaryContactEmail` | String | No | Main contact |
-| `primaryContactPhone` | String | No | Main contact |
-| `afterHoursPhone` | String | No | Emergency contact |
-| `insuranceExpiryDate` | Date | No | Compliance tracking |
-| `complianceDocumentIds` | [ObjectId] | No | Linked certificates |
-| `portalUserIds` | [ObjectId] | No | Restricted vendor users |
-| `defaultResponseTargetMinutes` | Number | No | Operational expectation |
-| `notes` | String | No | Internal notes |
+| Field                          | Type       | Required | Notes                                          |
+| ------------------------------ | ---------- | -------- | ---------------------------------------------- |
+| `vendorType`                   | String     | Yes      | `vendor`, `contractor`, `service_partner`      |
+| `companyName`                  | String     | Yes      | Display name                                   |
+| `status`                       | String     | Yes      | `active`, `probation`, `suspended`, `inactive` |
+| `serviceCategories`            | [String]   | No       | Work types handled                             |
+| `propertyScopeIds`             | [ObjectId] | No       | Allowed properties                             |
+| `serviceRegions`               | [String]   | No       | Human-readable regional coverage               |
+| `primaryContactName`           | String     | No       | Main contact                                   |
+| `primaryContactEmail`          | String     | No       | Main contact                                   |
+| `primaryContactPhone`          | String     | No       | Main contact                                   |
+| `afterHoursPhone`              | String     | No       | Emergency contact                              |
+| `insuranceExpiryDate`          | Date       | No       | Compliance tracking                            |
+| `complianceDocumentIds`        | [ObjectId] | No       | Linked certificates                            |
+| `portalUserIds`                | [ObjectId] | No       | Restricted vendor users                        |
+| `defaultResponseTargetMinutes` | Number     | No       | Operational expectation                        |
+| `notes`                        | String     | No       | Internal notes                                 |
 
 Indexes:
 
@@ -1911,20 +1971,20 @@ Indexes:
 
 ### 11.19 `documents`
 
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `entityType` | String | Yes | Parent module name |
-| `entityId` | ObjectId | Yes | Parent record ID |
-| `category` | String | Yes | Attachment category |
-| `fileName` | String | Yes | Original file name |
-| `mimeType` | String | Yes | Validated MIME type |
-| `sizeBytes` | Number | Yes | Stored size |
-| `storageKey` | String | Yes | Filesystem or object-store path |
-| `visibility` | String | Yes | `internal`, `vendor_visible` |
-| `uploadedByUserId` | ObjectId | No | Uploader |
-| `uploadedAt` | Date | Yes | Upload time |
-| `checksum` | String | No | Integrity/reference |
-| `thumbnailStorageKey` | String | No | For image previews |
+| Field                 | Type     | Required | Notes                           |
+| --------------------- | -------- | -------- | ------------------------------- |
+| `entityType`          | String   | Yes      | Parent module name              |
+| `entityId`            | ObjectId | Yes      | Parent record ID                |
+| `category`            | String   | Yes      | Attachment category             |
+| `fileName`            | String   | Yes      | Original file name              |
+| `mimeType`            | String   | Yes      | Validated MIME type             |
+| `sizeBytes`           | Number   | Yes      | Stored size                     |
+| `storageKey`          | String   | Yes      | Filesystem or object-store path |
+| `visibility`          | String   | Yes      | `internal`, `vendor_visible`    |
+| `uploadedByUserId`    | ObjectId | No       | Uploader                        |
+| `uploadedAt`          | Date     | Yes      | Upload time                     |
+| `checksum`            | String   | No       | Integrity/reference             |
+| `thumbnailStorageKey` | String   | No       | For image previews              |
 
 Indexes:
 
@@ -1933,19 +1993,19 @@ Indexes:
 
 ### 11.20 `notifications`
 
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `recipientUserId` | ObjectId | Yes | User receiving notice |
-| `eventType` | String | Yes | Notification event enum |
-| `channel` | String | Yes | `in_app`, `email` |
-| `entityType` | String | No | Linked entity type |
-| `entityId` | ObjectId | No | Linked entity ID |
-| `title` | String | Yes | Short title |
-| `bodySnippet` | String | Yes | Short body |
-| `deliveryStatus` | String | Yes | `queued`, `sent`, `delivered_if_known`, `failed`, `read` |
-| `readAt` | Date | No | Null until read |
-| `sentAt` | Date | No | Null until sent |
-| `failedReason` | String | No | Optional failure text |
+| Field             | Type     | Required | Notes                                                    |
+| ----------------- | -------- | -------- | -------------------------------------------------------- |
+| `recipientUserId` | ObjectId | Yes      | User receiving notice                                    |
+| `eventType`       | String   | Yes      | Notification event enum                                  |
+| `channel`         | String   | Yes      | `in_app`, `email`                                        |
+| `entityType`      | String   | No       | Linked entity type                                       |
+| `entityId`        | ObjectId | No       | Linked entity ID                                         |
+| `title`           | String   | Yes      | Short title                                              |
+| `bodySnippet`     | String   | Yes      | Short body                                               |
+| `deliveryStatus`  | String   | Yes      | `queued`, `sent`, `delivered_if_known`, `failed`, `read` |
+| `readAt`          | Date     | No       | Null until read                                          |
+| `sentAt`          | Date     | No       | Null until sent                                          |
+| `failedReason`    | String   | No       | Optional failure text                                    |
 
 Indexes:
 
@@ -1954,17 +2014,17 @@ Indexes:
 
 ### 11.21 `saved_views`
 
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `ownerUserId` | ObjectId | Yes | Owner |
-| `moduleKey` | String | Yes | `requests`, `work_orders`, `assets`, `pm`, `parts`, `vendors`, `reports` |
-| `name` | String | Yes | View label |
-| `filters` | Object | Yes | Stored filter definition |
-| `sort` | Object | Yes | Stored sort definition |
-| `visibleColumns` | [String] | No | Column keys |
-| `isPinned` | Boolean | Yes | Default `false` |
-| `isShared` | Boolean | Yes | Default `false` |
-| `sharedRoleIds` | [ObjectId] | No | Shared visibility if allowed |
+| Field            | Type       | Required | Notes                                                                    |
+| ---------------- | ---------- | -------- | ------------------------------------------------------------------------ |
+| `ownerUserId`    | ObjectId   | Yes      | Owner                                                                    |
+| `moduleKey`      | String     | Yes      | `requests`, `work_orders`, `assets`, `pm`, `parts`, `vendors`, `reports` |
+| `name`           | String     | Yes      | View label                                                               |
+| `filters`        | Object     | Yes      | Stored filter definition                                                 |
+| `sort`           | Object     | Yes      | Stored sort definition                                                   |
+| `visibleColumns` | [String]   | No       | Column keys                                                              |
+| `isPinned`       | Boolean    | Yes      | Default `false`                                                          |
+| `isShared`       | Boolean    | Yes      | Default `false`                                                          |
+| `sharedRoleIds`  | [ObjectId] | No       | Shared visibility if allowed                                             |
 
 Indexes:
 
@@ -1973,16 +2033,16 @@ Indexes:
 
 ### 11.22 `master_data_configs`
 
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `configType` | String | Yes | `category`, `priority`, `status`, `reason_code`, `business_hours`, `holiday_calendar`, `sla_policy`, `numbering_rule`, `custom_field_definition` |
-| `scopeLevel` | String | Yes | `organization` or `property` |
-| `propertyId` | ObjectId | No | Required when scopeLevel is property |
-| `key` | String | Yes | Stable identifier |
-| `label` | String | Yes | UI display label |
-| `payload` | Object | Yes | Type-specific details |
-| `isActive` | Boolean | Yes | Default `true` |
-| `version` | Number | Yes | Increment on update |
+| Field        | Type     | Required | Notes                                                                                                                                            |
+| ------------ | -------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `configType` | String   | Yes      | `category`, `priority`, `status`, `reason_code`, `business_hours`, `holiday_calendar`, `sla_policy`, `numbering_rule`, `custom_field_definition` |
+| `scopeLevel` | String   | Yes      | `organization` or `property`                                                                                                                     |
+| `propertyId` | ObjectId | No       | Required when scopeLevel is property                                                                                                             |
+| `key`        | String   | Yes      | Stable identifier                                                                                                                                |
+| `label`      | String   | Yes      | UI display label                                                                                                                                 |
+| `payload`    | Object   | Yes      | Type-specific details                                                                                                                            |
+| `isActive`   | Boolean  | Yes      | Default `true`                                                                                                                                   |
+| `version`    | Number   | Yes      | Increment on update                                                                                                                              |
 
 Indexes:
 
@@ -1991,18 +2051,18 @@ Indexes:
 
 ### 11.23 `import_jobs`
 
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `jobType` | String | Yes | `properties`, `locations`, `assets`, `parts`, `users`, `vendors`, `pm_plans`, `historical_work_orders` |
-| `fileName` | String | Yes | Original file name |
-| `storageKey` | String | Yes | Stored file path |
-| `status` | String | Yes | `uploaded`, `validated`, `validation_failed`, `committed`, `commit_failed` |
-| `strictMode` | Boolean | Yes | User selection |
-| `summary` | Object | No | Total rows, success count, fail count, warnings |
-| `errorDocumentId` | ObjectId | No | Downloadable error report |
-| `initiatedByUserId` | ObjectId | Yes | Actor |
-| `validatedAt` | Date | No | Validation complete time |
-| `committedAt` | Date | No | Commit complete time |
+| Field               | Type     | Required | Notes                                                                                                  |
+| ------------------- | -------- | -------- | ------------------------------------------------------------------------------------------------------ |
+| `jobType`           | String   | Yes      | `properties`, `locations`, `assets`, `parts`, `users`, `vendors`, `pm_plans`, `historical_work_orders` |
+| `fileName`          | String   | Yes      | Original file name                                                                                     |
+| `storageKey`        | String   | Yes      | Stored file path                                                                                       |
+| `status`            | String   | Yes      | `uploaded`, `validated`, `validation_failed`, `committed`, `commit_failed`                             |
+| `strictMode`        | Boolean  | Yes      | User selection                                                                                         |
+| `summary`           | Object   | No       | Total rows, success count, fail count, warnings                                                        |
+| `errorDocumentId`   | ObjectId | No       | Downloadable error report                                                                              |
+| `initiatedByUserId` | ObjectId | Yes      | Actor                                                                                                  |
+| `validatedAt`       | Date     | No       | Validation complete time                                                                               |
+| `committedAt`       | Date     | No       | Commit complete time                                                                                   |
 
 Indexes:
 
@@ -2010,20 +2070,20 @@ Indexes:
 
 ### 11.24 `audit_logs`
 
-| Field | Type | Required | Notes |
-| --- | --- | --- | --- |
-| `entityType` | String | Yes | Module name |
-| `entityId` | ObjectId | Yes | Affected record |
-| `action` | String | Yes | Create, update, delete, assign, approve, etc. |
-| `actorUserId` | ObjectId | No | Null for system actions |
-| `actorDisplayName` | String | No | Snapshot |
-| `actorRoleKeys` | [String] | No | Snapshot |
-| `sourceChannel` | String | Yes | `web_app`, `request_portal`, `scheduler`, `import_job`, `vendor_portal` |
-| `ipAddress` | String | No | Optional |
-| `sessionId` | ObjectId | No | Optional |
-| `before` | Object | No | Critical field snapshot |
-| `after` | Object | No | Critical field snapshot |
-| `summary` | String | Yes | Human-readable one-line summary |
+| Field              | Type     | Required | Notes                                                                   |
+| ------------------ | -------- | -------- | ----------------------------------------------------------------------- |
+| `entityType`       | String   | Yes      | Module name                                                             |
+| `entityId`         | ObjectId | Yes      | Affected record                                                         |
+| `action`           | String   | Yes      | Create, update, delete, assign, approve, etc.                           |
+| `actorUserId`      | ObjectId | No       | Null for system actions                                                 |
+| `actorDisplayName` | String   | No       | Snapshot                                                                |
+| `actorRoleKeys`    | [String] | No       | Snapshot                                                                |
+| `sourceChannel`    | String   | Yes      | `web_app`, `request_portal`, `scheduler`, `import_job`, `vendor_portal` |
+| `ipAddress`        | String   | No       | Optional                                                                |
+| `sessionId`        | ObjectId | No       | Optional                                                                |
+| `before`           | Object   | No       | Critical field snapshot                                                 |
+| `after`            | Object   | No       | Critical field snapshot                                                 |
+| `summary`          | String   | Yes      | Human-readable one-line summary                                         |
 
 Indexes:
 
@@ -2043,43 +2103,43 @@ Indexes:
 
 ### 12.1 Route Map
 
-| Route | Screen | Purpose |
-| --- | --- | --- |
-| `/login` | Login | User authentication |
-| `/forgot-password` | Forgot Password | Reset initiation |
-| `/reset-password/:token` | Reset Password | Password reset completion |
-| `/accept-invite/:token` | Invite Acceptance | First-time password setup |
-| `/dashboard` | Dashboard | Role-based overview |
-| `/requests` | Requests List | Intake queue and requester view |
-| `/requests/new` | New Request | Internal request creation |
-| `/requests/:requestId` | Request Detail | Triage and history |
-| `/work-orders` | Work Orders List | Operational execution list |
-| `/work-orders/new` | New Work Order | Direct WO creation |
-| `/work-orders/:workOrderId` | Work Order Detail | Execution, cost, parts, history |
-| `/pm` | PM Plans List | PM management |
-| `/pm/calendar` | PM Calendar | Schedule visualization |
-| `/pm/:planId` | PM Plan Detail | Plan definition and history |
-| `/assets` | Assets List | Asset management |
-| `/assets/:assetId` | Asset Detail | Asset record, history, meters |
-| `/locations` | Locations Tree/List | Hierarchy management |
-| `/locations/:locationId` | Location Detail | Location settings and linked work |
-| `/inventory/parts` | Parts List | Part master and stock summary |
-| `/inventory/parts/:partId` | Part Detail | Stock lines and transactions |
-| `/inventory/transactions` | Inventory Transactions | Stock history |
-| `/vendors` | Vendors List | Vendor management |
-| `/vendors/:vendorId` | Vendor Detail | Profile, compliance, assigned work |
-| `/reports` | Reports Hub | Standard reports and exports |
-| `/settings/organization` | Organization Settings | Organization-wide maintenance configuration |
-| `/settings/teams` | Teams | Team management |
-| `/settings/users` | Users | User management |
-| `/settings/roles` | Roles | Role management |
-| `/settings/master-data` | Master Data | Categories, priorities, reasons, SLAs |
-| `/settings/properties/:propertyId` | Property Settings | Property-specific config |
-| `/imports` | Import Jobs | Data import and migration |
-| `/audit` | Audit Log | Traceability view |
-| `/profile` | My Profile | Session and preference management |
-| `/portal/:portalSlug` | Request Portal | Restricted requester intake |
-| `/vendor/work-orders` | Vendor Portal List | External assigned work |
+| Route                              | Screen                 | Purpose                                     |
+| ---------------------------------- | ---------------------- | ------------------------------------------- |
+| `/login`                           | Login                  | User authentication                         |
+| `/forgot-password`                 | Forgot Password        | Reset initiation                            |
+| `/reset-password/:token`           | Reset Password         | Password reset completion                   |
+| `/accept-invite/:token`            | Invite Acceptance      | First-time password setup                   |
+| `/dashboard`                       | Dashboard              | Role-based overview                         |
+| `/requests`                        | Requests List          | Intake queue and requester view             |
+| `/requests/new`                    | New Request            | Internal request creation                   |
+| `/requests/:requestId`             | Request Detail         | Triage and history                          |
+| `/work-orders`                     | Work Orders List       | Operational execution list                  |
+| `/work-orders/new`                 | New Work Order         | Direct WO creation                          |
+| `/work-orders/:workOrderId`        | Work Order Detail      | Execution, cost, parts, history             |
+| `/pm`                              | PM Plans List          | PM management                               |
+| `/pm/calendar`                     | PM Calendar            | Schedule visualization                      |
+| `/pm/:planId`                      | PM Plan Detail         | Plan definition and history                 |
+| `/assets`                          | Assets List            | Asset management                            |
+| `/assets/:assetId`                 | Asset Detail           | Asset record, history, meters               |
+| `/locations`                       | Locations Tree/List    | Hierarchy management                        |
+| `/locations/:locationId`           | Location Detail        | Location settings and linked work           |
+| `/inventory/parts`                 | Parts List             | Part master and stock summary               |
+| `/inventory/parts/:partId`         | Part Detail            | Stock lines and transactions                |
+| `/inventory/transactions`          | Inventory Transactions | Stock history                               |
+| `/vendors`                         | Vendors List           | Vendor management                           |
+| `/vendors/:vendorId`               | Vendor Detail          | Profile, compliance, assigned work          |
+| `/reports`                         | Reports Hub            | Standard reports and exports                |
+| `/settings/organization`           | Organization Settings  | Organization-wide maintenance configuration |
+| `/settings/teams`                  | Teams                  | Team management                             |
+| `/settings/users`                  | Users                  | User management                             |
+| `/settings/roles`                  | Roles                  | Role management                             |
+| `/settings/master-data`            | Master Data            | Categories, priorities, reasons, SLAs       |
+| `/settings/properties/:propertyId` | Property Settings      | Property-specific config                    |
+| `/imports`                         | Import Jobs            | Data import and migration                   |
+| `/audit`                           | Audit Log              | Traceability view                           |
+| `/profile`                         | My Profile             | Session and preference management           |
+| `/portal/:portalSlug`              | Request Portal         | Restricted requester intake                 |
+| `/vendor/work-orders`              | Vendor Portal List     | External assigned work                      |
 
 ### 12.2 Screen-Level Requirements
 
@@ -2410,31 +2470,31 @@ Domain groups:
 
 ### 13.2 Endpoint Inventory
 
-| Domain | Core endpoints |
-| --- | --- |
-| Auth | `POST /auth/login`, `POST /auth/logout`, `POST /auth/logout-all`, `POST /auth/refresh`, `POST /auth/forgot-password`, `POST /auth/reset-password`, `POST /auth/accept-invite`, `GET /auth/me`, `PATCH /auth/me/password`, `GET /auth/sessions`, `DELETE /auth/sessions/:sessionId` |
-| Dashboard | `GET /dashboard/summary`, `GET /dashboard/widgets/:widgetKey` |
-| Organizations | `GET /organizations/current`, `PATCH /organizations/current` |
-| Properties | `GET /properties`, `POST /properties`, `GET /properties/:propertyId`, `PATCH /properties/:propertyId` |
-| Locations | `GET /locations/tree`, `GET /locations`, `POST /locations`, `GET /locations/:locationId`, `PATCH /locations/:locationId`, `POST /locations/:locationId/archive` |
-| Roles | `GET /roles`, `POST /roles`, `GET /roles/:roleId`, `PATCH /roles/:roleId` |
-| Users | `GET /users`, `POST /users`, `GET /users/:userId`, `PATCH /users/:userId`, `POST /users/:userId/resend-invite`, `POST /users/:userId/disable`, `POST /users/:userId/force-logout` |
-| Teams | `GET /teams`, `POST /teams`, `GET /teams/:teamId`, `PATCH /teams/:teamId` |
-| Assets | `GET /assets`, `POST /assets`, `GET /assets/:assetId`, `PATCH /assets/:assetId`, `POST /assets/:assetId/transfer`, `POST /assets/:assetId/retire`, `GET /assets/:assetId/history` |
-| Meters | `POST /assets/:assetId/meters`, `PATCH /meters/:meterId`, `POST /meters/:meterId/readings`, `GET /meters/:meterId/readings` |
-| Requests | `GET /requests`, `POST /requests`, `GET /requests/:requestId`, `PATCH /requests/:requestId`, `POST /requests/:requestId/approve`, `POST /requests/:requestId/reject`, `POST /requests/:requestId/cancel`, `POST /requests/:requestId/convert` |
-| Work Orders | `GET /work-orders`, `POST /work-orders`, `GET /work-orders/:workOrderId`, `PATCH /work-orders/:workOrderId`, `POST /work-orders/:workOrderId/assign`, `POST /work-orders/:workOrderId/schedule`, `POST /work-orders/:workOrderId/status`, `POST /work-orders/:workOrderId/labor-entries`, `POST /work-orders/:workOrderId/parts/reserve`, `POST /work-orders/:workOrderId/parts/issue`, `POST /work-orders/:workOrderId/parts/return`, `POST /work-orders/:workOrderId/complete`, `POST /work-orders/:workOrderId/verify`, `POST /work-orders/:workOrderId/reopen`, `POST /work-orders/:workOrderId/cancel`, `POST /work-orders/:workOrderId/comments`, `GET /work-orders/:workOrderId/print` |
-| PM Plans | `GET /pm-plans`, `POST /pm-plans`, `GET /pm-plans/:planId`, `PATCH /pm-plans/:planId`, `POST /pm-plans/:planId/activate`, `POST /pm-plans/:planId/pause`, `GET /pm-plans/:planId/forecast`, `GET /pm-plans/:planId/history` |
-| Checklists/Inspections | `GET /checklists`, `POST /checklists`, `PATCH /checklists/:templateId`, `POST /inspections`, `GET /inspections/:executionId`, `PATCH /inspections/:executionId` |
-| Parts and Inventory | `GET /parts`, `POST /parts`, `GET /parts/:partId`, `PATCH /parts/:partId`, `GET /inventory-lines`, `POST /inventory-lines`, `PATCH /inventory-lines/:lineId`, `POST /inventory-transactions`, `POST /inventory-transactions/transfer`, `POST /inventory-transactions/cycle-count` |
-| Vendors | `GET /vendors`, `POST /vendors`, `GET /vendors/:vendorId`, `PATCH /vendors/:vendorId`, `POST /vendors/:vendorId/invite-user` |
-| Documents | `POST /documents/upload`, `GET /documents/:documentId`, `GET /documents/:documentId/download`, `DELETE /documents/:documentId` |
-| Notifications | `GET /notifications`, `POST /notifications/:notificationId/read`, `POST /notifications/mark-all-read`, `PATCH /notifications/preferences` |
-| Reports | `GET /reports`, `GET /reports/:reportKey`, `POST /reports/:reportKey/export` |
-| Saved Views | `GET /saved-views`, `POST /saved-views`, `GET /saved-views/:savedViewId`, `PATCH /saved-views/:savedViewId`, `DELETE /saved-views/:savedViewId` |
-| Settings | `GET /settings/:configType`, `POST /settings/:configType`, `PATCH /settings/:configType/:configId` |
-| Imports | `POST /imports`, `GET /imports`, `GET /imports/:jobId`, `POST /imports/:jobId/validate`, `POST /imports/:jobId/commit` |
-| Audit | `GET /audit-logs` |
+| Domain                 | Core endpoints                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Auth                   | `POST /auth/login`, `POST /auth/logout`, `POST /auth/logout-all`, `POST /auth/refresh`, `POST /auth/forgot-password`, `POST /auth/reset-password`, `POST /auth/accept-invite`, `GET /auth/me`, `PATCH /auth/me/password`, `GET /auth/sessions`, `DELETE /auth/sessions/:sessionId`                                                                                                                                                                                                                                                                                                                                                                                                            |
+| Dashboard              | `GET /dashboard/summary`, `GET /dashboard/widgets/:widgetKey`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| Organizations          | `GET /organizations/current`, `PATCH /organizations/current`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| Properties             | `GET /properties`, `POST /properties`, `GET /properties/:propertyId`, `PATCH /properties/:propertyId`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| Locations              | `GET /locations/tree`, `GET /locations`, `POST /locations`, `GET /locations/:locationId`, `PATCH /locations/:locationId`, `POST /locations/:locationId/archive`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| Roles                  | `GET /roles`, `POST /roles`, `GET /roles/:roleId`, `PATCH /roles/:roleId`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| Users                  | `GET /users`, `POST /users`, `GET /users/:userId`, `PATCH /users/:userId`, `POST /users/:userId/resend-invite`, `POST /users/:userId/disable`, `POST /users/:userId/force-logout`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| Teams                  | `GET /teams`, `POST /teams`, `GET /teams/:teamId`, `PATCH /teams/:teamId`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| Assets                 | `GET /assets`, `POST /assets`, `GET /assets/:assetId`, `PATCH /assets/:assetId`, `POST /assets/:assetId/transfer`, `POST /assets/:assetId/retire`, `GET /assets/:assetId/history`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| Meters                 | `POST /assets/:assetId/meters`, `PATCH /meters/:meterId`, `POST /meters/:meterId/readings`, `GET /meters/:meterId/readings`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| Requests               | `GET /requests`, `POST /requests`, `GET /requests/:requestId`, `PATCH /requests/:requestId`, `POST /requests/:requestId/approve`, `POST /requests/:requestId/reject`, `POST /requests/:requestId/cancel`, `POST /requests/:requestId/convert`                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| Work Orders            | `GET /work-orders`, `POST /work-orders`, `GET /work-orders/:workOrderId`, `PATCH /work-orders/:workOrderId`, `POST /work-orders/:workOrderId/assign`, `POST /work-orders/:workOrderId/schedule`, `POST /work-orders/:workOrderId/status`, `POST /work-orders/:workOrderId/labor-entries`, `POST /work-orders/:workOrderId/parts/reserve`, `POST /work-orders/:workOrderId/parts/issue`, `POST /work-orders/:workOrderId/parts/return`, `POST /work-orders/:workOrderId/complete`, `POST /work-orders/:workOrderId/verify`, `POST /work-orders/:workOrderId/reopen`, `POST /work-orders/:workOrderId/cancel`, `POST /work-orders/:workOrderId/comments`, `GET /work-orders/:workOrderId/print` |
+| PM Plans               | `GET /pm-plans`, `POST /pm-plans`, `GET /pm-plans/:planId`, `PATCH /pm-plans/:planId`, `POST /pm-plans/:planId/activate`, `POST /pm-plans/:planId/pause`, `GET /pm-plans/:planId/forecast`, `GET /pm-plans/:planId/history`                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| Checklists/Inspections | `GET /checklists`, `POST /checklists`, `PATCH /checklists/:templateId`, `POST /inspections`, `GET /inspections/:executionId`, `PATCH /inspections/:executionId`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| Parts and Inventory    | `GET /parts`, `POST /parts`, `GET /parts/:partId`, `PATCH /parts/:partId`, `GET /inventory-lines`, `POST /inventory-lines`, `PATCH /inventory-lines/:lineId`, `POST /inventory-transactions`, `POST /inventory-transactions/transfer`, `POST /inventory-transactions/cycle-count`                                                                                                                                                                                                                                                                                                                                                                                                             |
+| Vendors                | `GET /vendors`, `POST /vendors`, `GET /vendors/:vendorId`, `PATCH /vendors/:vendorId`, `POST /vendors/:vendorId/invite-user`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| Documents              | `POST /documents/upload`, `GET /documents/:documentId`, `GET /documents/:documentId/download`, `DELETE /documents/:documentId`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| Notifications          | `GET /notifications`, `POST /notifications/:notificationId/read`, `POST /notifications/mark-all-read`, `PATCH /notifications/preferences`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| Reports                | `GET /reports`, `GET /reports/:reportKey`, `POST /reports/:reportKey/export`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| Saved Views            | `GET /saved-views`, `POST /saved-views`, `GET /saved-views/:savedViewId`, `PATCH /saved-views/:savedViewId`, `DELETE /saved-views/:savedViewId`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| Settings               | `GET /settings/:configType`, `POST /settings/:configType`, `PATCH /settings/:configType/:configId`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| Imports                | `POST /imports`, `GET /imports`, `GET /imports/:jobId`, `POST /imports/:jobId/validate`, `POST /imports/:jobId/commit`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| Audit                  | `GET /audit-logs`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 
 ### 13.3 Request Payload and Response Expectations
 
@@ -2628,16 +2688,16 @@ Minimum rate limits:
 
 ## 14. Real-Time and Notification Requirements
 
-| Event | Recipients | Reactive screens | Fallback when sockets disconnect |
-| --- | --- | --- | --- |
-| New request submitted | Triage users, property managers | Dashboard, requests list | Refetch on focus and 60-second polling |
-| Request status changed | Requester, triage users | Request detail, requester dashboard | Refetch request detail on focus |
-| Work order assigned | Assignee, supervisor | Dashboard, work-order list/detail | Poll assigned-work endpoint every 60 seconds |
-| Work order status changed | Watchers, requester if allowed, managers | Work-order detail, dashboard widgets | Detail refetch on page focus |
-| Comment added | Followers and assignees | Work-order detail | Incremental fetch of comments list |
-| PM generated | Assigned team, planners | PM calendar, work-order list | PM list refresh every 5 minutes |
-| Low stock triggered | Inventory controllers, managers | Inventory dashboard, parts list | Poll low-stock endpoint every 5 minutes |
-| Vendor updated work | Vendor coordinator, verifiers | Work-order detail, vendor dashboard | Detail refetch on focus |
+| Event                     | Recipients                               | Reactive screens                     | Fallback when sockets disconnect             |
+| ------------------------- | ---------------------------------------- | ------------------------------------ | -------------------------------------------- |
+| New request submitted     | Triage users, property managers          | Dashboard, requests list             | Refetch on focus and 60-second polling       |
+| Request status changed    | Requester, triage users                  | Request detail, requester dashboard  | Refetch request detail on focus              |
+| Work order assigned       | Assignee, supervisor                     | Dashboard, work-order list/detail    | Poll assigned-work endpoint every 60 seconds |
+| Work order status changed | Watchers, requester if allowed, managers | Work-order detail, dashboard widgets | Detail refetch on page focus                 |
+| Comment added             | Followers and assignees                  | Work-order detail                    | Incremental fetch of comments list           |
+| PM generated              | Assigned team, planners                  | PM calendar, work-order list         | PM list refresh every 5 minutes              |
+| Low stock triggered       | Inventory controllers, managers          | Inventory dashboard, parts list      | Poll low-stock endpoint every 5 minutes      |
+| Vendor updated work       | Vendor coordinator, verifiers            | Work-order detail, vendor dashboard  | Detail refetch on focus                      |
 
 Additional rules:
 
@@ -2910,3 +2970,246 @@ The system must be designed to support at least:
 14. Use of deprecated MUI Grid `item` prop patterns instead of the v9 `size` API.
 15. Use of hardcoded styling values where theme tokens should be used.
 16. Use of CMD-specific or PowerShell-specific command syntax in developer-facing implementation instructions.
+
+## 20. System Bootstrapping and Initial Setup
+
+### 20.1 First-Run Bootstrap Requirement
+
+The system MUST provide an in-application mechanism to create the first organization and its initial Super_Admin user without relying on any pre-existing human actor, external database insertion, or manual data seeding.
+
+**Rationale**: A production CMMS deployment requires a secure, auditable, and repeatable method to initialize the system with its first administrative user who can then configure the organization, invite additional users, and establish the operational hierarchy.
+
+### 20.2 Bootstrap Mechanism Design
+
+#### 20.2.1 Bootstrap Endpoint
+
+The system SHALL provide a dedicated bootstrap endpoint:
+
+- **Route**: `POST /api/v1/bootstrap/initialize`
+- **Availability**: Only accessible when the system detects zero organizations exist in the database
+- **Authentication**: No authentication required (endpoint is self-protecting via organization count check)
+- **Idempotency**: Endpoint SHALL return `409 Conflict` if any organization already exists
+
+#### 20.2.2 Bootstrap Request Payload
+
+```json
+{
+  "organization": {
+    "name": "string (required, 3-100 characters)",
+    "subdomain": "string (optional, 3-50 characters, lowercase alphanumeric + hyphens)",
+    "timezone": "string (required, IANA timezone identifier)",
+    "currency": "string (optional, ISO 4217 currency code, default: USD)"
+  },
+  "admin": {
+    "email": "string (required, valid email format)",
+    "firstName": "string (required, 1-50 characters)",
+    "lastName": "string (required, 1-50 characters)",
+    "password": "string (required, meets password policy)",
+    "confirmPassword": "string (required, must match password)"
+  }
+}
+```
+
+#### 20.2.3 Bootstrap Process Flow
+
+1. **Precondition Check**: Verify organization count is zero
+2. **Input Validation**: Validate all required fields and format constraints
+3. **Password Policy Enforcement**: Ensure password meets minimum requirements (8+ characters, uppercase, lowercase, number, special character)
+4. **Transaction Begin**: Start database transaction
+5. **Organization Creation**: Create organization record with status `active`
+6. **Super_Admin Role Provisioning**: Ensure built-in Super_Admin role exists
+7. **Admin User Creation**: Create user with:
+   - Email (lowercased, unique)
+   - Hashed password (bcrypt)
+   - Status: `active`
+   - Email verified: `true` (bootstrap user is pre-verified)
+   - Role: Super_Admin
+   - Organization scope: created organization
+   - Property scope: all properties (initially empty)
+   - Location scope: all locations (initially empty)
+8. **Audit Log Entry**: Record bootstrap event with system actor
+9. **Transaction Commit**: Commit all changes atomically
+10. **Response**: Return success with organization ID and admin user ID (no sensitive data)
+
+#### 20.2.4 Bootstrap Response
+
+**Success (201 Created)**:
+
+```json
+{
+  "success": true,
+  "message": "System initialized successfully",
+  "data": {
+    "organizationId": "507f1f77bcf86cd799439011",
+    "adminUserId": "507f1f77bcf86cd799439012",
+    "organizationName": "Acme Hospitality Group"
+  }
+}
+```
+
+**Error (409 Conflict)**:
+
+```json
+{
+  "success": false,
+  "message": "System already initialized",
+  "error": "BOOTSTRAP_ALREADY_COMPLETED"
+}
+```
+
+**Error (400 Bad Request)**:
+
+```json
+{
+  "success": false,
+  "message": "Validation failed",
+  "errors": [
+    {
+      "field": "admin.password",
+      "message": "Password must be at least 8 characters"
+    }
+  ]
+}
+```
+
+### 20.3 Bootstrap UI Flow
+
+#### 20.3.1 Bootstrap Detection
+
+The frontend application SHALL detect bootstrap requirement by:
+
+1. Attempting to load the login page
+2. Making a `GET /api/v1/bootstrap/status` request
+3. If response indicates `{ "bootstrapRequired": true }`, redirect to bootstrap page
+4. If response indicates `{ "bootstrapRequired": false }`, show normal login page
+
+#### 20.3.2 Bootstrap Page
+
+The bootstrap page SHALL provide:
+
+1. **Welcome Message**: "Welcome to Hospitality CMMS - Let's set up your system"
+2. **Organization Section**:
+   - Organization Name (required)
+   - Subdomain (optional, with validation feedback)
+   - Timezone (required, searchable dropdown)
+   - Currency (optional, defaults to USD)
+3. **Administrator Account Section**:
+   - Email (required, with format validation)
+   - First Name (required)
+   - Last Name (required)
+   - Password (required, with strength indicator)
+   - Confirm Password (required, with match validation)
+4. **Submit Button**: "Initialize System"
+5. **Security Notice**: "This will create the first organization and administrator account. Ensure all information is correct."
+
+#### 20.3.3 Post-Bootstrap Flow
+
+After successful bootstrap:
+
+1. Display success message: "System initialized successfully"
+2. Provide "Continue to Login" button
+3. Redirect to login page
+4. Admin can log in with created credentials
+5. Admin is directed to organization setup wizard (Phase 05 feature)
+
+### 20.4 Security Considerations
+
+#### 20.4.1 Bootstrap Endpoint Protection
+
+1. **Rate Limiting**: Apply strict rate limiting (max 5 attempts per IP per hour)
+2. **Organization Count Check**: MUST verify zero organizations before proceeding
+3. **Atomic Transaction**: All bootstrap operations MUST be atomic (all-or-nothing)
+4. **Audit Trail**: Bootstrap event MUST be logged with timestamp and IP address
+5. **No Bypass**: Endpoint MUST NOT be accessible after first organization exists
+
+#### 20.4.2 Password Security
+
+1. **Password Policy**: Enforce minimum 8 characters, uppercase, lowercase, number, special character
+2. **Password Hashing**: Use bcrypt with cost factor 10
+3. **No Password Transmission**: Password never logged or stored in plain text
+4. **Confirmation Required**: Require password confirmation to prevent typos
+
+#### 20.4.3 Email Verification
+
+1. **Bootstrap User Exception**: Bootstrap admin user is pre-verified (no email verification required)
+2. **Rationale**: First user must be able to access system immediately to complete setup
+3. **Subsequent Users**: All invited users MUST complete email verification
+
+### 20.5 Implementation Phase
+
+**Phase**: Phase 03.5 (New phase between Phase 03 and Phase 04)
+
+**Rationale**: Bootstrap mechanism must be implemented AFTER backend and frontend core infrastructure (Phases 02-03) but BEFORE authentication flows (Phase 04) so that authentication can be tested end-to-end with a real user.
+
+**Dependencies**:
+
+- Phase 02: Backend Core Infrastructure (database, models, middleware)
+- Phase 03: Frontend Core Infrastructure (router, theme, forms)
+
+**Enables**:
+
+- Phase 04: Authentication and Session Management (can be tested with bootstrap user)
+- Phase 05: Organization, Property, Location setup (bootstrap admin can configure)
+
+### 20.6 Acceptance Criteria
+
+1. THE System SHALL provide `POST /api/v1/bootstrap/initialize` endpoint
+2. THE Bootstrap_Endpoint SHALL only be accessible when organization count is zero
+3. THE Bootstrap_Endpoint SHALL create organization and Super_Admin user atomically
+4. THE Bootstrap_Endpoint SHALL return `409 Conflict` if organization already exists
+5. THE Bootstrap_Endpoint SHALL validate all input fields per specification
+6. THE Bootstrap_Endpoint SHALL enforce password policy
+7. THE Bootstrap_Endpoint SHALL hash password with bcrypt
+8. THE Bootstrap_Endpoint SHALL mark bootstrap admin as email-verified
+9. THE Bootstrap_Endpoint SHALL assign Super_Admin role to bootstrap user
+10. THE Bootstrap_Endpoint SHALL log bootstrap event to audit log
+11. THE System SHALL provide `GET /api/v1/bootstrap/status` endpoint
+12. THE Bootstrap_Status_Endpoint SHALL return `{ "bootstrapRequired": true }` when no organizations exist
+13. THE Bootstrap_Status_Endpoint SHALL return `{ "bootstrapRequired": false }` when organizations exist
+14. THE Frontend SHALL detect bootstrap requirement on application load
+15. THE Frontend SHALL redirect to bootstrap page when bootstrap required
+16. THE Frontend SHALL provide bootstrap form with all required fields
+17. THE Frontend SHALL validate password strength and confirmation match
+18. THE Frontend SHALL display success message after bootstrap completion
+19. THE Frontend SHALL redirect to login page after bootstrap completion
+20. THE Bootstrap_Admin SHALL be able to log in immediately after bootstrap
+
+### 20.7 Bootstrap vs. Mock Data
+
+**CRITICAL DISTINCTION**:
+
+- **Bootstrap**: Production mechanism for initializing the first organization and admin user in a real deployment
+- **Mock Data**: Development/demo mechanism for populating realistic test data (Phase 17)
+
+**Rules**:
+
+1. Bootstrap mechanism MUST be implemented in Phase 03.5
+2. Bootstrap mechanism MUST work in production environments
+3. Bootstrap mechanism MUST NOT depend on mock data
+4. Mock data MUST NOT be injected before Phase 17
+5. Mock data MUST NOT replace bootstrap mechanism
+6. Bootstrap creates ONE organization and ONE admin user
+7. Mock data creates MULTIPLE organizations, properties, users, assets, work orders, etc.
+
+### 20.8 Environment Configuration
+
+**Environment Variable** (optional):
+
+```
+DISABLE_BOOTSTRAP=false
+```
+
+- **Default**: `false` (bootstrap enabled)
+- **Production**: `false` (bootstrap enabled for first-run)
+- **Development**: `false` (bootstrap enabled, can be used instead of mock data for testing)
+- **Testing**: `true` (bootstrap disabled, use test fixtures)
+
+**Rationale**: Allow disabling bootstrap in automated testing environments where test fixtures are used instead.
+
+### 20.9 Traceability
+
+**PRD Section**: 20 (this section)
+**Requirements Section**: To be added in requirements.md
+**Design Section**: To be added in design.md
+**Task Phase**: Phase 03.5 (new phase)
+**Acceptance Criteria**: Section 20.6 above
