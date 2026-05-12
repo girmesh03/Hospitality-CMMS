@@ -1,5 +1,5 @@
-const App = () => {
-  return <div>App</div>;
-};
+import { AppProviders } from "./app/providers.jsx";
+
+const App = () => <AppProviders />;
 
 export default App;

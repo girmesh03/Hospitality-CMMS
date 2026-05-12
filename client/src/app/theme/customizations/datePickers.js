@@ -3,7 +3,7 @@
  */
 import { alpha } from '@mui/material/styles';
 import { menuItemClasses } from '@mui/material/MenuItem';
-import { pickersDayClasses, yearCalendarClasses } from '@mui/x-date-pickers';
+import { pickerDayClasses, yearCalendarClasses } from '@mui/x-date-pickers';
 import { gray, brand } from '../themePrimitives';
 
 const datePickersCustomizations = {
@@ -140,7 +140,7 @@ const datePickersCustomizations = {
         '&:hover': {
           backgroundColor: (theme.vars || theme).palette.action.hover,
         },
-        [`&.${pickersDayClasses.selected}`]: {
+        [`&.${pickerDayClasses.selected}`]: {
           backgroundColor: gray[700],
           fontWeight: theme.typography.fontWeightMedium,
         },
@@ -148,14 +148,14 @@ const datePickersCustomizations = {
           outline: `3px solid ${alpha(brand[500], 0.5)}`,
           outlineOffset: '2px',
           backgroundColor: 'transparent',
-          [`&.${pickersDayClasses.selected}`]: { backgroundColor: gray[700] },
+          [`&.${pickerDayClasses.selected}`]: { backgroundColor: gray[700] },
         },
         ...theme.applyStyles('dark', {
           color: (theme.vars || theme).palette.grey[300],
           '&:hover': {
             backgroundColor: (theme.vars || theme).palette.action.hover,
           },
-          [`&.${pickersDayClasses.selected}`]: {
+          [`&.${pickerDayClasses.selected}`]: {
             color: (theme.vars || theme).palette.common.black,
             fontWeight: theme.typography.fontWeightMedium,
             backgroundColor: gray[300],
@@ -164,7 +164,7 @@ const datePickersCustomizations = {
             outline: `3px solid ${alpha(brand[500], 0.5)}`,
             outlineOffset: '2px',
             backgroundColor: 'transparent',
-            [`&.${pickersDayClasses.selected}`]: { backgroundColor: gray[300] },
+            [`&.${pickerDayClasses.selected}`]: { backgroundColor: gray[300] },
           },
         }),
       }),

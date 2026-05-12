@@ -5,10 +5,10 @@ import "@fontsource/inter/400.css";
 import "@fontsource/inter/500.css";
 import "@fontsource/inter/600.css";
 import "@fontsource/inter/700.css";
-import App from "./App.jsx";
+import { AppProviders } from "./app/providers.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <App />
+    <AppProviders />
   </StrictMode>,
 );
